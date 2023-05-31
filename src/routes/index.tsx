@@ -1,9 +1,9 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
-import { HomePage } from '../pages/homePage';
-import { LoginPage } from '../pages/loginPage';
-import { ProductPage } from '../pages/ProductPage';
-import { RegisterPage } from '../pages/registerPage';
-import { UserPage } from '../pages/userPage';
+import { Routes, Route, Navigate } from "react-router-dom";
+import { HomePage } from "../pages/homePage";
+import { LoginPage } from "../pages/loginPage";
+import { ProductPage } from "../pages/ProductPage";
+import { RegisterPage } from "../pages/registerPage";
+import { UserPage } from "../pages/userPage";
 
 export const MainRoutes = (): JSX.Element => {
     return (
