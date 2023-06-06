@@ -51,6 +51,9 @@ export default {
                 "3.5xl": "32px",
                 "4.5xl": "44px",
             },
+            width: {
+                "9/10": "90%"
+            }
         },
     },
     plugins: [],
