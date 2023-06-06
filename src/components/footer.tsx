@@ -1,6 +1,13 @@
 import { MdKeyboardArrowUp } from "react-icons/md";
 
 export const Footer = (): JSX.Element => {
+    const toTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
+    };
+
     return (
         <div className="fixed bottom-0 bg-black w-full text-white h-26 py-2.5 flex flex-col font-medium gap-2 md:flex-row md:justify-between md:h-20 md:px-12 md:items-center">
             <section className="flex gap-2 justify-center items-baseline">
@@ -11,7 +18,7 @@ export const Footer = (): JSX.Element => {
                 © 2022 - Todos os direitos reservados.
             </p>
             <section className="flex justify-center items-center">
-                <button className="p-1 bg-grey1 rounded">
+                <button onClick={toTop} className="p-1 bg-grey1 rounded">
                     <MdKeyboardArrowUp size={25} />
                 </button>
             </section>
