@@ -1,5 +1,10 @@
-import { Header } from "../../components/header";
+import { Footer, Header } from "../../components";
 
 export const HomePage = (): JSX.Element => {
-    return <Header />;
+    return (
+        <>
+            <Header />
+            <Footer />
+        </>
+    );
 };

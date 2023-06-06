@@ -12,8 +12,8 @@ export const Header = (): JSX.Element => {
 
     return (
         <header className="flex px-3 md:px-12 border-b-2 border-gray-300 font-medium items-center justify-between">
-            <section className="flex gap-2 items-baseline xl:w-5/6 w-7/12 md:border-r-2 md:border-gray-300 ">
-                <h1>Motor</h1>
+            <section className="flex gap-2 items-baseline xl:w-5/6 w-4/6  md:border-r-2 md:border-gray-300 ">
+                <h1>Motors</h1>
                 <h2 className="text-2xl text-brand1">shop</h2>
             </section>
 
