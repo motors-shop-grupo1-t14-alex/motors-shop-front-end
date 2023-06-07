@@ -12,7 +12,7 @@ const database = {
 
 export const CardProduct = () => {
   return (
-    <section className="pl-5">
+    <section className="pl-5 h-[400px]">
       <div className="flex flex-col gap-4 font-inter w-[275px]">
         <div className="flex items-center bg-grey7 mt-5 h-[152px]">
           <img src={car} alt="carro de luxo" />
