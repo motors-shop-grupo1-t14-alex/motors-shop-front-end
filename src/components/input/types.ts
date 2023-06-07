@@ -1,9 +1,8 @@
 export interface iInput {
     children: React.ReactNode;
-    type: string;
     placeHolder: string;
     defaultValue?: string;
     id: string;
-    labelCSS: string;
+    css: string;
     inputCSS: string;
 }

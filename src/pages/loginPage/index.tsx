@@ -3,22 +3,22 @@ import { Input } from "../../components/input";
 
 export const LoginPage = (): JSX.Element => {
     return (
-        <div className="flex flex-col gap-4">
+        <section className="flex flex-col gap-4">
             <h1>Login Page</h1>
             <Button
-                children={"Entrar"}
+                children={"botao teste"}
                 css="w-1/6 border-2 "
                 onClick={() => console.log("oi")}
                 type="submit"
             />
             <Input
-                children={"label"}
-                placeHolder="placeholder"
+                children={"label teste"}
+                placeHolder="placeholder teste"
                 id="1"
+                css=""
                 inputCSS="border-2 w-1/6"
-                labelCSS=""
-                type="submit"
+                defaultValue="valor default teste"
             />
-        </div>
+        </section>
     );
 };
