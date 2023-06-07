@@ -44,7 +44,7 @@ export default {
             },
             fontFamily: {
                 inter: ["Inter, sans-serif"],
-                Lexend: ["Lexend, sans-serif"],
+                lexend: ["Lexend, sans-serif"],
             },
             fontSize: {
                 "2.5xl": "28px",
@@ -52,7 +52,8 @@ export default {
                 "4.5xl": "44px",
             },
             width: {
-                "9/10": "90%"
+                "9/10": "90%",
+                "300": "885px"
             }
         },
     },

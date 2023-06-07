@@ -9,11 +9,11 @@ export const Footer = (): JSX.Element => {
     };
 
     return (
-        <div className="flex justify-center fixed bottom-0 bg-grey0 w-full h-52 py-2.5 font-medium md:px-12 md:h-32">
+        <div className="flex justify-center bottom-0 bg-grey0 w-full h-52 py-2.5 font-medium md:px-12 md:h-32">
 
-            <div className="flex flex-col gap-8 md:flex-row md:justify-between md:items-center text-white w-9/10">
+            <div className="flex flex-col gap-8 md:flex-row md:justify-between md:items-center text-white w-9/10 max-w-screen-2xl">
                 <div className="flex justify-center mt-5 md:mt-0">
-                    <img src="../../../public/logo-motors-shop-white.svg" alt="logo-motors-shop-white" />
+                    <img src="/logo-motors-shop-white.svg" alt="logo-motors-shop-white" />
                 </div>
                 
                 <p className="flex justify-center items-center text-sm font-inter font-normal">
