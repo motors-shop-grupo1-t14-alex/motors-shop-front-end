@@ -3,6 +3,7 @@ import { CommentSuggestion } from "../commentSuggestion";
 import { ProductTag } from "../productTag";
 import { UserProfile } from "../userProfile";
 import "../../index.css";
+import { Button } from "../button";
 
 export const ProductInfos = (): JSX.Element => {
     return (
@@ -17,11 +18,14 @@ export const ProductInfos = (): JSX.Element => {
                         <div className="w-full sm:w-[85%] 2xl:w-full max-w-[800px] h-[355px] bg-grey10 mb-6 flex justify-center rounded-[4px]">
                             <div className="w-4/5">
                                 <h1 className="font-Lexend font-bold text-xl mt-11">Mercedes Benz A 200 CGI ADVANCE SEDAN Mercedes Benz A 200 </h1>
-                                <div className="mt-10 mb-8 flex gap-3">
-                                    <ProductTag content={"2013"}/>
-                                    <ProductTag content={"0 KM"}/>
+                                <div className="sm:flex sm:justify-between sm:items-center">
+                                    <div className="mt-10 mb-8 flex gap-3">
+                                        <ProductTag content={"2013"}/>
+                                        <ProductTag content={"0 KM"}/>
+                                    </div>
+                                    <p className="font-Lexend text-base font-semibold text-grey mb-6">R$ 00.000,00</p>
                                 </div>
-                                <p className="font-Lexend text-base font-semibold text-grey">R$ 00.000,00</p>
+                                <Button children={"Comprar"} type="button" css="bg-brand1 w-[100px] h-[38px] rounded-[4px] font-inter font-normal text-base text-white hover:bg-brand2 transition"/>
                             </div>
                         </div>
                         <div className="w-full sm:w-[85%] 2xl:w-full max-w-[800px] h-[355px] bg-grey10 mb-6 flex justify-center rounded-[4px]">
@@ -62,6 +66,7 @@ export const ProductInfos = (): JSX.Element => {
                                 <img src="../../src/assets/img/user-example.svg" alt="user-profile" />
                                 <p className="text-xl font-bold font-Lexend text-grey1">Samuel Leão</p>
                                 <p className="text-base font-normal font-Lexend text-grey2 text-center">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's</p>
+                                <Button children={"Ver todos anuncios"} type="button" css="bg-grey0 w-[206px] h-[48px] rounded-[4px] font-medium text-lg text-white hover:bg-grey1 transition"/>
                             </div>
                         </div>
                     </section>
@@ -86,8 +91,11 @@ export const ProductInfos = (): JSX.Element => {
                                 <div className="w-full sm:w-[85%] 2xl:w-full max-w-[800px] h-[414px] bg-grey10 mb-6 flex justify-center rounded-[4px]">
                                     <div className="w-4/5 pt-9">
                                         <UserProfile/>
-                                        <textarea className="w-full sm:w-[85%] 2xl:w-full border-2 border-grey7 min-h-[128px] max-h-[128px] rounded-[4px] py-3 px-4 mt-6" placeholder="Carro muito confortável, foi uma ótima experiência de compra...">
+                                        <textarea className="w-full border-2 border-grey7 min-h-[128px] max-h-[128px] rounded-[4px] py-3 px-4 mt-6" placeholder="Carro muito confortável, foi uma ótima experiência de compra...">
                                         </textarea>
+                                        <div className="flex sm:justify-end">
+                                            <Button children={"Comentar"} type="button" css="bg-brand1 w-[100px] h-[38px] rounded-[4px] font-inter font-normal text-base text-white hover:bg-brand2 transition mt-6 sm:-mt-14 mr-3 z-0"/>
+                                        </div>
                                         <div className="flex flex-wrap gap-3 mt-6">
                                             <CommentSuggestion content={"Gostei muito!"}/>
                                             <CommentSuggestion content={"Incrível"}/>

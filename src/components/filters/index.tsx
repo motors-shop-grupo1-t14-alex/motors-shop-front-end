@@ -1,3 +1,5 @@
+import { Button } from "../button";
+
 export const Filter = (): JSX.Element => {
   return (
     <div className="hidden md:block">
@@ -54,10 +56,18 @@ export const Filter = (): JSX.Element => {
 
         <section className="mb-10">
             <h2 className="font-Lexend text-2.5xl font-bold mb-3">Km</h2>
+            <div className="flex gap-5">
+                <Button children={"Mínima"} type="button" css="bg-grey5 w-[125px] h-[37px] font-Lexend font-semibold text-grey3 hover:text-white transition"/>
+                <Button children={"Máxima"} type="button" css="bg-grey5 w-[125px] h-[37px] font-Lexend font-semibold text-grey3 hover:text-white transition"/>
+            </div>
         </section>
 
         <section className="mb-10">
             <h2 className="font-Lexend text-2.5xl font-bold mb-3">Preço</h2>
+            <div className="flex gap-5">
+                <Button children={"Mínima"} type="button" css="bg-grey5 w-[125px] h-[37px] font-Lexend font-semibold text-grey3 hover:text-white transition"/>
+                <Button children={"Máxima"} type="button" css="bg-grey5 w-[125px] h-[37px] font-Lexend font-semibold text-grey3 hover:text-white transition"/>
+            </div>
         </section>
     </div>
   );
