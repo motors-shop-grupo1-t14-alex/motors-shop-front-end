@@ -54,8 +54,15 @@ export default {
             width: {
                 "9/10": "90%",
                 "300": "885px"
+            },
+            screens: {
+                mobileM: "375px",
+                mobileG: "425px",
+                desktopM: "1100px"
             }
         },
     },
-    plugins: [],
+    plugins: [ 
+        require('tailwind-scrollbar')
+    ],
 };

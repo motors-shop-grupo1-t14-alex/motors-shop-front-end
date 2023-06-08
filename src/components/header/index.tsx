@@ -14,7 +14,7 @@ export const Header = (): JSX.Element => {
         <header className="flex justify-center border-b-2 border-gray-300 font-medium h-20">
            
             <div className="flex items-center justify-between h-full w-9/10 max-w-screen-2xl">
-                <img src="/logo-motors-shop.svg" alt="logo-motors-shop" />
+                <a href="/" className="cursor-pointer"><img src="/logo-motors-shop.svg" alt="logo-motors-shop" /></a>
                 {screenSize < 768 ? (
                     <button>
                         <AiOutlineMenu size={28} />
