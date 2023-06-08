@@ -57,9 +57,12 @@ export default {
             },
             screens: {
                 mobileM: "375px",
-                mobileG: "425px"
+                mobileG: "425px",
+                desktopM: "1100px"
             }
         },
     },
-    plugins: [],
+    plugins: [ 
+        require('tailwind-scrollbar')
+    ],
 };
