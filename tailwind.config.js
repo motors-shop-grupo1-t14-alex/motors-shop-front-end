@@ -54,6 +54,10 @@ export default {
             width: {
                 "9/10": "90%",
                 "300": "885px"
+            },
+            screens: {
+                mobileM: "375px",
+                mobileG: "425px"
             }
         },
     },
