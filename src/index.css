@@ -5,3 +5,20 @@
 .bannerMobile {
     background-image: url("./assets/img/banner-home-mobile.svg");
 }
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-overlay {
+    height: 85vh;
+    top: 80px;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    position: fixed;
+    background-color: white;
+}
