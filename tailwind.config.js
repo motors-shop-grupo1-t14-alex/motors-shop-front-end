@@ -12,6 +12,7 @@ export default {
                 brand2: "#5126EA",
                 brand3: "#B0A6F0",
                 brand4: "#EDEAFD",
+                modalBg: "#000000b3",
                 grey0: "#0B0D0D",
                 grey1: "#212529",
                 grey2: "#495057",
