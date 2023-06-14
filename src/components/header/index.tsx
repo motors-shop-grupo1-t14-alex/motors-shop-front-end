@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { BiLogOut } from "react-icons/bi";
 import { AiOutlineMenu } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import { UserContext } from "../../contexts/userContext/UserContext";
 
 export const Header = (): JSX.Element => {
+    const { user, logout } = useContext(UserContext);
     const { innerWidth } = window;
-    const [isLogged, setIsLogged] = useState(false);
     const [screenSize, setScreenSize] = useState(innerWidth);
 
     window.addEventListener("resize", () => {
@@ -21,15 +23,19 @@ export const Header = (): JSX.Element => {
                     <button>
                         <AiOutlineMenu size={28} />
                     </button>
-                ) : isLogged == true ? (
+                ) : user ? (
                     <section className="flex items-center justify-center pl-8 gap-4 md:border-l-2 md:border-gray-300 h-full">
-                        <p
-                            className="bg-blue-500 p-3 rounded-full text-white"
-                            onClick={() => setIsLogged(!isLogged)}
-                        >
-                            SM
+                        <p className="bg-blue-500 p-3 rounded-full text-white">
+                            {`${user?.name
+                                ?.split(" ")[0]
+                                .substring(0, 1)}${user?.name
+                                ?.split(" ")[1]
+                                .substring(0, 1)}`}
                         </p>
-                        <p className="p-3 ">Samuel Leão</p>
+                        <p className="p-3 ">{user.name}</p>
+                        <button onClick={logout}>
+                            <BiLogOut size={28} />
+                        </button>
                     </section>
                 ) : (
                     <nav className="flex items-center justify-between pl-8 md:border-l-2 md:border-gray-300 h-full">
@@ -37,7 +43,6 @@ export const Header = (): JSX.Element => {
                             <Link
                                 to="/login"
                                 className="p-2.5 w-32 text-brand1"
-                                onClick={() => setIsLogged(!isLogged)}
                             >
                                 Fazer login
                             </Link>

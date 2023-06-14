@@ -5,8 +5,12 @@ import {
 } from "../../pages/registerPage/validators";
 import { useForm } from "react-hook-form";
 import { Input } from "../input";
+import { useContext } from "react";
+import { UserContext } from "../../contexts/userContext/UserContext";
 
 export const RegisterForm = () => {
+    const { registerUser } = useContext(UserContext);
+
     const {
         register,
         handleSubmit,
@@ -17,10 +21,10 @@ export const RegisterForm = () => {
     });
 
     return (
-        <main className="bg-grey8 flex items-center justify-center h-full py-8 font-medium">
+        <main className="bg-grey8 flex items-center justify-center h-full py-8 font-medium ">
             <form
-                onSubmit={handleSubmit(() => console.log("submit"))}
-                className="flex flex-col gap-6 w-95/100 py-8 px-4 rounded bg-white justify-center items-center md:w-1/2 lg:w-1/3 xl:w-1/4 md:py-11 md:px-12"
+                onSubmit={handleSubmit(registerUser)}
+                className="flex flex-col transition-all gap-6 py-8 px-4 rounded bg-white justify-center items-center w-95/100 md:w-1/2 lg:w-1/3 xl:w-30/100 2xl:w-1/4 md:py-11 md:px-12"
             >
                 <h2 className="text-2xl w-full">Registro</h2>
                 <section className="w-full relative flex flex-col">
@@ -37,7 +41,8 @@ export const RegisterForm = () => {
                         {errors?.name ? errors.name.message : null}
                     </span>
                 </section>
-                {/* <section className="w-full relative flex flex-col">
+
+                <section className="w-full relative flex flex-col">
                     <Input
                         children={"Email"}
                         css="gap-1"
@@ -83,21 +88,21 @@ export const RegisterForm = () => {
                     <Input
                         children={"Data de nascimento"}
                         css="gap-1"
-                        id="birthdate"
+                        id="birth_date"
                         inputCSS="w-full p-3 rounded bg-white border-gray7 border-2"
                         placeHolder="Digite seu nome"
                         type="date"
-                        register={register("birthdate")}
+                        register={register("birth_date")}
                     />
                     <span className="opacity-70 w-full absolute -bottom-5 text-sm">
-                        {errors?.birthdate ? errors.birthdate.message : null}
+                        {errors?.birth_date ? errors.birth_date.message : null}
                     </span>
                 </section>
                 <section className="w-full relative flex flex-col">
                     <Input
                         children={"Descrição"}
                         css="gap-1"
-                        id="email"
+                        id="description"
                         inputCSS="w-full p-3 rounded bg-white border-gray7 border-2"
                         placeHolder="Digitar descrição"
                         type="text"
@@ -109,7 +114,9 @@ export const RegisterForm = () => {
                             : null}
                     </span>
                 </section>
+
                 <p>Infomações de endereço</p>
+
                 <section className="w-full relative flex flex-col">
                     <Input
                         children={"CEP"}
@@ -206,16 +213,27 @@ export const RegisterForm = () => {
                 <p>Tipo de conta</p>
 
                 <section className="w-full relative flex flex-col">
-                    <select
+                    {/* <select
                         name=""
                         id=""
                         className="w-full p-3 rounded bg-white border-gray7 border-2"
                     >
                         <option value="seller">Anunciante</option>
                         <option value="user">Comprador</option>
-                    </select>
+                    </select> */}
+                    <Input
+                        children={""}
+                        css="gap-1"
+                        id="accontType"
+                        inputCSS="w-full p-3 rounded bg-white border-gray7 border-2"
+                        placeHolder="Vendedor ou comprador"
+                        type="text"
+                        register={register("accountType")}
+                    />
                     <span className="opacity-70 w-full absolute -bottom-5 text-sm">
-                        {errors?.accontType ? errors?.accontType.message : null}
+                        {errors?.accountType
+                            ? errors?.accountType.message
+                            : null}
                     </span>
                 </section>
 
@@ -226,7 +244,7 @@ export const RegisterForm = () => {
                         id="password"
                         inputCSS="w-full p-3 rounded bg-white border-gray7 border-2"
                         placeHolder="Digitar senha"
-                        type="text"
+                        type="password"
                         register={register("password")}
                     />
                     <span className="opacity-70 w-full absolute -bottom-5 text-sm">
@@ -240,7 +258,7 @@ export const RegisterForm = () => {
                         id="confirmPassword"
                         inputCSS="w-full p-3 rounded bg-white border-gray7 border-2"
                         placeHolder="Digitar senha"
-                        type="text"
+                        type="password"
                         register={register("confirmPassword")}
                     />
                     <span className="opacity-70 w-full absolute -bottom-5 text-sm">
@@ -248,8 +266,11 @@ export const RegisterForm = () => {
                             ? errors.confirmPassword.message
                             : null}
                     </span>
-                </section>*/}
-                <button className="p-4 bg-brand1 text-white rounded w-full">
+                </section>
+                <button
+                    //type="submit"
+                    className="p-4 bg-brand1 text-white rounded w-full"
+                >
                     Finalizar cadastro
                 </button>
             </form>

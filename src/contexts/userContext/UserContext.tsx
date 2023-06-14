@@ -2,6 +2,7 @@ import api from "../../services/axios";
 import { useState, useEffect, createContext } from "react";
 import { iLoginData, iUser, iUserContext, iUserContextProps } from "./types";
 import { NavigateFunction, useNavigate } from "react-router-dom";
+import { iRegisterData } from "../../pages/registerPage/validators";
 
 export const UserContext = createContext({} as iUserContext);
 
@@ -45,8 +46,26 @@ export const UserProvider = ({ children }: iUserContextProps) => {
         }
     }
 
+    async function registerUser(data: iRegisterData) {
+        try {
+            const response = await api.post("/users", data);
+
+            console.log(response);
+            navigate("/login");
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    function logout() {
+        localStorage.removeItem("@TOKEN");
+        localStorage.removeItem("@ID");
+        setUser(null);
+        navigate("/login");
+    }
+
     return (
-        <UserContext.Provider value={{ user, login }}>
+        <UserContext.Provider value={{ user, login, registerUser, logout }}>
             {children}
         </UserContext.Provider>
     );

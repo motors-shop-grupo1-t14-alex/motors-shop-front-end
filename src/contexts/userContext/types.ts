@@ -1,6 +1,10 @@
+import { iRegisterData } from "../../pages/registerPage/validators";
+
 export interface iUserContext {
     user: iUser | null;
     login: (data: iLoginData) => void;
+    registerUser: (data: iRegisterData) => void;
+    logout: () => void;
 }
 
 export interface iUserContextProps {
