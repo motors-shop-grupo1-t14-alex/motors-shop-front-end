@@ -7,6 +7,8 @@ export const Input = ({
     id,
     css,
     inputCSS,
+    register,
+    type,
 }: iInput) => {
     return (
         <section className={`${css} flex flex-col`}>
@@ -16,6 +18,8 @@ export const Input = ({
                 id={id}
                 placeholder={placeHolder}
                 defaultValue={defaultValue}
+                type={type}
+                {...register}
             />
         </section>
     );

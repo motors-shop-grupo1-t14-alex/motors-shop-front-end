@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 export const Header = (): JSX.Element => {
     const { innerWidth } = window;
@@ -12,9 +13,10 @@ export const Header = (): JSX.Element => {
 
     return (
         <header className="flex justify-center border-b-2 border-gray-300 font-medium h-20">
-           
             <div className="flex items-center justify-between h-full w-9/10 max-w-screen-2xl">
-                <a href="/" className="cursor-pointer"><img src="/logo-motors-shop.svg" alt="logo-motors-shop" /></a>
+                <a href="/" className="cursor-pointer">
+                    <img src="/logo-motors-shop.svg" alt="logo-motors-shop" />
+                </a>
                 {screenSize < 768 ? (
                     <button>
                         <AiOutlineMenu size={28} />
@@ -31,19 +33,32 @@ export const Header = (): JSX.Element => {
                     </section>
                 ) : (
                     <nav className="flex items-center justify-between pl-8 md:border-l-2 md:border-gray-300 h-full">
-                        <button
-                            className="p-2.5 w-32 text-gray-500 "
-                            onClick={() => setIsLogged(!isLogged)}
+                        {window.location.href.split("/")[3] == "login" ? (
+                            <Link
+                                to="/login"
+                                className="p-2.5 w-32 text-brand1"
+                                onClick={() => setIsLogged(!isLogged)}
+                            >
+                                Fazer login
+                            </Link>
+                        ) : (
+                            <Link
+                                to="/login"
+                                className="p-2.5 w-32 text-gray-500 "
+                            >
+                                Fazer login
+                            </Link>
+                        )}
+
+                        <Link
+                            className="p-2.5 w-32 border-2 rounded border-gray-400 shadow-md flex justify-center items-center"
+                            to="/register"
                         >
-                            Fazer login
-                        </button>
-                        <button className="p-2.5 w-32 border-2 rounded border-gray-400 shadow-md">
                             Cadastrar
-                        </button>
+                        </Link>
                     </nav>
                 )}
             </div>
-
         </header>
     );
 };

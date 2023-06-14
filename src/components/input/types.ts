@@ -1,3 +1,5 @@
+import { UseFormRegisterReturn } from "react-hook-form";
+
 export interface iInput {
     children: React.ReactNode;
     placeHolder: string;
@@ -5,4 +7,6 @@ export interface iInput {
     id: string;
     css: string;
     inputCSS: string;
+    register?: UseFormRegisterReturn<string>;
+    type: string;
 }
