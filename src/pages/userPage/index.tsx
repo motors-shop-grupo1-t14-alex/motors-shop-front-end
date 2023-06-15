@@ -1,6 +1,11 @@
-export const UserPage = (): JSX.Element => {
+import { ProtectedRouted } from "../../components/protectedRoutes";
 
-    return (
-        <h1>User page</h1>
-    )
-}
+export const UserPage = (): JSX.Element => {
+  return (
+    <>
+      <ProtectedRouted />
+
+      <h1>User page</h1>
+    </>
+  );
+};
