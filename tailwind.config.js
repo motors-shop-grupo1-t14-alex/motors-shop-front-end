@@ -12,6 +12,7 @@ export default {
                 brand2: "#5126EA",
                 brand3: "#B0A6F0",
                 brand4: "#EDEAFD",
+                modalBg: "#000000b3",
                 grey0: "#0B0D0D",
                 grey1: "#212529",
                 grey2: "#495057",
@@ -53,9 +54,22 @@ export default {
             },
             width: {
                 "9/10": "90%",
-                "300": "885px"
-            }
+                "95/100": "95%",
+                300: "885px",
+                "30/100": "30%",
+            },
+            height: {
+                "9/10": "90%",
+                "80vh": "80vh",
+            },
+            screens: {
+                mobileM: "375px",
+                mobileG: "425px",
+                desktopM: "1100px",
+            },
         },
     },
-    plugins: [],
+    // plugins: [
+    //     require('tailwind-scrollbar')
+    // ],
 };

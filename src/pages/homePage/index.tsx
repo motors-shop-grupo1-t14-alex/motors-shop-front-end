@@ -1,12 +1,12 @@
 import { Header } from "../../components/header";
 import { Footer } from "../../components/footer";
-import { Main } from "../../components/main";
+import { MainHome } from "../../components/main";
 
 export const HomePage = (): JSX.Element => {
   return (
     <>
       <Header />
-      <Main />
+      <MainHome />
       <Footer />
     </>
   );

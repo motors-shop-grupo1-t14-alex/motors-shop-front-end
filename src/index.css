@@ -6,6 +6,7 @@
     background-image: url("./assets/img/banner-home-mobile.svg");
 }
 
+<<<<<<< HEAD
 .container {
     display: flex;
     justify-content: center;
@@ -22,3 +23,14 @@
     position: fixed;
     background-color: white;
 }
+=======
+.background-product-page-mobile {
+    background-image: linear-gradient(to top, #E9ECEF 0, #E9ECEF 86.5%, #4529E6 13.5%);
+}
+
+@media (min-width: 640px){
+    .background-product-page-mobile {
+        background-image: linear-gradient(to top, #E9ECEF 0, #E9ECEF 80%, #4529E6 20%);    
+    }
+}
+>>>>>>> 97abf1a99a1f3f86bdeb019648997a8e400eb4bf

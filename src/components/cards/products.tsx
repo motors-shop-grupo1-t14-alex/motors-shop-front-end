@@ -1,4 +1,5 @@
 import car from "../../assets/img/car.svg";
+import { ProductTag } from "../productTag";
 
 const database = {
   name: "Product title stays here - max 1 line",
@@ -28,12 +29,8 @@ export const CardProduct = () => {
         </div>
         <div className="text-brand1 font-medium leading-6 text-[14px]">
           <div className="flex gap-3 items-center">
-            <span className="bg-brand4 px-1 py-2 rounded-[4px]">
-              {database.km}
-            </span>
-            <span className="bg-brand4 px-1 py-2 rounded-[4px]">
-              {database.year}
-            </span>
+            <ProductTag content={database.km}/>
+            <ProductTag content={database.year}/>
             <div className="flex justify-end w-[59%] text-black font-bold">
             <span>{database.price}</span>
             </div>

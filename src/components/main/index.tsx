@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { CardProduct } from "../cards/products"
 import { Filter, FilterMobile } from "../filters"
-import { useLocation } from "react-router-dom"
 
-export const Main = () => {
+export const MainHome = () => {
     const [openFilter, setOpenFilter] = useState(false)
     
     const toggleModal = () => {
