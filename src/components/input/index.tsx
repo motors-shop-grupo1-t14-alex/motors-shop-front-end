@@ -1,4 +1,4 @@
-import { iInput } from "./types";
+import { iInput } from "./types;
 
 export const Input = ({
     children,
@@ -26,4 +26,4 @@ export const Input = ({
             />
         </section>
     );
-};
+
