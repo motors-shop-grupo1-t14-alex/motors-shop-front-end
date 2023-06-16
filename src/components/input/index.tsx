@@ -9,16 +9,19 @@ export const Input = ({
     inputCSS,
     register,
     type,
-}: iInput) => {
+    step,
+    value
+}: iInput): JSX.Element => {
     return (
         <section className={`${css} flex flex-col`}>
             <label htmlFor={id}>{children}</label>
-            <input
+            <input value={value}
                 className={inputCSS}
                 id={id}
                 placeholder={placeHolder}
                 defaultValue={defaultValue}
                 type={type}
+                step={step}
                 {...register}
             />
         </section>

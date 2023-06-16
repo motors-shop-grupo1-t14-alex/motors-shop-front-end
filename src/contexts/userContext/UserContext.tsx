@@ -1,4 +1,4 @@
-import api from "../../services/axios";
+import { api } from "../../services/axios";
 import { useState, useEffect, createContext } from "react";
 import { iLoginData, iUser, iUserContext, iUserContextProps } from "./types";
 import { NavigateFunction, useNavigate } from "react-router-dom";
@@ -25,7 +25,7 @@ export const UserProvider = ({ children }: iUserContextProps) => {
                 api.defaults.headers.common.authorization = `Bearer ${myToken}`;
                 const response = await api.get(`/users/${myId}`);
                 setUser(response.data);
-                navigate("/");
+                // navigate("/");
             } catch (error) {
                 console.log(error);
                 localStorage.clear();
