@@ -1,3 +1,4 @@
+import { ProtectedRouted } from "../../components/protectedRoutes";
 import { useContext, useEffect, useState } from "react"
 import { Button } from "../../components/button"
 import { Footer } from "../../components/footer"
@@ -7,7 +8,7 @@ import { SellerProductCard } from "../../components/sellerProductCard"
 import api from "../../services/axios"
 
 export const UserPage = (): JSX.Element => {
-
+  
     const userInfos = JSON.parse(localStorage.getItem('@INFOS') || '{}')
 
     const [adverts, setAdverts] = useState<any>([]);
@@ -45,6 +46,7 @@ export const UserPage = (): JSX.Element => {
 
     return (
         <>
+        <ProtectedRouted />
         <Header/>
         <main className="flex flex-col items-center bg-grey8">
             <section className="w-9/10 bg-grey10 rounded-[4px] mt-[65px] flex justify-center font-inter mb-[76px]">
@@ -91,3 +93,4 @@ export const UserPage = (): JSX.Element => {
         </>
     )
 }
+
