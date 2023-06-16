@@ -4,5 +4,6 @@ export interface iUserProviderProps {
 
 export interface iUserProviderValue {
     openOrCloseModal: () => void,
-    modal: boolean
+    createAdvertsModal: boolean,
+    brands: string[]
 }

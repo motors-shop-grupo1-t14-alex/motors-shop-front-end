@@ -1,11 +1,11 @@
 import { ProtectedRouted } from "../../components/protectedRoutes";
-import { useContext, useEffect, useState } from "react"
-import { Button } from "../../components/button"
-import { Footer } from "../../components/footer"
-import { Header } from "../../components/header"
-import { UserContext } from "../../contexts/userContext/UserContext"
-import { SellerProductCard } from "../../components/sellerProductCard"
-import api from "../../services/axios"
+import { useContext, useEffect, useState } from "react";
+import { Button } from "../../components/button";
+import { Footer } from "../../components/footer";
+import { Header } from "../../components/header";
+import { UserContext } from "../../contexts/userContext/UserContext";
+import { SellerProductCard } from "../../components/sellerProductCard";
+import api from "../../services/axios";
 
 export const UserPage = (): JSX.Element => {
   
@@ -93,4 +93,3 @@ export const UserPage = (): JSX.Element => {
         </>
     )
 }
-

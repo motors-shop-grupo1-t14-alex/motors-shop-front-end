@@ -1,4 +1,4 @@
-import api from "../../services/axios";
+import { api } from "../../services/axios";
 import { useState, useEffect, createContext } from "react";
 import { iLoginData, iUser, iUserContext, iUserContextProps } from "./types";
 import { NavigateFunction, useNavigate } from "react-router-dom";
