@@ -13,6 +13,8 @@ export const Header = (): JSX.Element => {
         setScreenSize(window.innerWidth);
     });
 
+    const verificaEspaco = (string: string | undefined) => string && string.indexOf(' ') >= 0;
+
     return (
         <header className="flex justify-center border-b-2 border-gray-300 font-medium h-20">
             <div className="flex items-center justify-between h-full w-9/10 max-w-screen-2xl">
@@ -26,11 +28,16 @@ export const Header = (): JSX.Element => {
                 ) : user ? (
                     <section className="flex items-center justify-center pl-8 gap-4 md:border-l-2 md:border-gray-300 h-full">
                         <p className="bg-blue-500 p-3 rounded-full text-white">
-                            {`${user?.name
+                            {
+                            verificaEspaco(user?.name) ?
+                            `${user?.name
                                 ?.split(" ")[0]
                                 .substring(0, 1)}${user?.name
                                 ?.split(" ")[1]
-                                .substring(0, 1)}`}
+                                .substring(0, 1)}`
+                                :
+                                user.name && `${user?.name[0].toUpperCase()}`
+                            }
                         </p>
                         <p className="p-3 ">{user.name}</p>
                         <button onClick={logout}>
