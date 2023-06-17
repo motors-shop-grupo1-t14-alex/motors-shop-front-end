@@ -22,6 +22,11 @@
     position: fixed;
     background-color: white;
 }
+
+.background-user-page {
+    background-image: linear-gradient(to top, #E9ECEF 0, #E9ECEF 80%, #4529E6 20%);
+}
+
 .background-product-page-mobile {
     background-image: linear-gradient(to top, #E9ECEF 0, #E9ECEF 86.5%, #4529E6 13.5%);
 }
@@ -29,5 +34,9 @@
 @media (min-width: 640px){
     .background-product-page-mobile {
         background-image: linear-gradient(to top, #E9ECEF 0, #E9ECEF 80%, #4529E6 20%);    
+    }
+
+    .background-user-page {
+        background-image: linear-gradient(to top, #E9ECEF 0, #E9ECEF 90%, #4529E6 10%);
     }
 }

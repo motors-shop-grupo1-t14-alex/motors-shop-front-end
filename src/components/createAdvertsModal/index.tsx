@@ -24,8 +24,13 @@ export const CreateAdvertsModal = (): JSX.Element => {
 
   const select = useRef()
 
-  const getCarModels = async (event: any) => {
-    const brand: string = event.target.value
+  const getCarModels = async (event: React.ChangeEvent<HTMLInputElement>) => {
+
+    if(!event.target) {
+      return
+    }
+
+    const brand: string = event.target.value 
 
     try {
       const { data } = await fipe_api.get("/cars", { params: {brand: brand} })
@@ -37,23 +42,23 @@ export const CreateAdvertsModal = (): JSX.Element => {
     }
   }
 
-  const getCarInfos = async (event: any) => {
+  const getCarInfos = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const model: string = event.target.value
 
-    const carInfos = models.find(item => item.name === model)
+    const carInfos: iCarInfos | undefined = models.find(item => item.name === model)
 
     setCarInfos(carInfos)
   }
 
-  const fuelTypes = ["Flex", "Híbrido", "Elétrico"]
+  const fuelTypes: string[] = ["Flex", "Híbrido", "Elétrico"]
 
-  const fuel = carInfos && fuelTypes[carInfos.fuel - 1]
+  const fuel: string | undefined = carInfos && fuelTypes[carInfos.fuel - 1]
 
-  const fipe = carInfos && carInfos.value.toFixed(2) 
+  const fipe: string | undefined = carInfos && carInfos.value.toFixed(2) 
 
-  const year = carInfos && carInfos.year
+  const year: string | undefined = carInfos && carInfos.year
   
-  const createAdverts = async (data: iAdverts) => {
+  const createAdverts = async (data: iAdverts): Promise<void> => {
 
     if(!carInfos) {
       return
@@ -62,11 +67,11 @@ export const CreateAdvertsModal = (): JSX.Element => {
     const requestBody = {
       brand: carInfos.brand,
       model: carInfos.name,
-      year: parseInt(year!),
+      year: parseInt(carInfos.year),
       fuel_type: fuel,
       mileage: data.mileage,
       color: data.color,
-      fipe_price: parseFloat(fipe!),
+      fipe_price: parseFloat(carInfos.value.toFixed(2)),
       price: parseFloat(data.price),
       description: data.description,
       cover_image: data.cover_image,
@@ -75,13 +80,13 @@ export const CreateAdvertsModal = (): JSX.Element => {
       ]
     };
 
-    const tokenString = localStorage.getItem("@TOKEN");
+    const tokenString: string | null = localStorage.getItem("@TOKEN");
 
     if(!tokenString) {
       return
     }
 
-    const token = tokenString.split('"').join("");
+    const token: string = tokenString.split('"').join("");
 
     const config = {
       headers: { Authorization: `Bearer ${token}` },
