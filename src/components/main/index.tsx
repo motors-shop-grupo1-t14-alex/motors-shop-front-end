@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { CardProduct } from "../cardProduct/products"
 import { Filter, FilterMobile } from "../filters"
+import { ModalTemplate } from "../modalTemplate"
 
 export const MainHome = (): JSX.Element => {
     const [openFilter, setOpenFilter] = useState(false)
@@ -8,6 +9,7 @@ export const MainHome = (): JSX.Element => {
     const toggleModal = () => {
         setOpenFilter(!openFilter)
     }
+
     const clickFilterBtn = () => {
         toTop()
         toggleModal()
@@ -22,7 +24,7 @@ export const MainHome = (): JSX.Element => {
 
     return (
         <>
-        {openFilter && <FilterMobile modal={openFilter} toggleModal={toggleModal}/>}
+        {openFilter && <ModalTemplate OpenOrClose={toggleModal} title="Filtro" style="bg-white w-full fixed top-0" headerStyle="w-9/10 my-5 mx-auto font-medium text-lg text-grey1" children={<FilterMobile OpenOrClose={toggleModal}/>}/> }
         <main className="mb-10">
         
         <div className="h-[625px] md:h[300px] bannerMobile bg-fixed bg-center bg-cover md:flex md:justify-center md:items-center">
