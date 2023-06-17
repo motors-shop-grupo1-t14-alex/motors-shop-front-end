@@ -111,7 +111,7 @@ export const CreateAdvertsModal = (): JSX.Element => {
   const onSubmit: SubmitHandler<iAdverts> = (data) => createAdverts(data)
 
   return (
-    <ModalTemplate title="Criar anuncio" style="bg-white w-[520px]">
+    <ModalTemplate title="Criar anuncio" style="bg-white w-[520px]" OpenOrClose={openOrCloseModal}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <p>Infomações do veículo</p>
 
