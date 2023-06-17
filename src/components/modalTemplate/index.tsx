@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef } from "react";
-import { UserContext } from "../../contexts/userContext";
+import { AdvertContext } from "../../contexts/userContext";
 import { iModal } from "./types";
 import { Button } from "../button";
 import { IoMdClose }  from "react-icons/io";
@@ -7,7 +7,7 @@ import { createPortal } from "react-dom";
 
 export const ModalTemplate = ({title, children, style}: iModal): JSX.Element => {
 
-    const { openOrCloseModal } = useContext(UserContext)
+    const { openOrCloseModal } = useContext(AdvertContext)
 
     const ref = useRef<HTMLDivElement>(null)
 

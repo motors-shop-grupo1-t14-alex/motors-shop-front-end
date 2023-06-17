@@ -1,11 +1,13 @@
-import { ProtectedRouted } from "../../components/protectedRoutes";
+// import { ProtectedRouted } from "../../components/protectedRoutes";
 import { useContext, useEffect, useState } from "react";
 import { Button } from "../../components/button";
 import { Footer } from "../../components/footer";
 import { Header } from "../../components/header";
 import { UserContext } from "../../contexts/userContext/UserContext";
 import { SellerProductCard } from "../../components/sellerProductCard";
-import api from "../../services/axios";
+import { api } from "../../services/axios";
+import { CreateAdvertsModal } from "../../components/createAdvertsModal";
+import { AdvertContext } from "../../contexts/userContext";
 
 export const UserPage = (): JSX.Element => {
   
@@ -14,6 +16,8 @@ export const UserPage = (): JSX.Element => {
     const [adverts, setAdverts] = useState<any>([]);
 
     const { user } = useContext(UserContext);
+
+    const { createAdvertsModal, openOrCloseModal } = useContext(AdvertContext)
 
     const verificaEspaco = (string: string | undefined) => string && string.indexOf(' ') >= 0;
 
@@ -42,11 +46,12 @@ export const UserPage = (): JSX.Element => {
             }
         }
         getUserAdverts()
-    }, [])
+    }, [adverts])
 
     return (
         <>
-        <ProtectedRouted />
+        {/* <ProtectedRouted /> */}
+        { createAdvertsModal && <CreateAdvertsModal/>}
         <Header/>
         <main className="flex flex-col items-center bg-grey8">
             <section className="w-9/10 bg-grey10 rounded-[4px] mt-[65px] flex justify-center font-inter mb-[76px]">
@@ -77,7 +82,7 @@ export const UserPage = (): JSX.Element => {
 
                     
                     <div className="mt-[16px] mb-[40px] ">
-                        <Button children={"Criar anuncio"} type="button" css="w-[160px] h-[48px] border-brand1 border-[1.5px] rounded-[4px] text-base font-semibold text-brand1 hover:bg-brand4 transition"/>
+                        <Button children={"Criar anuncio"} type="button" onClick={openOrCloseModal} css="w-[160px] h-[48px] border-brand1 border-[1.5px] rounded-[4px] text-base font-semibold text-brand1 hover:bg-brand4 transition"/>
                     </div>
                     
                 </div>
@@ -85,7 +90,7 @@ export const UserPage = (): JSX.Element => {
 
             <section className="flex justify-center mb-[200px] w-9/10">
                 <ul className="flex overflow-x-scroll md:flex-wrap md:overflow-hidden md:w-300">
-                    {adverts.map(items => <SellerProductCard key={items.id} advertInfos={items} userInfos={userInfos}/>)}
+                    {adverts.map(items => <SellerProductCard key={items.id} advertInfos={items}/>)}
                 </ul>
             </section>
         </main>

@@ -20,10 +20,10 @@ export const FormLogin = (): JSX.Element => {
   });
 
   return (
-    <main className="bg-grey8 flex items-center justify-center h-full py-8  font-medium">
+    <main className="bg-grey8 flex items-center justify-center h-700px mobileGG:h-screen py-8 font-medium">
       <Form
         onSubmit={handleSubmit(login)}
-        inputCSS="flex flex-col gap-6 w-95/100 py-8 px-4 rounded bg-white justify-center items-center md:w-1/2 lg:w-1/3 xl:w-1/4 md:py-11 md:px-12"
+        inputCSS="flex flex-col transition-all gap-6 py-8 px-4 rounded bg-white justify-center items-center w-95/100 md:w-1/2 lg:w-1/3 xl:w-30/100 2xl:w-1/4 md:py-11 md:px-12"
       >
         <h2 className="text-2xl w-full">Login</h2>
         <section className="w-full relative flex flex-col">

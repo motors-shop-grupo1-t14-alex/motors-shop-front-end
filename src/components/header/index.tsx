@@ -27,18 +27,20 @@ export const Header = (): JSX.Element => {
                     </button>
                 ) : user ? (
                     <section className="flex items-center justify-center pl-8 gap-4 md:border-l-2 md:border-gray-300 h-full">
-                        <p className="bg-blue-500 p-3 rounded-full text-white">
-                            {
-                            verificaEspaco(user?.name) ?
-                            `${user?.name
-                                ?.split(" ")[0]
-                                .substring(0, 1)}${user?.name
-                                ?.split(" ")[1]
-                                .substring(0, 1)}`
-                                :
-                                user.name && `${user?.name[0].toUpperCase()}`
-                            }
-                        </p>
+                        <div className="w-[52px] h-[52px] bg-brand1 rounded-full flex justify-center items-center">
+                            <p className="text-white text-2xl font-medium">
+                                {
+                                verificaEspaco(user?.name) ?
+                                `${user?.name
+                                    ?.split(" ")[0]
+                                    .substring(0, 1)}${user?.name
+                                    ?.split(" ")[1]
+                                    .substring(0, 1)}`
+                                    :
+                                    user.name && `${user?.name[0].toUpperCase()}`
+                                }
+                            </p>
+                        </div>
                         <p className="p-3 ">{user.name}</p>
                         <button onClick={logout}>
                             <BiLogOut size={28} />
@@ -56,7 +58,7 @@ export const Header = (): JSX.Element => {
                         ) : (
                             <Link
                                 to="/login"
-                                className="p-2.5 w-32 text-gray-500 "
+                                className="p-2.5 w-32 text-gray-500 hover:text-brand1"
                             >
                                 Fazer login
                             </Link>

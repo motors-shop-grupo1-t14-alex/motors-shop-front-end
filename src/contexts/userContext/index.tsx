@@ -1,10 +1,10 @@
 import { createContext, useState } from "react";
-import { iUserProviderProps, iUserProviderValue } from "./type";
+import { iAdvertProviderProps, iAdvertProviderValue } from "./type";
 import { fipe_api } from "../../services/axios";
 
-export const UserContext = createContext({} as iUserProviderValue);
+export const AdvertContext = createContext({} as iAdvertProviderValue);
 
-export const UserProvider = ({ children }: iUserProviderProps) => {
+export const AdvertProvider = ({ children }: iAdvertProviderProps) => {
 
   const [createAdvertsModal, setCreateAdvertsModal] = useState<boolean>(false);
   const [brands, setBrands] = useState<string[]>([])
@@ -28,7 +28,7 @@ export const UserProvider = ({ children }: iUserProviderProps) => {
   }
 
   return (
-    <UserContext.Provider
+    <AdvertContext.Provider
       value={{
         openOrCloseModal,
         createAdvertsModal,
@@ -36,6 +36,6 @@ export const UserProvider = ({ children }: iUserProviderProps) => {
       }}
     >
       {children}
-    </UserContext.Provider>
+    </AdvertContext.Provider>
   );
 };

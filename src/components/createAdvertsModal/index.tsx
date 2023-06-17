@@ -7,12 +7,12 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { Button } from "../../components/button";
 import { Select } from "../select";
 import { useContext, useRef, useState } from "react";
-import { UserContext } from "../../contexts/userContext";
+import { AdvertContext } from "../../contexts/userContext";
 import { api, fipe_api } from "../../services/axios";
 import { iCarInfos } from "./types";
 
 export const CreateAdvertsModal = (): JSX.Element => {
-  const { brands, openOrCloseModal } = useContext(UserContext);
+  const { brands, openOrCloseModal } = useContext(AdvertContext);
 
   const [models, setModels] = useState<iCarInfos[]>([])
   const [carInfos, setCarInfos] = useState<iCarInfos>()
@@ -89,7 +89,7 @@ export const CreateAdvertsModal = (): JSX.Element => {
     
     try {
       await api.post(`adverts`, requestBody, config);
-          
+      openOrCloseModal()
     } catch (error) {
       console.log(error);
     } 
