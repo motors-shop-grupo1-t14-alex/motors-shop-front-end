@@ -1,4 +1,4 @@
-// import { ProtectedRouted } from "../../components/protectedRoutes";
+import { ProtectedRouted } from "../../components/protectedRoutes";
 import { useContext, useEffect, useState } from "react";
 import { Button } from "../../components/button";
 import { Footer } from "../../components/footer";
@@ -24,13 +24,13 @@ export const UserPage = (): JSX.Element => {
     useEffect(() => {
         const getUserAdverts = async () => {
 
-            const tokenString = localStorage.getItem("@TOKEN");
+            const tokenString = localStorage.getItem("@TOKEN")
 
             if(!tokenString) {
                 return
             }
 
-            const token = tokenString.split('"').join("");
+            const token = JSON.parse(tokenString)
 
             const config = {
                 headers: { Authorization: `Bearer ${token}` },
@@ -50,7 +50,7 @@ export const UserPage = (): JSX.Element => {
 
     return (
         <>
-        {/* <ProtectedRouted /> */}
+        <ProtectedRouted />
         { createAdvertsModal && <CreateAdvertsModal/>}
         <Header/>
         <main className="flex flex-col items-center bg-grey8">

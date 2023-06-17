@@ -25,7 +25,6 @@ export const UserProvider = ({ children }: iUserContextProps) => {
                 api.defaults.headers.common.authorization = `Bearer ${myToken}`;
                 const response = await api.get(`/users/${myId}`);
                 setUser(response.data);
-                // navigate("/");
             } catch (error) {
                 console.log(error);
                 localStorage.clear();
@@ -61,6 +60,7 @@ export const UserProvider = ({ children }: iUserContextProps) => {
     function logout() {
         localStorage.removeItem("@TOKEN");
         localStorage.removeItem("@ID");
+        localStorage.removeItem("@INFOS");
         setUser(null);
         navigate("/login");
     }
