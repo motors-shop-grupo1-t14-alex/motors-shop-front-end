@@ -1,20 +1,7 @@
-import car from "../../assets/img/car.svg";
 import { Button } from "../button";
 import { ProductTag } from "../productTag";
 
-const database = {
-  name: "Product title stays here - max 1 line",
-  img: car,
-  year: "2019",
-  mileage: `0 KM`,
-  price: "R$ 00.000,00",
-  imgProfile: "SL",
-  user: "Samuel Leão",
-  is_published: true
-};
-
-export const SellerProductCard = ({advertInfos, userInfos}: any) => {
-    console.log(advertInfos)
+export const SellerProductCard = ({advertInfos}: any): JSX.Element => {
   return (
     <section className="h-[500px] pl-5">
       <div className="flex flex-col gap-4 font-inter w-[275px]">
@@ -28,23 +15,24 @@ export const SellerProductCard = ({advertInfos, userInfos}: any) => {
                 </div>
             }
 
-            <div className="flex items-center bg-grey7 mt-5 h-[152px]">
-                <img src={advertInfos.cover_image} alt="carro de luxo" />
+            <div className="flex items-center justify-center bg-grey7 mt-5 h-[152px] w-[312px]">
+                <img className="max-h-[152px] max-w-[312px]" src={advertInfos.cover_image} alt="carro de luxo" />
             </div>
 
-            <p className="font-Lexend font-semibold">{advertInfos.name}</p>
+            <p className="font-Lexend font-semibold overflow-hidden text-ellipsis whitespace-nowrap">{advertInfos.model}</p>
 
-            <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem...
+            <p className="font-normal font-inter text-grey2 text-sm max-h-[40px] min-h-[40px] overflow-hidden text-ellipsis">
+              {advertInfos.description}
             </p>
 
             <div className="text-brand1 font-medium leading-6 text-[14px]">
-                <div className="flex gap-3 items-center">
-                    <ProductTag content={advertInfos.mileage}/>
-                    <ProductTag content={advertInfos.year}/>
-                    <div className="flex justify-end w-[59%] text-black font-bold">
-                        <span>{advertInfos.price}</span>
+                <div className="flex gap-3 items-center justify-between">
+                    <div className="flex gap-2">
+                      <ProductTag content={advertInfos.mileage}/>
+                      <ProductTag content={advertInfos.year}/>
+                    </div>
+                    <div className="flex justify-end text-black font-bold">
+                        <span>R$ {advertInfos.price}</span>
                     </div>
                 </div>
             </div>

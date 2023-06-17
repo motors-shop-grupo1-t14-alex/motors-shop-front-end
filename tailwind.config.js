@@ -65,6 +65,7 @@ export default {
             screens: {
                 mobileM: "375px",
                 mobileG: "425px",
+                mobileGG: "800px",
                 desktopM: "1100px",
             },
         },

@@ -1,8 +1,8 @@
-export interface iUserProviderProps {
+export interface iAdvertProviderProps {
     children: React.ReactNode
 }
 
-export interface iUserProviderValue {
+export interface iAdvertProviderValue {
     openOrCloseModal: () => void,
     createAdvertsModal: boolean,
     brands: string[]

@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { CardProduct } from "../cards/products"
+import { CardProduct } from "../cardProduct/products"
 import { Filter, FilterMobile } from "../filters"
 
 export const MainHome = () => {

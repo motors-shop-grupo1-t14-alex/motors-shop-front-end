@@ -1,15 +1,15 @@
 import React from "react";
-import { UserProvider } from "./contexts/userContext/index.tsx";
+import { AdvertProvider } from "./contexts/userContext/index.tsx";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <UserProvider>
+    <AdvertProvider>
       <BrowserRouter>
         <App />
       </BrowserRouter>
-    </UserProvider>
+    </AdvertProvider>
   </React.StrictMode>
 )
