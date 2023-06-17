@@ -9,7 +9,8 @@ import { Input } from "../input";
 import { useContext } from "react";
 import { UserContext } from "../../contexts/userContext/UserContext";
 
-export const RegisterForm = () => {
+export const RegisterForm = (): JSX.Element => {
+  
   const { registerUser } = useContext(UserContext);
 
   const {

@@ -2,7 +2,7 @@ import { useState } from "react"
 import { CardProduct } from "../cardProduct/products"
 import { Filter, FilterMobile } from "../filters"
 
-export const MainHome = () => {
+export const MainHome = (): JSX.Element => {
     const [openFilter, setOpenFilter] = useState(false)
     
     const toggleModal = () => {
@@ -39,7 +39,7 @@ export const MainHome = () => {
 
             <div className="w-9/10 flex justify-between max-w-screen-2xl">
                 <Filter />
-                <ul className="flex overflow-x-scroll md:flex-wrap md:overflow-hidden md:w-300">
+                <ul className="flex gap-5 overflow-x-scroll md:flex-wrap md:overflow-hidden md:w-300">
                     <CardProduct />
                     <CardProduct />
                     <CardProduct />

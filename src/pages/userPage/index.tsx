@@ -8,12 +8,14 @@ import { SellerProductCard } from "../../components/sellerProductCard";
 import { api } from "../../services/axios";
 import { CreateAdvertsModal } from "../../components/createAdvertsModal";
 import { AdvertContext } from "../../contexts/userContext";
+import { iAdvert, iUserInfos } from "./types";
+import "../../index.css";
 
 export const UserPage = (): JSX.Element => {
   
-    const userInfos = JSON.parse(localStorage.getItem('@INFOS') || '{}')
+    const userInfos: iUserInfos = JSON.parse(localStorage.getItem('@INFOS') || '{}')
 
-    const [adverts, setAdverts] = useState<any>([]);
+    const [adverts, setAdverts] = useState<iAdvert[]>([]);
 
     const { user } = useContext(UserContext);
 
@@ -30,7 +32,7 @@ export const UserPage = (): JSX.Element => {
                 return
             }
 
-            const token = JSON.parse(tokenString)
+            const token: string = JSON.parse(tokenString)
 
             const config = {
                 headers: { Authorization: `Bearer ${token}` },
@@ -46,15 +48,15 @@ export const UserPage = (): JSX.Element => {
             }
         }
         getUserAdverts()
-    }, [adverts])
+    }, [openOrCloseModal])
 
     return (
         <>
         <ProtectedRouted />
         { createAdvertsModal && <CreateAdvertsModal/>}
         <Header/>
-        <main className="flex flex-col items-center bg-grey8">
-            <section className="w-9/10 bg-grey10 rounded-[4px] mt-[65px] flex justify-center font-inter mb-[76px]">
+        <main className="flex flex-col items-center bg-grey8 background-user-page">
+            <section className="w-9/10 bg-grey10 rounded-[4px] mt-[65px] flex justify-center font-inter mb-[76px] max-w-screen-xl">
 
                 <div className="flex flex-col w-9/10 mt-[40px]">
                     <div className="w-[104px] h-[104px] bg-brand1 rounded-full flex justify-center items-center">
@@ -89,10 +91,15 @@ export const UserPage = (): JSX.Element => {
             </section>
 
             <section className="flex justify-center mb-[200px] w-9/10">
-                <ul className="flex overflow-x-scroll md:flex-wrap md:overflow-hidden md:w-300">
+                <ul className="flex gap-5 justify-center overflow-x-scroll md:flex-wrap md:overflow-hidden w-full max-w-screen-xl">
                     {adverts.map(items => <SellerProductCard key={items.id} advertInfos={items}/>)}
                 </ul>
             </section>
+
+            <div className="flex flex-col gap-3 md:flex-row md:justify-center md:gap-10 md:mt-16 md:mb-16">
+            <span className="text-grey3 m-auto md:m-0"><strong>1</strong> de 2</span>
+            <span className="m-auto md:m-0 text-brand1 cursor-pointer font-bold">Seguinte {">"}</span>
+        </div>
         </main>
         <Footer/>
         </>

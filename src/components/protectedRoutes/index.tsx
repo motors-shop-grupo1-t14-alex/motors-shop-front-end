@@ -3,7 +3,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import { UserContext } from "../../contexts/userContext/UserContext";
 import { api } from "../../services/axios";
 
-export const ProtectedRouted = () => {
+export const ProtectedRouted = (): JSX.Element => {
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
 
@@ -19,7 +19,7 @@ export const ProtectedRouted = () => {
       return
     }
 
-    const token = JSON.parse(tokenString)
+    const token: string = JSON.parse(tokenString)
 
     const checkIfUserIsValid = async () => {
       try {
