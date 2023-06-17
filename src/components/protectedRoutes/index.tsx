@@ -24,8 +24,7 @@ export const ProtectedRouted = () => {
     const checkIfUserIsValid = async () => {
       try {
         api.defaults.headers.common.authorization = `Bearer ${token}`;
-        const teste = await api.get(`/users/${myId}`)
-        console.log(teste)
+        await api.get(`/users/${myId}`)
       } catch {
         localStorage.clear();
         navigate("/login");
