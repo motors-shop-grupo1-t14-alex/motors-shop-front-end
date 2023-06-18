@@ -3,7 +3,9 @@ export interface iAdvertProviderProps {
 }
 
 export interface iAdvertProviderValue {
-    openOrCloseModal: () => void,
+    openOrCloseAdvertModal: () => void,
     createAdvertsModal: boolean,
-    brands: string[]
+    brands: string[],
+    createAdvertSuccessModal: () => void,
+    createSuccessModal: boolean
 }

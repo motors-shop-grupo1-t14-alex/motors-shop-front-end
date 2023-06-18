@@ -1,41 +1,73 @@
-import { createContext, useState } from "react";
-import { iAdvertProviderProps, iAdvertProviderValue } from "./type";
-import { fipe_api } from "../../services/axios";
+import { api } from "../../services/axios";
+import { useState, useEffect, createContext } from "react";
+import { iLoginData, iUser, iUserContext, iUserContextProps } from "./types";
+import { NavigateFunction, useNavigate } from "react-router-dom";
+import { iRegisterData } from "../../pages/registerPage/validators";
 
-export const AdvertContext = createContext({} as iAdvertProviderValue);
+export const UserContext = createContext({} as iUserContext);
 
-export const AdvertProvider = ({ children }: iAdvertProviderProps) => {
+export const UserProvider = ({ children }: iUserContextProps) => {
+    const navigate: NavigateFunction = useNavigate();
 
-  const [createAdvertsModal, setCreateAdvertsModal] = useState<boolean>(false);
-  const [brands, setBrands] = useState<string[]>([])
+    const [user, setUser] = useState<iUser | null>(null);
 
-  const getCarBrands = async () => {
-    try {
-      const { data } = await fipe_api.get("/cars")
-      const brandList = Object.keys(data)
+    useEffect(() => {
+        async function infoUser() {
+            const token = localStorage.getItem("@TOKEN");
+            const myId: string | null = localStorage.getItem("@ID");
 
-      setBrands(brandList)
-    } catch (error) {
-      console.error(error)
+            if (!token && !myId) {
+                return;
+            }
+            try {
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                const myToken = JSON.parse(token!);
+                api.defaults.headers.common.authorization = `Bearer ${myToken}`;
+                const response = await api.get(`/users/${myId}`);
+                setUser(response.data);
+            } catch (error) {
+                console.log(error);
+                localStorage.clear();
+            }
+        }
+        infoUser();
+    }, [navigate]);
+
+    async function login(data: iLoginData) {
+        try {
+            const response = await api.post("/login", data);
+            localStorage.setItem("@TOKEN", JSON.stringify(response.data.token));
+            localStorage.setItem("@ID", JSON.stringify(response.data.user.id));
+            localStorage.setItem("@INFOS", JSON.stringify({name: response.data.user.name, is_seller: response.data.user.is_seller}))
+            setUser(response.data.user);
+            navigate("/");
+        } catch (error) {
+            console.log(error);
+        }
     }
-  };
 
-  const openOrCloseModal = () => {
-    if (!createAdvertsModal) {
-      getCarBrands()
+    async function registerUser(data: iRegisterData) {
+        try {
+            const response = await api.post("/users", data);
+
+            console.log(response);
+            navigate("/login");
+        } catch (error) {
+            console.log(error);
+        }
     }
-    setCreateAdvertsModal(!createAdvertsModal);
-  }
 
-  return (
-    <AdvertContext.Provider
-      value={{
-        openOrCloseModal,
-        createAdvertsModal,
-        brands
-      }}
-    >
-      {children}
-    </AdvertContext.Provider>
-  );
+    function logout() {
+        localStorage.removeItem("@TOKEN");
+        localStorage.removeItem("@ID");
+        localStorage.removeItem("@INFOS");
+        setUser(null);
+        navigate("/login");
+    }
+
+    return (
+        <UserContext.Provider value={{ user, login, registerUser, logout }}>
+            {children}
+        </UserContext.Provider>
+    );
 };
