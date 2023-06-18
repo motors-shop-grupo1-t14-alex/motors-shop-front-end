@@ -55,7 +55,7 @@ export const UserPage = (): JSX.Element => {
     };
     getUserAdverts();
   }, [createAdvertSuccessModal]);
-
+  console.log(userInfos)
   return (
     <>
       <ProtectedRouted />
@@ -86,9 +86,7 @@ export const UserPage = (): JSX.Element => {
             </div>
 
             <p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s
+              {userInfos.description}
             </p>
 
             <div className="mt-[16px] mb-[40px] ">
