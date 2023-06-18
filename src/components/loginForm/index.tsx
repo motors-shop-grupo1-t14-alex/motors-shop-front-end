@@ -4,7 +4,7 @@ import { LoginData, loginSchema } from "../../pages/loginPage/validator";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-import { UserContext } from "../../contexts/userContext/UserContext";
+import { UserContext } from "../../contexts/userContext";
 import { Form } from "../form";
 
 export const FormLogin = (): JSX.Element => {

@@ -1,4 +1,3 @@
-import { MutableRefObject, ReactEventHandler } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
 
 export interface iSelect {
@@ -8,6 +7,6 @@ export interface iSelect {
     boxStyle: string;
     selectStyle: string;
     register?: UseFormRegisterReturn<string>
-    ref?: any
-    onChange?: (event: any) => void 
+    ref?: React.MutableRefObject<undefined>
+    onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void 
 }

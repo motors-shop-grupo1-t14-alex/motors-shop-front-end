@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import { UserContext } from "../../contexts/userContext/UserContext";
+import { UserContext } from "../../contexts/userContext";
 import { api } from "../../services/axios";
 
 export const ProtectedRouted = (): JSX.Element => {
@@ -8,7 +8,6 @@ export const ProtectedRouted = (): JSX.Element => {
   const navigate = useNavigate();
 
   useEffect(() => {
-
     const myId: string | null = localStorage.getItem("@ID");
     const tokenString = localStorage.getItem("@TOKEN");
 
@@ -16,23 +15,22 @@ export const ProtectedRouted = (): JSX.Element => {
       localStorage.clear();
       navigate("/login");
 
-      return
+      return;
     }
 
-    const token: string = JSON.parse(tokenString)
+    const token: string = JSON.parse(tokenString);
 
     const checkIfUserIsValid = async () => {
       try {
         api.defaults.headers.common.authorization = `Bearer ${token}`;
-        await api.get(`/users/${myId}`)
+        await api.get(`/users/${myId}`);
       } catch {
         localStorage.clear();
         navigate("/login");
       }
-    }
-    
-    checkIfUserIsValid()
-    
+    };
+
+    checkIfUserIsValid();
   }, []);
 
   return <>{user && <Outlet />}</>;

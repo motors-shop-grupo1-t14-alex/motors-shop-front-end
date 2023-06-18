@@ -7,10 +7,9 @@ import { useForm } from "react-hook-form";
 import { Form } from "../form";
 import { Input } from "../input";
 import { useContext } from "react";
-import { UserContext } from "../../contexts/userContext/UserContext";
+import { UserContext } from "../../contexts/userContext";
 
 export const RegisterForm = (): JSX.Element => {
-  
   const { registerUser } = useContext(UserContext);
 
   const {
