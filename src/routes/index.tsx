@@ -5,6 +5,7 @@ import { ProductPage } from "../pages/ProductPage";
 import { RegisterPage } from "../pages/registerPage";
 import { UserPage } from "../pages/userPage";
 import { Providers } from "../contexts/providers";
+import { RecoveryPassword } from "../pages/passwordRecoveryPage";
 
 export const MainRoutes = () => {
     return (
@@ -15,6 +16,10 @@ export const MainRoutes = () => {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
                 <Route path="/user" element={<UserPage />} />
+                <Route
+                    path="/passwordRecovery"
+                    element={<RecoveryPassword />}
+                />
                 <Route path="*" element={<Navigate to={"/"} />} />
             </Routes>
         </Providers>
