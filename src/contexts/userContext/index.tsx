@@ -3,11 +3,15 @@ import { useState, useEffect, createContext } from "react";
 import { iLoginData, iUser, iUserContext, iUserContextProps } from "./types";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 import { iRegisterData } from "../../pages/registerPage/validators";
+import { string } from "zod";
 
 export const UserContext = createContext({} as iUserContext);
 
 export const UserProvider = ({ children }: iUserContextProps) => {
     const navigate: NavigateFunction = useNavigate();
+    const [exist, setExist] = useState(false);
+    const [isSubmited, setIsSubmited] = useState(false);
+    const [code, setCode] = useState("");
 
     const [user, setUser] = useState<iUser | null>(null);
 
@@ -73,7 +77,20 @@ export const UserProvider = ({ children }: iUserContextProps) => {
     }
 
     return (
-        <UserContext.Provider value={{ user, login, registerUser, logout }}>
+        <UserContext.Provider
+            value={{
+                user,
+                login,
+                registerUser,
+                logout,
+                exist,
+                setExist,
+                isSubmited,
+                setIsSubmited,
+                code,
+                setCode,
+            }}
+        >
             {children}
         </UserContext.Provider>
     );

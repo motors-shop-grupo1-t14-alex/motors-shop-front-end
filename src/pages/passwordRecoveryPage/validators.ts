@@ -11,3 +11,15 @@ export const recoveryPasswordSchema = z
     });
 
 export type RecoveryPasswordData = z.infer<typeof recoveryPasswordSchema>;
+
+export const verifyEmailSchema = z.object({
+    email: z.string(),
+});
+
+export type VerifyEmailData = z.infer<typeof verifyEmailSchema>;
+
+export const verifyCodeSchema = z.object({
+    code: z.string(),
+});
+
+export type verifyCodeData = z.infer<typeof verifyCodeSchema>;
