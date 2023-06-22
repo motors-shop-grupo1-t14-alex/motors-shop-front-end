@@ -9,7 +9,7 @@ import { UserContext } from "../../contexts/userContext";
 import { Input } from "../input";
 
 export const FormCodigo = () => {
-    const { setExist, code } = useContext(UserContext);
+    const { submitCode } = useContext(UserContext);
 
     const {
         register,
@@ -20,14 +20,6 @@ export const FormCodigo = () => {
         resolver: zodResolver(verifyCodeSchema),
     });
 
-    const submitCode = (data: any) => {
-        // console.log(data);
-        if (data.code == code) {
-            setExist(true);
-        } else {
-            console.log("erro");
-        }
-    };
     return (
         <form
             onSubmit={handleSubmit(submitCode)}

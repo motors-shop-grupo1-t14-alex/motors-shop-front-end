@@ -16,9 +16,19 @@ export const RecoveryPasswordForm = (): JSX.Element => {
         mode: "onChange",
         resolver: zodResolver(recoveryPasswordSchema),
     });
+
+    interface RecoveryPass {
+        password: string;
+        confirmPassword: string;
+    }
+
+    const submitPassword = (data: RecoveryPass) => {
+        console.log(data);
+    };
+
     return (
         <Form
-            onSubmit={(data) => console.log(data)}
+            onSubmit={handleSubmit(submitPassword)}
             inputCSS="flex flex-col transition-all gap-6 pt-8 py-5 px-4 rounded-t bg-white justify-center items-center w-95/100 md:w-1/2 lg:w-1/3 xl:w-30/100 2xl:w-1/4 md:py-11  md:px-12"
         >
             <h2 className="text-2xl w-full">Recuperação de senha</h2>

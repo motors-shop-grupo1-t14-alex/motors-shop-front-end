@@ -12,6 +12,16 @@ export interface iUserContext {
     setIsSubmited: Dispatch<SetStateAction<boolean>>;
     code: string;
     setCode: Dispatch<SetStateAction<string>>;
+    submitCode: (data: iCode) => void;
+    submitMail: (data: Mail) => void;
+}
+
+export interface iCode {
+    code: string;
+}
+
+export interface Mail {
+    email: string;
 }
 
 export type CodeNumber = [number];

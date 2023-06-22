@@ -9,13 +9,7 @@ import { useContext } from "react";
 import { UserContext } from "../../contexts/userContext";
 
 export const FormEmail = () => {
-    const { setIsSubmited, setCode } = useContext(UserContext);
-
-    const generateCode = `${Math.floor(Math.random() * 10)}${Math.floor(
-        Math.random() * 10
-    )}${Math.floor(Math.random() * 10)}${Math.floor(
-        Math.random() * 10
-    )}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}`;
+    const { submitMail } = useContext(UserContext);
 
     const {
         register,
@@ -25,17 +19,6 @@ export const FormEmail = () => {
         mode: "onBlur",
         resolver: zodResolver(verifyEmailSchema),
     });
-
-    interface Mail {
-        email: string;
-    }
-
-    const submitMail = (data: Mail) => {
-        setIsSubmited(true);
-        setCode(generateCode);
-        console.log(generateCode);
-        //console.log(data);
-    };
 
     return (
         <form

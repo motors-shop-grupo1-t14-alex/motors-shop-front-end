@@ -1,9 +1,15 @@
 import { api } from "../../services/axios";
 import { useState, useEffect, createContext } from "react";
-import { iLoginData, iUser, iUserContext, iUserContextProps } from "./types";
+import {
+    Mail,
+    iCode,
+    iLoginData,
+    iUser,
+    iUserContext,
+    iUserContextProps,
+} from "./types";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 import { iRegisterData } from "../../pages/registerPage/validators";
-import { string } from "zod";
 
 export const UserContext = createContext({} as iUserContext);
 
@@ -75,6 +81,38 @@ export const UserProvider = ({ children }: iUserContextProps) => {
         setUser(null);
         navigate("/login");
     }
+    const submitCode = (data: iCode) => {
+        // console.log(data);
+        if (data.code == code) {
+            setExist(true);
+        } else {
+            console.log("erro");
+        }
+    };
+
+    const submitMail = async (data: Mail) => {
+        const response = await api.get("/users");
+        const findEmail = response.data.find(
+            (elem: iUser) => elem.email == data.email
+        );
+
+        if (!findEmail) {
+            console.log("nao existe");
+            return;
+        }
+
+        console.log(findEmail);
+        const generateCode = `${Math.floor(Math.random() * 10)}${Math.floor(
+            Math.random() * 10
+        )}${Math.floor(Math.random() * 10)}${Math.floor(
+            Math.random() * 10
+        )}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}`;
+
+        setIsSubmited(true);
+        setCode(generateCode);
+        console.log(generateCode);
+        console.log(data);
+    };
 
     return (
         <UserContext.Provider
@@ -89,6 +127,8 @@ export const UserProvider = ({ children }: iUserContextProps) => {
                 setIsSubmited,
                 code,
                 setCode,
+                submitCode,
+                submitMail,
             }}
         >
             {children}
