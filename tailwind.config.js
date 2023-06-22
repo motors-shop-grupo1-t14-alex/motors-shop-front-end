@@ -69,6 +69,13 @@ export default {
                 desktopM: "1100px",
                 desktopG: "1400px"
             },
+            variants: {
+                extend: {
+                    display: ['group-focus'],
+                    opacity: ['group-focus'],
+                    inset: ['group-focus'],
+                }
+            }
         },
     },
     plugins: [
