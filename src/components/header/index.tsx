@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { BiLogOut } from "react-icons/bi";
 import { AiOutlineMenu } from "react-icons/ai";
+import { AiOutlineClose } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../contexts/userContext";
 
@@ -8,6 +9,19 @@ export const Header = (): JSX.Element => {
   const { user, logout } = useContext(UserContext);
   const { innerWidth } = window;
   const [screenSize, setScreenSize] = useState(innerWidth);
+  const [menu, setMenu] = useState(false)
+
+  const openMenu = () => {
+    if(!menu){
+      return "hidden"
+    } 
+    return "block"
+  }
+
+  const toggleMenu = () => {
+    setMenu(!menu)
+  }
+
 
   window.addEventListener("resize", () => {
     setScreenSize(window.innerWidth);
@@ -23,8 +37,31 @@ export const Header = (): JSX.Element => {
           <img src="/logo-motors-shop.svg" alt="logo-motors-shop" />
         </a>
         {screenSize < 768 ? (
-          <button>
-            <AiOutlineMenu size={28} />
+          <button onClick={toggleMenu} className="block md:hidden py-3 focus:outline-none group rounded-[10px]">
+            {menu ? <AiOutlineClose size='28' /> : <AiOutlineMenu size='28' />}
+            <div className={`${openMenu()} absolute z-10 top-20 right-0 h-40 w-52 bg-white border rounded-b-[2.5px]`}>
+              <ul className="flex gap-5 flex-col items-center w-full pt-10">
+                <li>{window.location.href.split("/")[3] == "login" ? (
+              <Link to="/login" className="p-2.5 w-32 text-brand1">
+                Fazer login
+              </Link>
+            ) : (
+              <Link
+                to="/login"
+                className="p-2.5 w-32 text-gray-500 hover:text-brand1"
+              >
+                Fazer login
+              </Link>
+            )}</li>
+              <li><Link
+              className="p-2.5 w-32 border-2 rounded border-gray-400 shadow-md flex justify-center items-center"
+              to="/register"
+            >
+              Cadastrar
+            </Link></li>
+              </ul>
+
+            </div>
           </button>
         ) : user ? (
           <section className="flex items-center justify-center pl-8 gap-4 md:border-l-2 md:border-gray-300 h-full">
