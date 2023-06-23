@@ -8,9 +8,10 @@ import { Input } from "../input";
 import { CSSProperties, useContext } from "react";
 import { UserContext } from "../../contexts/userContext";
 import ClipLoader from "react-spinners/ClipLoader";
+import { SuccesModal } from "../successModal";
 
 export const FormEmail = () => {
-    const { submitMail, loading } = useContext(UserContext);
+    const { submitMail, loading, openOrCloseEmailModal, emailWaring } = useContext(UserContext);
 
     const {
         register,
@@ -28,12 +29,14 @@ export const FormEmail = () => {
     };
 
     return (
+        <>
+        {emailWaring && <SuccesModal textOne="Email enviado com sucesso!" textTwo="Um email foi enviado para sua caixa de entrada (confira em sua caixa de spam caso não encontre)" openOrClose={openOrCloseEmailModal}/>}
         <form
             onSubmit={handleSubmit(submitMail)}
             className="flex flex-col transition-all gap-6 pt-8 py-5 px-4 rounded-t bg-white justify-center items-center w-95/100 md:w-1/2 lg:w-1/3 xl:w-30/100 2xl:w-1/4 md:py-11  md:px-12"
         >
             <h2 className="text-2xl w-full">Verificação de email</h2>
-            <p className="font-normal text-sm">
+            <p className="font-normal text-sm font-inter text-grey3">
                 Enviaremos um link ao seu email para iniciar a recuperação da
                 senha
             </p>
@@ -68,5 +71,6 @@ export const FormEmail = () => {
                 )}
             </button>
         </form>
+        </>
     );
 };

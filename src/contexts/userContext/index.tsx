@@ -1,6 +1,7 @@
 import { api } from "../../services/axios";
 import { useState, useEffect, createContext } from "react";
 import {
+    iMail,
     RecoveryPass,
     iCode,
     iLoginData,
@@ -19,7 +20,7 @@ export const UserProvider = ({ children }: iUserContextProps) => {
     const [isSubmited, setIsSubmited] = useState(false);
     const [code, setCode] = useState("");
     const [loading, setLoading] = useState(false);
-
+    const [emailWaring, setEmailWaring] = useState(false);
     const [user, setUser] = useState<iUser | null>(null);
 
     useEffect(() => {
@@ -95,10 +96,11 @@ export const UserProvider = ({ children }: iUserContextProps) => {
     const submitPassword = async (data: RecoveryPass) => {
         const code = window.location.pathname.split("/")[2];
         try {
-            const response = await api.patch(`/users/resetPassword/${code}`, {
+            await api.patch(`/users/resetPassword/${code}`, {
                 password: data.password,
             });
-            console.log(response.data);
+
+            navigate("/login");
         } catch (error) {
             console.log(error);
         }
@@ -112,7 +114,6 @@ export const UserProvider = ({ children }: iUserContextProps) => {
         navigate("/login");
     };
     const submitCode = (data: iCode) => {
-        // console.log(data);
         if (data.code == code) {
             setExist(true);
         } else {
@@ -120,12 +121,16 @@ export const UserProvider = ({ children }: iUserContextProps) => {
         }
     };
 
-    const submitMail = async (data: any) => {
+    const openOrCloseEmailModal = () => {
+        setEmailWaring(!emailWaring)
+
+    }
+
+    const submitMail = async (data: iMail) => {
         try {
             setLoading(true);
-            const response = await api.post("/users/resetPassword", data);
-            console.log(response.data);
-            alert("Email enviado");
+            await api.post("/users/resetPassword", data);
+            openOrCloseEmailModal()
         } catch (error) {
             console.log(error);
         } finally {
@@ -151,6 +156,8 @@ export const UserProvider = ({ children }: iUserContextProps) => {
                 loading,
                 setLoading,
                 submitPassword,
+                openOrCloseEmailModal,
+                emailWaring
             }}
         >
             {children}
