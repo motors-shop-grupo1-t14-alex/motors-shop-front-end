@@ -13,10 +13,12 @@ export interface iUserContext {
     code: string;
     setCode: Dispatch<SetStateAction<string>>;
     submitCode: (data: iCode) => void;
-    submitMail: (data: Mail) => void;
+    submitMail: (data: iMail) => void;
     loading: boolean;
     setLoading: Dispatch<SetStateAction<boolean>>;
     submitPassword: (data: RecoveryPass) => void;
+    openOrCloseEmailModal: () => void;
+    emailWaring: boolean
 }
 
 export interface RecoveryPass {
@@ -28,7 +30,7 @@ export interface iCode {
     code: string;
 }
 
-export interface Mail {
+export interface iMail {
     email: string;
 }
 
