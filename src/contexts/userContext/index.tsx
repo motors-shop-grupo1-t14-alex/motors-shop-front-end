@@ -1,7 +1,7 @@
 import { api } from "../../services/axios";
 import { useState, useEffect, createContext } from "react";
 import {
-    Mail,
+    RecoveryPass,
     iCode,
     iLoginData,
     iUser,
@@ -18,6 +18,7 @@ export const UserProvider = ({ children }: iUserContextProps) => {
     const [exist, setExist] = useState(false);
     const [isSubmited, setIsSubmited] = useState(false);
     const [code, setCode] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const [user, setUser] = useState<iUser | null>(null);
 
@@ -43,7 +44,7 @@ export const UserProvider = ({ children }: iUserContextProps) => {
         infoUser();
     }, [navigate]);
 
-    async function login(data: iLoginData) {
+    const login = async (data: iLoginData) => {
         try {
             const response = await api.post("/login", data);
             localStorage.setItem("@TOKEN", JSON.stringify(response.data.token));
@@ -61,26 +62,55 @@ export const UserProvider = ({ children }: iUserContextProps) => {
         } catch (error) {
             console.log(error);
         }
-    }
+    };
 
-    async function registerUser(data: iRegisterData) {
+    const registerUser = async (data: iRegisterData) => {
         try {
-            const response = await api.post("/users", data);
+            const newData = {
+                email: data.email,
+                password: data.password,
+                name: data.name,
+                cpf: data.cpf,
+                cellphone: data.cellphone,
+                birth_date: data.birth_date,
+                description: data.description,
+                address: {
+                    cep: data.cep,
+                    uf: data.state,
+                    city: data.city,
+                    street: data.street,
+                    number: data.streetNumber,
+                    complement: data.complement,
+                },
+            };
+            const response = await api.post("/users", newData);
 
             console.log(response);
             navigate("/login");
         } catch (error) {
             console.log(error);
         }
-    }
+    };
 
-    function logout() {
+    const submitPassword = async (data: RecoveryPass) => {
+        const code = window.location.pathname.split("/")[2];
+        try {
+            const response = await api.patch(`/users/resetPassword/${code}`, {
+                password: data.password,
+            });
+            console.log(response.data);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const logout = () => {
         localStorage.removeItem("@TOKEN");
         localStorage.removeItem("@ID");
         localStorage.removeItem("@INFOS");
         setUser(null);
         navigate("/login");
-    }
+    };
     const submitCode = (data: iCode) => {
         // console.log(data);
         if (data.code == code) {
@@ -90,28 +120,17 @@ export const UserProvider = ({ children }: iUserContextProps) => {
         }
     };
 
-    const submitMail = async (data: Mail) => {
-        const response = await api.get("/users");
-        const findEmail = response.data.find(
-            (elem: iUser) => elem.email == data.email
-        );
-
-        if (!findEmail) {
-            console.log("nao existe");
-            return;
+    const submitMail = async (data: any) => {
+        try {
+            setLoading(true);
+            const response = await api.post("/users/resetPassword", data);
+            console.log(response.data);
+            alert("Email enviado");
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setLoading(false);
         }
-
-        console.log(findEmail);
-        const generateCode = `${Math.floor(Math.random() * 10)}${Math.floor(
-            Math.random() * 10
-        )}${Math.floor(Math.random() * 10)}${Math.floor(
-            Math.random() * 10
-        )}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}`;
-
-        setIsSubmited(true);
-        setCode(generateCode);
-        console.log(generateCode);
-        console.log(data);
     };
 
     return (
@@ -129,6 +148,9 @@ export const UserProvider = ({ children }: iUserContextProps) => {
                 setCode,
                 submitCode,
                 submitMail,
+                loading,
+                setLoading,
+                submitPassword,
             }}
         >
             {children}

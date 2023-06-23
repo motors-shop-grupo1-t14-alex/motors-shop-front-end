@@ -14,6 +14,14 @@ export interface iUserContext {
     setCode: Dispatch<SetStateAction<string>>;
     submitCode: (data: iCode) => void;
     submitMail: (data: Mail) => void;
+    loading: boolean;
+    setLoading: Dispatch<SetStateAction<boolean>>;
+    submitPassword: (data: RecoveryPass) => void;
+}
+
+export interface RecoveryPass {
+    password: string;
+    confirmPassword: string;
 }
 
 export interface iCode {

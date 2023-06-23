@@ -6,8 +6,12 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "../form";
 import { Input } from "../input";
+import { useContext } from "react";
+import { UserContext } from "../../contexts/userContext";
 
 export const RecoveryPasswordForm = (): JSX.Element => {
+    const { submitPassword } = useContext(UserContext);
+
     const {
         register,
         handleSubmit,
@@ -16,15 +20,6 @@ export const RecoveryPasswordForm = (): JSX.Element => {
         mode: "onChange",
         resolver: zodResolver(recoveryPasswordSchema),
     });
-
-    interface RecoveryPass {
-        password: string;
-        confirmPassword: string;
-    }
-
-    const submitPassword = (data: RecoveryPass) => {
-        console.log(data);
-    };
 
     return (
         <Form

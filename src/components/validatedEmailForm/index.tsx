@@ -5,11 +5,12 @@ import {
 } from "../../pages/passwordRecoveryPage/validators";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "../input";
-import { useContext } from "react";
+import { CSSProperties, useContext } from "react";
 import { UserContext } from "../../contexts/userContext";
+import ClipLoader from "react-spinners/ClipLoader";
 
 export const FormEmail = () => {
-    const { submitMail } = useContext(UserContext);
+    const { submitMail, loading } = useContext(UserContext);
 
     const {
         register,
@@ -20,6 +21,12 @@ export const FormEmail = () => {
         resolver: zodResolver(verifyEmailSchema),
     });
 
+    const override: CSSProperties = {
+        display: "block",
+        margin: "0 auto",
+        borderColor: "white",
+    };
+
     return (
         <form
             onSubmit={handleSubmit(submitMail)}
@@ -27,7 +34,7 @@ export const FormEmail = () => {
         >
             <h2 className="text-2xl w-full">Verificação de email</h2>
             <p className="font-normal text-sm">
-                Enviaremos um codigo ao seu email para iniciar a recuperação da
+                Enviaremos um link ao seu email para iniciar a recuperação da
                 senha
             </p>
             <section className="w-full relative flex flex-col gap-1">
@@ -45,8 +52,20 @@ export const FormEmail = () => {
                 </span>
             </section>
 
-            <button className="p-4 bg-brand1 text-white rounded w-full">
-                Enviar
+            <button
+                className="p-4 bg-brand1 text-white rounded w-full"
+                disabled={loading}
+            >
+                {loading == false ? (
+                    "Enviar"
+                ) : (
+                    <ClipLoader
+                        cssOverride={override}
+                        size={20}
+                        aria-label="Loading Spinner"
+                        data-testid="loader"
+                    />
+                )}
             </button>
         </form>
     );

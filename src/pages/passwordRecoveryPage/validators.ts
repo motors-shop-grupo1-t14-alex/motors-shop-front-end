@@ -2,7 +2,10 @@ import { z } from "zod";
 
 export const recoveryPasswordSchema = z
     .object({
-        password: z.string().nonempty("Senha é obrigatória"),
+        password: z
+            .string()
+            .nonempty("Senha é obrigatória")
+            .min(8, "Senha deve ter no minimo 8 caracteres"),
         confirmPassword: z.string().nonempty("Senha é obrigatória"),
     })
     .refine((data) => data.password === data.confirmPassword, {
