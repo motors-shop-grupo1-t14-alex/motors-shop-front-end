@@ -60,9 +60,15 @@ export const UserPage = (): JSX.Element => {
     <>
       <ProtectedRouted />
       {createAdvertsModal && <CreateAdvertsModal />}
-      {createSuccessModal && <SuccesModal openOrClose={createAdvertSuccessModal} textOne="Seu anúncio foi criado com sucesso!" textTwo="Agora você poderá ver seus negócios crescendo em grande escala"/>}
+      {createSuccessModal && (
+        <SuccesModal
+          openOrClose={createAdvertSuccessModal}
+          textOne="Seu anúncio foi criado com sucesso!"
+          textTwo="Agora você poderá ver seus negócios crescendo em grande escala"
+        />
+      )}
       <Header />
-      
+
       <main className="flex flex-col items-center background-user-page">
         <section className="w-9/10 bg-grey10 rounded-[4px] mt-[65px] flex justify-center font-inter mb-[76px] max-w-screen-xl">
           <div className="flex flex-col w-9/10 mt-[40px]">
@@ -86,9 +92,7 @@ export const UserPage = (): JSX.Element => {
               </p>
             </div>
 
-            <p>
-              {userInfos.description}
-            </p>
+            <p>{userInfos.description}</p>
 
             <div className="mt-[16px] mb-[40px] ">
               <Button
