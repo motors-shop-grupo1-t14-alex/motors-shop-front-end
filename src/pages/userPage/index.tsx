@@ -13,23 +13,15 @@ import "../../index.css";
 import { SuccesModal } from "../../components/successModal";
 
 export const UserPage = (): JSX.Element => {
-  const userInfos: iUserInfos = JSON.parse(
-    localStorage.getItem("@INFOS") || "{}"
-  );
+  const userInfos: iUserInfos = JSON.parse(localStorage.getItem("@INFOS") || "{}");
 
   const [adverts, setAdverts] = useState<iAdvert[]>([]);
 
   const { user } = useContext(UserContext);
 
-  const {
-    createAdvertsModal,
-    openOrCloseAdvertModal,
-    createSuccessModal,
-    createAdvertSuccessModal,
-  } = useContext(AdvertContext);
+  const { createAdvertsModal, openOrCloseAdvertModal, createSuccessModal, createAdvertSuccessModal } = useContext(AdvertContext);
 
-  const verificaEspaco = (string: string | undefined) =>
-    string && string.indexOf(" ") >= 0;
+  const verificaEspaco = (string: string | undefined) => string && string.indexOf(" ") >= 0;
 
   useEffect(() => {
     const getUserAdverts = async () => {
@@ -76,20 +68,14 @@ export const UserPage = (): JSX.Element => {
               <p className="text-white text-4xl font-medium">
                 {user !== null &&
                   (verificaEspaco(user?.name)
-                    ? `${user?.name?.split(" ")[0].substring(0, 1)}${user?.name
-                        ?.split(" ")[1]
-                        .substring(0, 1)}`
+                    ? `${user?.name?.split(" ")[0].substring(0, 1)}${user?.name?.split(" ")[1].substring(0, 1)}`
                     : user.name && `${user?.name[0].toUpperCase()}`)}
               </p>
             </div>
 
             <div className="flex gap-[9px] my-[24px]">
-              <p className="text-[20px] font-semibold text-grey1 font-lexend">
-                {userInfos.name}
-              </p>
-              <p className="bg-brand4 text-brand1 px-[8px] py-[4px] rounded-[4px] text-sm font-medium">
-                Anunciante
-              </p>
+              <p className="text-[20px] font-semibold text-grey1 font-lexend">{userInfos.name}</p>
+              <p className="bg-brand4 text-brand1 px-[8px] py-[4px] rounded-[4px] text-sm font-medium">Anunciante</p>
             </div>
 
             <p>{userInfos.description}</p>
@@ -117,9 +103,7 @@ export const UserPage = (): JSX.Element => {
           <span className="text-grey3 m-auto md:m-0">
             <strong>1</strong> de 2
           </span>
-          <span className="m-auto md:m-0 text-brand1 cursor-pointer font-bold">
-            Seguinte {">"}
-          </span>
+          <span className="m-auto md:m-0 text-brand1 cursor-pointer font-bold">Seguinte {">"}</span>
         </div>
       </main>
       <Footer />
