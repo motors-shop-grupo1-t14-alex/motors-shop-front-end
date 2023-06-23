@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from "react";
 import { iRegisterData } from "../../pages/registerPage/validators";
 
 export interface iUserContext {
@@ -5,8 +6,33 @@ export interface iUserContext {
     login: (data: iLoginData) => void;
     registerUser: (data: iRegisterData) => void;
     logout: () => void;
+    exist: boolean;
+    setExist: Dispatch<SetStateAction<boolean>>;
+    isSubmited: boolean;
+    setIsSubmited: Dispatch<SetStateAction<boolean>>;
+    code: string;
+    setCode: Dispatch<SetStateAction<string>>;
+    submitCode: (data: iCode) => void;
+    submitMail: (data: Mail) => void;
+    loading: boolean;
+    setLoading: Dispatch<SetStateAction<boolean>>;
+    submitPassword: (data: RecoveryPass) => void;
 }
 
+export interface RecoveryPass {
+    password: string;
+    confirmPassword: string;
+}
+
+export interface iCode {
+    code: string;
+}
+
+export interface Mail {
+    email: string;
+}
+
+export type CodeNumber = [number];
 export interface iUserContextProps {
     children: React.ReactNode;
 }

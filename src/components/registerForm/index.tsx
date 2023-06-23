@@ -120,7 +120,7 @@ export const RegisterForm = (): JSX.Element => {
 
                 <section className="w-full relative flex flex-col">
                     <Input
-                        children={"CEP"}
+                        children={"CEP (somente numeros)"}
                         css="gap-1"
                         id="cep"
                         inputCSS="w-full p-3 rounded bg-white border-gray7 border-2"
