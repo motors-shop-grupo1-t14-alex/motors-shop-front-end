@@ -1,10 +1,15 @@
+import { useContext } from "react";
 import car from "../../assets/img/car.svg";
+import { AdvertContext } from "../../contexts/advertContext";
 import { iAdvert } from "../../contexts/advertContext/type";
 import { ProductTag } from "../productTag";
 
 export const CardProduct = ({ advertInfos }: { advertInfos: iAdvert }): JSX.Element => {
+  const { handleClick } = useContext(AdvertContext);
+  const verificaEspaco = (string: string | undefined) => string && string.indexOf(" ") >= 0;
+
   return (
-    <li className="flex flex-col gap-4 font-inter w-[275px]">
+    <li className="flex flex-col gap-4 font-inter w-[275px]" onClick={handleClick(advertInfos)}>
       <div className="flex items-center justify-center bg-grey7 mt-5 h-[152px]">
         <img src={car} alt="carro de luxo" />
       </div>
@@ -16,7 +21,12 @@ export const CardProduct = ({ advertInfos }: { advertInfos: iAdvert }): JSX.Elem
       </p>
 
       <div className="font-inter font-medium text-sm leading-6">
-        <span className="text-white px-2 py-2 mr-2 rounded-[50%] bg-brand1">{advertInfos.cover_image}</span>
+        <span className="text-white px-2 py-2 mr-2 rounded-[50%] bg-brand1">
+          {advertInfos.user !== null &&
+            (verificaEspaco(advertInfos.user?.name)
+              ? `${advertInfos.user?.name?.split(" ")[0].substring(0, 1)}${advertInfos.user?.name?.split(" ")[1].substring(0, 1)}`
+              : advertInfos.user.name && `${advertInfos.user?.name[0].toUpperCase()}`)}
+        </span>
         <span className="text-grey2">{advertInfos.user.name}</span>
       </div>
 

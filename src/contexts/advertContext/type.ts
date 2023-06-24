@@ -26,6 +26,7 @@ export interface iAdvertProviderValue {
   filterByMaxMileage: () => void;
   filterByMinPrice: () => void;
   filterByMaxPrice: () => void;
+  handleClick: () => iUser;
 }
 
 interface iGallery_images {

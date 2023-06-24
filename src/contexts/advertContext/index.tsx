@@ -77,49 +77,54 @@ export const AdvertProvider = ({ children }: iAdvertProviderProps) => {
   const maxPrice: string = Math.max.apply(null, uniqueCarPrices).toString();
   adverts.forEach((advert) => allPricesPerCar.push(parseInt(advert.price)));
 
-  function filterByBrand(brand: string) {
+    const filterByBrand = (brand: string) => {
     const filteredAdverts: iAdvert[] = adverts.filter((advert) => advert.brand === brand);
     setAdverts(filteredAdverts);
   }
 
-  function filterByModel(model: string) {
+    const filterByModel = (model: string) => {
     const filteredAdverts: iAdvert[] = adverts.filter((advert) => advert.model === model);
     setAdverts(filteredAdverts);
   }
 
-  function filterByColor(color: string) {
+    const filterByColor = (color: string) => {
     const filteredAdverts: iAdvert[] = adverts.filter((advert) => advert.color === color);
     setAdverts(filteredAdverts);
   }
 
-  function filterByYear(year: string) {
+    const filterByYear = (year: string) => {
     const filteredAdverts: iAdvert[] = adverts.filter((advert) => advert.year === year);
     setAdverts(filteredAdverts);
   }
 
-  function filterByFuelType(fuelType: string) {
+    const filterByFuelType = (fuelType: string) => {
     const filteredAdverts: iAdvert[] = adverts.filter((advert) => advert.fuel_type === fuelType);
     setAdverts(filteredAdverts);
   }
 
-  function filterByMinMileage() {
+    const filterByMinMileage = () => {
     const filteredAdverts: iAdvert[] = adverts.filter((advert) => advert.mileage === minMileage);
     setAdverts(filteredAdverts);
   }
 
-  function filterByMaxMileage() {
+    const filterByMaxMileage = () {
     const filteredAdverts: iAdvert[] = adverts.filter((advert) => advert.mileage === maxMileage);
     setAdverts(filteredAdverts);
   }
 
-  function filterByMinPrice() {
+    const filterByMinPrice = () => {
     const filteredAdverts: iAdvert[] = adverts.filter((advert) => advert.price === minPrice);
     setAdverts(filteredAdverts);
   }
 
-  function filterByMaxPrice() {
+    const filterByMaxPrice = () => {
     const filteredAdverts: iAdvert[] = adverts.filter((advert) => advert.price === maxPrice);
     setAdverts(filteredAdverts);
+  }
+
+  const handleClick = (advertInfos: iAdvert) => {
+    const user = advertInfos?.user;
+    return user;
   }
 
   return (
@@ -146,6 +151,7 @@ export const AdvertProvider = ({ children }: iAdvertProviderProps) => {
         filterByMaxMileage,
         filterByMinPrice,
         filterByMaxPrice,
+        handleClick,
       }}
     >
       {children}
