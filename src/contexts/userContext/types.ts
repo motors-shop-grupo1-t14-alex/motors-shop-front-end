@@ -18,7 +18,14 @@ export interface iUserContext {
     setLoading: Dispatch<SetStateAction<boolean>>;
     submitPassword: (data: RecoveryPass) => void;
     openOrCloseEmailModal: () => void;
-    emailWaring: boolean
+    emailWaring: boolean;
+    openModalUpdateProfile: boolean;
+    setOpenModalUpdateAddress: React.Dispatch<React.SetStateAction<boolean>>;
+    setOpenModalUpdateProfile: React.Dispatch<React.SetStateAction<boolean>>;
+    openModalUpdateAddress: boolean;
+    onSubmitFormUpdateUserProfile: (data: iRegisterUpdate) => Promise<void>;
+    onSubmitFormUpdateUserAddress: (data: iRegisterUpdateAddress) => Promise<void>;
+    deleteUser: () => Promise<void>;
 }
 
 export interface RecoveryPass {
