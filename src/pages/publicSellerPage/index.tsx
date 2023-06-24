@@ -8,7 +8,7 @@ import { iUser } from "../../contexts/userContext/types";
 
 export const PublicSellerPage = (): JSX.Element => {
   const { adverts } = useContext(AdvertContext);
-  // const userData: iUser[] = adverts.map(advert => advert.user === clickedAdvert? )
+  // const userData: iUser[] = adverts.filter(advert => advert.user === clickedAdvert? )
 
   return (
     <>
