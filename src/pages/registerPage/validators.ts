@@ -24,3 +24,24 @@ export const registerSchema = z
     });
 
 export type iRegisterData = z.infer<typeof registerSchema>;
+
+export const registerUpdateSchema = z.object({
+    email: z.string().email("Deve ser um e-mail válido"),
+    name: z.string(),
+    cpf: z.string(),
+    cellphone: z.string(),
+    birth_date: z.string(),
+    description: z.string(),
+}).partial()
+
+export const registerUpdateAddressSchema = z.object({
+    cep: z.string(),
+    city: z.string(),
+    complement: z.string(),
+    number: z.string(),
+    street: z.string(),
+    uf: z.string(),
+}).partial()
+
+export type iRegisterUpdate = z.infer<typeof registerUpdateSchema>
+export type iRegisterUpdateAddress = z.infer<typeof registerUpdateAddressSchema>

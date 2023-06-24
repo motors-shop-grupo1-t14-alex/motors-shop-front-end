@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import { iRegisterData } from "../../pages/registerPage/validators";
+import { iRegisterData, iRegisterUpdate, iRegisterUpdateAddress } from "../../pages/registerPage/validators";
 
 export interface iUserContext {
     user: iUser | null;
@@ -18,7 +18,14 @@ export interface iUserContext {
     setLoading: Dispatch<SetStateAction<boolean>>;
     submitPassword: (data: RecoveryPass) => void;
     openOrCloseEmailModal: () => void;
-    emailWaring: boolean
+    emailWaring: boolean;
+    openModalUpdateProfile: boolean;
+    setOpenModalUpdateAddress: React.Dispatch<React.SetStateAction<boolean>>;
+    setOpenModalUpdateProfile: React.Dispatch<React.SetStateAction<boolean>>;
+    openModalUpdateAddress: boolean;
+    onSubmitFormUpdateUserProfile: (data: iRegisterUpdate) => Promise<void>;
+    onSubmitFormUpdateUserAddress: (data: iRegisterUpdateAddress) => Promise<void>;
+    deleteUser: () => Promise<void>;
 }
 
 export interface RecoveryPass {
@@ -32,6 +39,13 @@ export interface iCode {
 
 export interface iMail {
     email: string;
+    openModalUpdateProfile: boolean;
+    setOpenModalUpdateProfile: React.Dispatch<React.SetStateAction<boolean>>
+    openModalUpdateAddress: boolean;
+    setOpenModalUpdateAddress: React.Dispatch<React.SetStateAction<boolean>>;
+    onSubmitFormUpdateUserProfile(data: iRegisterUpdate): Promise<void>;
+    onSubmitFormUpdateUserAddress(data: iRegisterUpdateAddress): Promise<void>;
+    deleteUser(): Promise<void>;
 }
 
 export type CodeNumber = [number];
@@ -51,6 +65,7 @@ export type iUser = {
     is_admin: boolean;
     is_seller: boolean;
     updated_at: string;
+    address: iRegisterUpdateAddress;
 };
 
 export interface iLoginData {

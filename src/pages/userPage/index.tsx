@@ -11,6 +11,8 @@ import { AdvertContext } from "../../contexts/advertContext";
 import { iAdvert, iUserInfos } from "./types";
 import "../../index.css";
 import { SuccesModal } from "../../components/successModal";
+import { ModalUpdateProfile } from "../../components/modalUpdateProfile";
+import { ModalUpdateAddressProfile } from "../../components/modalUpdateAddressProfile";
 
 export const UserPage = (): JSX.Element => {
   const userInfos: iUserInfos = JSON.parse(
@@ -19,7 +21,13 @@ export const UserPage = (): JSX.Element => {
 
   const [adverts, setAdverts] = useState<iAdvert[]>([]);
 
-  const { user } = useContext(UserContext);
+  const { 
+    user, 
+    openModalUpdateProfile,
+    setOpenModalUpdateProfile,
+    openModalUpdateAddress, 
+    setOpenModalUpdateAddress, 
+  } = useContext(UserContext);
 
   const {
     createAdvertsModal,
@@ -61,6 +69,8 @@ export const UserPage = (): JSX.Element => {
       <ProtectedRouted />
       {createAdvertsModal && <CreateAdvertsModal />}
       {createSuccessModal && <SuccesModal openOrClose={createAdvertSuccessModal} textOne="Seu anúncio foi criado com sucesso!" textTwo="Agora você poderá ver seus negócios crescendo em grande escala"/>}
+      {openModalUpdateProfile && <ModalUpdateProfile/>}
+      {openModalUpdateAddress && <ModalUpdateAddressProfile/>}
       <Header />
       
       <main className="flex flex-col items-center background-user-page">
@@ -77,9 +87,24 @@ export const UserPage = (): JSX.Element => {
               </p>
             </div>
 
+            <div className="flex gap-[9px] justify-end w-full">
+              <Button 
+              children={"Editar perfil"}
+              type="button"
+              onClick={() => setOpenModalUpdateProfile(true)}
+              css="bg-brand1 text-brand4 px-[8px] py-[4px] rounded-[4px] text-sm font-medium"
+              />
+              <Button 
+              children={"Editar endereço"}
+              type="button"
+              onClick={() => setOpenModalUpdateAddress(true)}
+              css="bg-brand1 text-brand4 px-[8px] py-[4px] rounded-[4px] text-sm font-medium"
+              />
+            </div>
+
             <div className="flex gap-[9px] my-[24px]">
               <p className="text-[20px] font-semibold text-grey1 font-lexend">
-                {userInfos.name}
+                {user && user.name}
               </p>
               <p className="bg-brand4 text-brand1 px-[8px] py-[4px] rounded-[4px] text-sm font-medium">
                 Anunciante
@@ -87,7 +112,7 @@ export const UserPage = (): JSX.Element => {
             </div>
 
             <p>
-              {userInfos.description}
+              {user && user.description}
             </p>
 
             <div className="mt-[16px] mb-[40px] ">
