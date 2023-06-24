@@ -45,6 +45,83 @@ export const AdvertProvider = ({ children }: iAdvertProviderProps) => {
     setCreateSuccessModal(!createSuccessModal);
   };
 
+  const allBrandsPerCar: Array<string> = [];
+  const uniqueCarBrands: Array<string> = [...new Set(allBrandsPerCar)];
+  adverts.forEach((advert) => allBrandsPerCar.push(advert.brand));
+
+  const allModelsPerCar: Array<string> = [];
+  const uniqueCarModels: Array<string> = [...new Set(allModelsPerCar)];
+  adverts.forEach((advert) => allModelsPerCar.push(advert.model));
+
+  const allColorsPerCar: Array<string> = [];
+  const uniqueCarColors: Array<string> = [...new Set(allColorsPerCar)];
+  adverts.forEach((advert) => allColorsPerCar.push(advert.color));
+
+  const allManufacturedYearsPerCar: Array<string> = [];
+  const uniqueYearOfManufacture: Array<string> = [...new Set(allManufacturedYearsPerCar)];
+  adverts.forEach((advert) => allManufacturedYearsPerCar.push(advert.year));
+
+  const allFuelTypesPerCar: Array<string> = [];
+  const uniqueFuelTypes: Array<string> = [...new Set(allFuelTypesPerCar)];
+  adverts.forEach((advert) => allFuelTypesPerCar.push(advert.fuel_type));
+
+  const allMileagesPerCar: Array<number> = [];
+  const uniqueCarMileages: Array<number> = [...new Set(allMileagesPerCar)];
+  const minMileage: string = Math.min.apply(null, uniqueCarMileages).toString();
+  const maxMileage: string = Math.max.apply(null, uniqueCarMileages).toString();
+  adverts.forEach((advert) => allMileagesPerCar.push(parseInt(advert.mileage)));
+
+  const allPricesPerCar: Array<number> = [];
+  const uniqueCarPrices: Array<number> = [...new Set(allPricesPerCar)];
+  const minPrice: string = Math.min.apply(null, uniqueCarPrices).toString();
+  const maxPrice: string = Math.max.apply(null, uniqueCarPrices).toString();
+  adverts.forEach((advert) => allPricesPerCar.push(parseInt(advert.price)));
+
+  function filterByBrand(brand: string) {
+    const filteredAdverts: iAdvert[] = adverts.filter((advert) => advert.brand === brand);
+    setAdverts(filteredAdverts);
+  }
+
+  function filterByModel(model: string) {
+    const filteredAdverts: iAdvert[] = adverts.filter((advert) => advert.model === model);
+    setAdverts(filteredAdverts);
+  }
+
+  function filterByColor(color: string) {
+    const filteredAdverts: iAdvert[] = adverts.filter((advert) => advert.color === color);
+    setAdverts(filteredAdverts);
+  }
+
+  function filterByYear(year: string) {
+    const filteredAdverts: iAdvert[] = adverts.filter((advert) => advert.year === year);
+    setAdverts(filteredAdverts);
+  }
+
+  function filterByFuelType(fuelType: string) {
+    const filteredAdverts: iAdvert[] = adverts.filter((advert) => advert.fuel_type === fuelType);
+    setAdverts(filteredAdverts);
+  }
+
+  function filterByMinMileage() {
+    const filteredAdverts: iAdvert[] = adverts.filter((advert) => advert.mileage === minMileage);
+    setAdverts(filteredAdverts);
+  }
+
+  function filterByMaxMileage() {
+    const filteredAdverts: iAdvert[] = adverts.filter((advert) => advert.mileage === maxMileage);
+    setAdverts(filteredAdverts);
+  }
+
+  function filterByMinPrice() {
+    const filteredAdverts: iAdvert[] = adverts.filter((advert) => advert.price === minPrice);
+    setAdverts(filteredAdverts);
+  }
+
+  function filterByMaxPrice() {
+    const filteredAdverts: iAdvert[] = adverts.filter((advert) => advert.price === maxPrice);
+    setAdverts(filteredAdverts);
+  }
+
   return (
     <AdvertContext.Provider
       value={{
@@ -55,6 +132,20 @@ export const AdvertProvider = ({ children }: iAdvertProviderProps) => {
         brands,
         adverts,
         setAdverts,
+        uniqueCarBrands,
+        uniqueCarModels,
+        uniqueCarColors,
+        uniqueYearOfManufacture,
+        uniqueFuelTypes,
+        filterByBrand,
+        filterByModel,
+        filterByColor,
+        filterByYear,
+        filterByFuelType,
+        filterByMinMileage,
+        filterByMaxMileage,
+        filterByMinPrice,
+        filterByMaxPrice,
       }}
     >
       {children}

@@ -12,6 +12,20 @@ export interface iAdvertProviderValue {
   createSuccessModal: boolean;
   adverts: iAdvert[];
   setAdverts: React.Dispatch<React.SetStateAction<iAdvert[]>>;
+  uniqueCarBrands: Array<string>;
+  uniqueCarModels: Array<string>;
+  uniqueCarColors: Array<string>;
+  uniqueYearOfManufacture: Array<string>;
+  uniqueFuelTypes: Array<string>;
+  filterByBrand: (brand: string) => void;
+  filterByModel: (model: string) => void;
+  filterByColor: (color: string) => void;
+  filterByYear: (year: string) => void;
+  filterByFuelType: (fuelType: string) => void;
+  filterByMinMileage: () => void;
+  filterByMaxMileage: () => void;
+  filterByMinPrice: () => void;
+  filterByMaxPrice: () => void;
 }
 
 interface iGallery_images {
