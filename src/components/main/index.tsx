@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { CardProduct } from "../cardProduct/products";
 import { Filter, FilterMobile } from "../filters";
 import { ModalTemplate } from "../modalTemplate";
+import { AdvertContext } from "../../contexts/advertContext";
 
 export const MainHome = (): JSX.Element => {
   const [openFilter, setOpenFilter] = useState(false);
+  const { adverts } = useContext(AdvertContext);
 
   const toggleModal = () => {
     setOpenFilter(!openFilter);
@@ -46,18 +48,9 @@ export const MainHome = (): JSX.Element => {
           <div className="w-9/10 flex justify-between max-w-screen-2xl">
             <Filter />
             <ul className="flex gap-5 overflow-x-scroll md:flex-wrap md:overflow-hidden md:w-300">
-              <CardProduct />
-              <CardProduct />
-              <CardProduct />
-              <CardProduct />
-              <CardProduct />
-              <CardProduct />
-              <CardProduct />
-              <CardProduct />
-              <CardProduct />
-              <CardProduct />
-              <CardProduct />
-              <CardProduct />
+              {adverts.map((advert) => (
+                <CardProduct key={advert.id} advertInfos={advert} />
+              ))}
             </ul>
           </div>
         </div>
@@ -74,9 +67,7 @@ export const MainHome = (): JSX.Element => {
           <span className="text-grey3 m-auto md:m-0">
             <strong>1</strong> de 2
           </span>
-          <span className="m-auto md:m-0 text-brand1 cursor-pointer font-bold">
-            Seguinte {">"}
-          </span>
+          <span className="m-auto md:m-0 text-brand1 cursor-pointer font-bold">Seguinte {">"}</span>
         </div>
       </main>
     </>

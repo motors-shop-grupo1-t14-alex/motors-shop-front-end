@@ -1,35 +1,14 @@
-import { useEffect, useState } from "react";
+import { useContext } from "react";
 import { Footer } from "../../components/footer";
 import { Header } from "../../components/header";
 import { SellerProductCard } from "../../components/sellerProductCard";
-import { api } from "../../services/axios";
-import { iAdvert } from "./types";
 import "../../index.css";
-import { CardProduct } from "../../components/cardProduct/products";
-
-const database = {
-  imgProfile: "SL",
-  name: "Samuel Leão",
-  description:
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi vel quia tempore quaerat ullam dolores porro dolor quas esse, adipisci corrupti soluta necessitatibus eum corporis molestiae possimus voluptas, numquam nulla!",
-};
+import { AdvertContext } from "../../contexts/advertContext";
+import { iUser } from "../../contexts/userContext/types";
 
 export const PublicSellerPage = (): JSX.Element => {
-  const [adverts, setAdverts] = useState<iAdvert[]>([]);
-
-  const getUserAdverts = async () => {
-    try {
-      const { data } = await api.get(`adverts/user`);
-
-      setAdverts(data.adverts);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    getUserAdverts();
-  }, []);
+  const { adverts } = useContext(AdvertContext);
+  // const userData: iUser[] = adverts.map(advert => advert.user === clickedAdvert? )
 
   return (
     <>
@@ -58,14 +37,6 @@ export const PublicSellerPage = (): JSX.Element => {
               {adverts.map((advert) => (
                 <SellerProductCard key={advert.id} advertInfos={advert} />
               ))}
-              <CardProduct />
-              <CardProduct />
-              <CardProduct />
-              <CardProduct />
-              <CardProduct />
-              <CardProduct />
-              <CardProduct />
-              <CardProduct />
             </ul>
           </div>
         </section>

@@ -1,3 +1,3 @@
 export interface iFilter {
-    OpenOrClose: () => void
+  OpenOrClose: () => void;
 }

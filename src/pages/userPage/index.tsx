@@ -1,5 +1,5 @@
 import { ProtectedRouted } from "../../components/protectedRoutes";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { Button } from "../../components/button";
 import { Footer } from "../../components/footer";
 import { Header } from "../../components/header";
@@ -8,38 +8,33 @@ import { SellerProductCard } from "../../components/sellerProductCard";
 import { api } from "../../services/axios";
 import { CreateAdvertsModal } from "../../components/createAdvertsModal";
 import { AdvertContext } from "../../contexts/advertContext";
-import { iAdvert, iUserInfos } from "./types";
+import { iUserInfos } from "./types";
 import "../../index.css";
 import { SuccesModal } from "../../components/successModal";
 
 export const UserPage = (): JSX.Element => {
   const userInfos: iUserInfos = JSON.parse(localStorage.getItem("@INFOS") || "{}");
-
-  const [adverts, setAdverts] = useState<iAdvert[]>([]);
-
   const { user } = useContext(UserContext);
 
-  const { createAdvertsModal, openOrCloseAdvertModal, createSuccessModal, createAdvertSuccessModal } = useContext(AdvertContext);
+  const { adverts, setAdverts, createAdvertsModal, openOrCloseAdvertModal, createSuccessModal, createAdvertSuccessModal } =
+    useContext(AdvertContext);
 
   const verificaEspaco = (string: string | undefined) => string && string.indexOf(" ") >= 0;
 
   useEffect(() => {
     const getUserAdverts = async () => {
       const tokenString = localStorage.getItem("@TOKEN");
-
       if (!tokenString) {
         return;
       }
 
       const token: string = JSON.parse(tokenString);
-
       const config = {
         headers: { Authorization: `Bearer ${token}` },
       };
 
       try {
         const { data } = await api.get(`adverts/user`, config);
-
         setAdverts(data.adverts);
       } catch (error) {
         console.log(error);

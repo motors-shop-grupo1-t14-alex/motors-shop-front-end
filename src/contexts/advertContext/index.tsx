@@ -1,9 +1,6 @@
-import { createContext, useState } from "react";
-import {
-  iAdvertProviderProps,
-  iAdvertProviderValue,
-} from "./type";
-import { fipe_api } from "../../services/axios";
+import { createContext, useEffect, useState } from "react";
+import { iAdvert, iAdvertProviderProps, iAdvertProviderValue } from "./type";
+import { api, fipe_api } from "../../services/axios";
 
 export const AdvertContext = createContext({} as iAdvertProviderValue);
 
@@ -11,6 +8,20 @@ export const AdvertProvider = ({ children }: iAdvertProviderProps) => {
   const [createAdvertsModal, setCreateAdvertsModal] = useState<boolean>(false);
   const [createSuccessModal, setCreateSuccessModal] = useState<boolean>(false);
   const [brands, setBrands] = useState<string[]>([]);
+  const [adverts, setAdverts] = useState<iAdvert[]>([]);
+
+  const getAllAdverts: () => Promise<void> = async () => {
+    try {
+      const { data } = await api.get(`adverts`);
+      setAdverts(data.adverts);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getAllAdverts();
+  }, []);
 
   const getCarBrands = async () => {
     try {
@@ -39,9 +50,11 @@ export const AdvertProvider = ({ children }: iAdvertProviderProps) => {
       value={{
         openOrCloseAdvertModal,
         createAdvertsModal,
-        brands,
         createAdvertSuccessModal,
         createSuccessModal,
+        brands,
+        adverts,
+        setAdverts,
       }}
     >
       {children}
