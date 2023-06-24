@@ -17,7 +17,7 @@ export const MainRoutes = () => {
                 <Route path="/register" element={<RegisterPage />} />
                 <Route path="/user" element={<UserPage />} />
                 <Route
-                    path="/passwordRecovery"
+                    path="/passwordRecovery/*"
                     element={<RecoveryPassword />}
                 />
                 <Route path="*" element={<Navigate to={"/"} />} />

@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from "react";
 import { iRegisterData, iRegisterUpdate, iRegisterUpdateAddress } from "../../pages/registerPage/validators";
 
 export interface iUserContext {
@@ -5,6 +6,32 @@ export interface iUserContext {
     login: (data: iLoginData) => void;
     registerUser: (data: iRegisterData) => void;
     logout: () => void;
+    exist: boolean;
+    setExist: Dispatch<SetStateAction<boolean>>;
+    isSubmited: boolean;
+    setIsSubmited: Dispatch<SetStateAction<boolean>>;
+    code: string;
+    setCode: Dispatch<SetStateAction<string>>;
+    submitCode: (data: iCode) => void;
+    submitMail: (data: iMail) => void;
+    loading: boolean;
+    setLoading: Dispatch<SetStateAction<boolean>>;
+    submitPassword: (data: RecoveryPass) => void;
+    openOrCloseEmailModal: () => void;
+    emailWaring: boolean
+}
+
+export interface RecoveryPass {
+    password: string;
+    confirmPassword: string;
+}
+
+export interface iCode {
+    code: string;
+}
+
+export interface iMail {
+    email: string;
     openModalUpdateProfile: boolean;
     setOpenModalUpdateProfile: React.Dispatch<React.SetStateAction<boolean>>
     openModalUpdateAddress: boolean;
@@ -14,6 +41,7 @@ export interface iUserContext {
     deleteUser(): Promise<void>;
 }
 
+export type CodeNumber = [number];
 export interface iUserContextProps {
     children: React.ReactNode;
 }

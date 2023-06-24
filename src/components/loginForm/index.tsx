@@ -2,13 +2,14 @@ import { useForm } from "react-hook-form";
 import { Input } from "../input";
 import { LoginData, loginSchema } from "../../pages/loginPage/validator";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Link } from "react-router-dom";
+import { Link, NavigateFunction, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../../contexts/userContext";
 import { Form } from "../form";
 
 export const FormLogin = (): JSX.Element => {
-    const { login } = useContext(UserContext);
+    const { login, setExist } = useContext(UserContext);
+    const navigate: NavigateFunction = useNavigate();
 
     const {
         register,
@@ -18,6 +19,11 @@ export const FormLogin = (): JSX.Element => {
         mode: "onBlur",
         resolver: zodResolver(loginSchema),
     });
+
+    const recoveryButton = () => {
+        setExist(true);
+        navigate("/passwordRecovery");
+    };
 
     return (
         <main className="bg-grey8 flex flex-col items-center justify-center h-700px mobileGG:h-screen py-8 font-medium">
@@ -61,12 +67,12 @@ export const FormLogin = (): JSX.Element => {
             </Form>
 
             <div className="flex flex-col transition-all gap-6 px-4 rounded-b bg-white justify-center items-center w-95/100 md:w-1/2 lg:w-1/3 xl:w-30/100 2xl:w-1/4 md:pb-11 md:px-12">
-                <Link
-                    to="/passwordRecovery"
+                <button
+                    onClick={recoveryButton}
                     className="text-sm opacity-80 disabled:true w-full flex justify-end items-start "
                 >
                     Esqueci minha senha
-                </Link>
+                </button>
 
                 <p>Ainda não possui conta?</p>
 

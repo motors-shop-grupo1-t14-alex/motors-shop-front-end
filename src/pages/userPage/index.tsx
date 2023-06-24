@@ -10,7 +10,7 @@ import { CreateAdvertsModal } from "../../components/createAdvertsModal";
 import { AdvertContext } from "../../contexts/advertContext";
 import { iAdvert, iUserInfos } from "./types";
 import "../../index.css";
-import { CreateWithSuccessAdvertModal } from "../../components/successAdvertModal";
+import { SuccesModal } from "../../components/successModal";
 import { ModalUpdateProfile } from "../../components/modalUpdateProfile";
 import { ModalUpdateAddressProfile } from "../../components/modalUpdateAddressProfile";
 
@@ -68,10 +68,11 @@ export const UserPage = (): JSX.Element => {
     <>
       <ProtectedRouted />
       {createAdvertsModal && <CreateAdvertsModal />}
-      {createSuccessModal && <CreateWithSuccessAdvertModal />}
+      {createSuccessModal && <SuccesModal openOrClose={createAdvertSuccessModal} textOne="Seu anúncio foi criado com sucesso!" textTwo="Agora você poderá ver seus negócios crescendo em grande escala"/>}
       {openModalUpdateProfile && <ModalUpdateProfile/>}
       {openModalUpdateAddress && <ModalUpdateAddressProfile/>}
       <Header />
+      
       <main className="flex flex-col items-center background-user-page">
         <section className="w-9/10 bg-grey10 rounded-[4px] mt-[65px] flex justify-center font-inter mb-[76px] max-w-screen-xl">
           <div className="flex flex-col w-9/10 mt-[40px]">

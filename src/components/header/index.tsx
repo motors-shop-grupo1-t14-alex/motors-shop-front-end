@@ -39,22 +39,22 @@ export const Header = (): JSX.Element => {
         {screenSize < 768 ? (
           <button onClick={toggleMenu} className="block md:hidden py-3 focus:outline-none group rounded-[10px]">
             {menu ? <AiOutlineClose size='28' /> : <AiOutlineMenu size='28' />}
-            <div className={`${openMenu()} absolute z-10 top-20 right-0 h-40 w-52 bg-white border rounded-b-[2.5px]`}>
+            <div className={`${openMenu()} absolute z-10 top-20 right-0 h-40 w-full bg-white border rounded-b-[2.5px]`}>
               <ul className="flex gap-5 flex-col items-center w-full pt-10">
-                <li>{window.location.href.split("/")[3] == "login" ? (
+                <li className="w-9/10 flex justify-start">{window.location.href.split("/")[3] == "login" ? (
               <Link to="/login" className="p-2.5 w-32 text-brand1">
                 Fazer login
               </Link>
             ) : (
               <Link
                 to="/login"
-                className="p-2.5 w-32 text-gray-500 hover:text-brand1"
+                className=" text-gray-500 hover:text-brand1"
               >
                 Fazer login
               </Link>
             )}</li>
-              <li><Link
-              className="p-2.5 w-32 border-2 rounded border-gray-400 shadow-md flex justify-center items-center"
+              <li className="w-full flex justify-center"><Link
+              className="p-2.5 w-9/10 border-2 rounded border-gray-400 shadow-md flex justify-center items-center"
               to="/register"
             >
               Cadastrar
