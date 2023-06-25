@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { iAdvert, iAdvertProviderProps, iAdvertProviderValue } from "./type";
 import { api, fipe_api } from "../../services/axios";
+import { iUser } from "../userContext/types";
 
 export const AdvertContext = createContext({} as iAdvertProviderValue);
 
@@ -77,55 +78,55 @@ export const AdvertProvider = ({ children }: iAdvertProviderProps) => {
   const maxPrice: string = Math.max.apply(null, uniqueCarPrices).toString();
   adverts.forEach((advert) => allPricesPerCar.push(parseInt(advert.price)));
 
-    const filterByBrand = (brand: string) => {
+  const filterByBrand = (brand: string) => {
     const filteredAdverts: iAdvert[] = adverts.filter((advert) => advert.brand === brand);
     setAdverts(filteredAdverts);
-  }
+  };
 
-    const filterByModel = (model: string) => {
+  const filterByModel = (model: string) => {
     const filteredAdverts: iAdvert[] = adverts.filter((advert) => advert.model === model);
     setAdverts(filteredAdverts);
-  }
+  };
 
-    const filterByColor = (color: string) => {
+  const filterByColor = (color: string) => {
     const filteredAdverts: iAdvert[] = adverts.filter((advert) => advert.color === color);
     setAdverts(filteredAdverts);
-  }
+  };
 
-    const filterByYear = (year: string) => {
+  const filterByYear = (year: string) => {
     const filteredAdverts: iAdvert[] = adverts.filter((advert) => advert.year === year);
     setAdverts(filteredAdverts);
-  }
+  };
 
-    const filterByFuelType = (fuelType: string) => {
+  const filterByFuelType = (fuelType: string) => {
     const filteredAdverts: iAdvert[] = adverts.filter((advert) => advert.fuel_type === fuelType);
     setAdverts(filteredAdverts);
-  }
+  };
 
-    const filterByMinMileage = () => {
+  const filterByMinMileage = () => {
     const filteredAdverts: iAdvert[] = adverts.filter((advert) => advert.mileage === minMileage);
     setAdverts(filteredAdverts);
-  }
+  };
 
-    const filterByMaxMileage = () {
+  const filterByMaxMileage = () => {
     const filteredAdverts: iAdvert[] = adverts.filter((advert) => advert.mileage === maxMileage);
     setAdverts(filteredAdverts);
-  }
+  };
 
-    const filterByMinPrice = () => {
+  const filterByMinPrice = () => {
     const filteredAdverts: iAdvert[] = adverts.filter((advert) => advert.price === minPrice);
     setAdverts(filteredAdverts);
-  }
+  };
 
-    const filterByMaxPrice = () => {
+  const filterByMaxPrice = () => {
     const filteredAdverts: iAdvert[] = adverts.filter((advert) => advert.price === maxPrice);
     setAdverts(filteredAdverts);
-  }
+  };
 
-  const handleClick = (advertInfos: iAdvert) => {
+  const handleClick = (advertInfos?: iAdvert): iUser | undefined => {
     const user = advertInfos?.user;
     return user;
-  }
+  };
 
   return (
     <AdvertContext.Provider

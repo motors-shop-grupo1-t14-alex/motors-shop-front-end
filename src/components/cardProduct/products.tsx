@@ -9,7 +9,7 @@ export const CardProduct = ({ advertInfos }: { advertInfos: iAdvert }): JSX.Elem
   const verificaEspaco = (string: string | undefined) => string && string.indexOf(" ") >= 0;
 
   return (
-    <li className="flex flex-col gap-4 font-inter w-[275px]" onClick={handleClick(advertInfos)}>
+    <li className="flex flex-col gap-4 font-inter w-[275px]" onClick={() => handleClick(advertInfos)}>
       <div className="flex items-center justify-center bg-grey7 mt-5 h-[152px]">
         <img src={car} alt="carro de luxo" />
       </div>

@@ -16,15 +16,15 @@ export const PublicSellerPage = (): JSX.Element => {
         <section className="w-9/10 bg-grey10 rounded-[4px] mt-[65px] flex justify-center font-inter mb-[76px] max-w-screen-xl">
           <div className="flex flex-col w-9/10 py-14">
             <div className="w-[104px] h-[104px] bg-brand1 rounded-full flex justify-center items-center">
-              <p className="text-white text-4xl font-medium">{handleClick().name}</p>
+              <p className="text-white text-4xl font-medium">{handleClick()?.name}</p>
             </div>
 
             <div className="flex gap-[9px] my-[24px]">
-              <p className="text-[20px] font-semibold text-grey1 font-lexend">{handleClick().name}</p>
+              <p className="text-[20px] font-semibold text-grey1 font-lexend">{handleClick()?.name}</p>
               <p className="bg-brand4 text-brand1 px-[8px] py-[4px] rounded-[4px] text-sm font-medium">Anunciante</p>
             </div>
 
-            <p>{handleClick().description}</p>
+            <p>{handleClick()?.description}</p>
           </div>
         </section>
 
@@ -33,7 +33,7 @@ export const PublicSellerPage = (): JSX.Element => {
           <div className="flex justify-center w-full max-w-screen-l">
             <ul className="flex gap-y-14 justify-start sm:justify-between overflow-x-scroll md:flex-wrap md:overflow-hidden w-full max-w-screen-xl">
               {adverts.map((advert) => {
-                if (advert.user === handleClick()) {
+                if (advert.user.id === handleClick()?.id) {
                   return <SellerProductCard key={advert.id} advertInfos={advert} />;
                 }
               })}
