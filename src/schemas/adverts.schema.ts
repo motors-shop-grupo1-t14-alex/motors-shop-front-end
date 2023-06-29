@@ -15,6 +15,11 @@ const createAdvertSchema = z.object({
 
 })
 
+const updateAdvertSchema = createAdvertSchema.extend({
+    gallery_images1: z.string().url().max(255).optional(),
+})
+
 export {
-    createAdvertSchema
+    createAdvertSchema,
+    updateAdvertSchema,
 }

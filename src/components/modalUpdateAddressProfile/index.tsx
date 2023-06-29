@@ -3,8 +3,8 @@ import { UserContext } from "../../contexts/userContext";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
-  iRegisterUpdateAddress,
-  registerUpdateAddressSchema,
+  iUpdateAddress,
+  updateAddressSchema,
 } from "../../pages/registerPage/validators";
 import { ModalTemplate } from "../modalTemplate";
 import { Form } from "../form/index";
@@ -19,9 +19,9 @@ export const ModalUpdateAddressProfile = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<iRegisterUpdateAddress>({
+  } = useForm<iUpdateAddress>({
     mode: "onChange",
-    resolver: zodResolver(registerUpdateAddressSchema),
+    resolver: zodResolver(updateAddressSchema),
   });
 
   return (
@@ -45,7 +45,7 @@ export const ModalUpdateAddressProfile = () => {
               children={"CEP"}
               css="text-sm text-grey1 font-medium font-inter mb-[24px]"
               id="cep"
-              inputCSS="w-full p-3 rounded bg-white border-gray7 border-2"
+              inputCSS="w-full pl-[5px] h-[48px] border-grey7 border-[1.5px] rounded-[4px] text-grey3 font-normal mt-[8px]"
               placeHolder="Digitar cep"
               type="text"
               register={register("cep")}
@@ -61,7 +61,7 @@ export const ModalUpdateAddressProfile = () => {
               children={"Estado"}
               css="text-sm text-grey1 font-medium font-inter mb-[24px]"
               id="state"
-              inputCSS="w-full p-3 rounded bg-white border-gray7 border-2"
+              inputCSS="w-full pl-[5px] h-[48px] border-grey7 border-[1.5px] rounded-[4px] text-grey3 font-normal mt-[8px]"
               placeHolder="Digitar UF"
               type="text"
               register={register("uf")}
@@ -77,7 +77,7 @@ export const ModalUpdateAddressProfile = () => {
               children={"Rua"}
               css="text-sm text-grey1 font-medium font-inter mb-[24px]"
               id="street"
-              inputCSS="w-full p-3 rounded bg-white border-gray7 border-2"
+              inputCSS="w-full pl-[5px] h-[48px] border-grey7 border-[1.5px] rounded-[4px] text-grey3 font-normal mt-[8px]"
               placeHolder="Digitar sua rua"
               type="text"
               register={register("street")}
@@ -93,7 +93,7 @@ export const ModalUpdateAddressProfile = () => {
               children={"Número"}
               css="text-sm text-grey1 font-medium font-inter mb-[24px]"
               id="number"
-              inputCSS="w-full p-3 rounded bg-white border-gray7 border-2"
+              inputCSS="w-full pl-[5px] h-[48px] border-grey7 border-[1.5px] rounded-[4px] text-grey3 font-normal mt-[8px]"
               placeHolder="Digitar número"
               type="text"
               register={register("number")}
@@ -109,7 +109,7 @@ export const ModalUpdateAddressProfile = () => {
               children={"Cidade"}
               css="text-sm text-grey1 font-medium font-inter mb-[24px]"
               id="city"
-              inputCSS="w-full p-3 rounded bg-white border-gray7 border-2"
+              inputCSS="w-full pl-[5px] h-[48px] border-grey7 border-[1.5px] rounded-[4px] text-grey3 font-normal mt-[8px]"
               placeHolder="Digitar cep"
               type="text"
               register={register("city")}
@@ -125,7 +125,7 @@ export const ModalUpdateAddressProfile = () => {
               children={"Complemento"}
               css="text-sm text-grey1 font-medium font-inter mb-[24px]"
               id="complement"
-              inputCSS="w-full p-3 rounded bg-white border-gray7 border-2"
+              inputCSS="w-full pl-[5px] h-[48px] border-grey7 border-[1.5px] rounded-[4px] text-grey3 font-normal mt-[8px]"
               placeHolder="Digitar Complemento"
               type="text"
               register={register("complement")}
@@ -138,8 +138,8 @@ export const ModalUpdateAddressProfile = () => {
 
           <div className="flex justify-end w-full gap-2 mb-[24px]">
             <Button
-              type="submit"
-              css="bg-grey6 text-grey2 rounded-[4px] w-[47%] h-[48px] font-inter text-base font-medium max-w-[126px] hover:bg-grey5 hover:text-grey2"
+              type="button"
+              css="bg-grey6 text-grey2 rounded-[4px] w-[47%] h-[48px] font-inter text-base font-medium max-w-[126px] hover:bg-grey5"
               onClick={() => setOpenModalUpdateAddress(false)}
             >
               Cancelar
@@ -147,7 +147,7 @@ export const ModalUpdateAddressProfile = () => {
 
             <Button
               type="submit"
-              css=" bg-brand1 text-brand4 rounded-[4px] w-[47%] h-[48px] font-inter text-base font-medium max-w-[193px] hover:bg-brand2 hover:text-white"
+              css=" bg-brand1 text-brand4 rounded-[4px] w-[47%] h-[48px] font-inter text-base font-medium max-w-[193px] hover:bg-brand2"
             >
               Salvar alterações
             </Button>

@@ -3,8 +3,8 @@ import { UserContext } from "../../contexts/userContext";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
-  iRegisterUpdate,
-  registerUpdateSchema,
+  iUpdateProfile,
+  updateProfileSchema,
 } from "../../pages/registerPage/validators";
 import { ModalTemplate } from "../modalTemplate";
 import { Form } from "../form/index";
@@ -12,16 +12,20 @@ import { Input } from "../input/index";
 import { Button } from "../button";
 
 export const ModalUpdateProfile = () => {
-  const { user, setOpenModalUpdateProfile, onSubmitFormUpdateUserProfile, deleteUser } =
-    useContext(UserContext);
+  const { 
+    user, 
+    setOpenModalUpdateProfile, 
+    onSubmitFormUpdateUserProfile, 
+    setOpenModalConfirmDeleteUser,
+  } = useContext(UserContext);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<iRegisterUpdate>({
+  } = useForm<iUpdateProfile>({
     mode: "onChange",
-    resolver: zodResolver(registerUpdateSchema),
+    resolver: zodResolver(updateProfileSchema),
   });
 
   return (
@@ -45,7 +49,7 @@ export const ModalUpdateProfile = () => {
               children={"Nome"}
               css="text-sm text-grey1 font-medium font-inter mb-[24px]"
               id="name"
-              inputCSS="w-full p-3 rounded bg-white border-gray7 border-2"
+              inputCSS="w-full pl-[5px] h-[48px] border-grey7 border-[1.5px] rounded-[4px] text-grey3 font-normal mt-[8px]"
               placeHolder="Digite seu nome"
               type="text"
               register={register("name")}
@@ -61,7 +65,7 @@ export const ModalUpdateProfile = () => {
               children={"Email"}
               css="text-sm text-grey1 font-medium font-inter mb-[24px]"
               id="email"
-              inputCSS="w-full p-3 rounded bg-white border-gray7 border-2"
+              inputCSS="w-full pl-[5px] h-[48px] border-grey7 border-[1.5px] rounded-[4px] text-grey3 font-normal mt-[8px]"
               placeHolder="Digite seu email"
               type="email"
               register={register("email")}
@@ -77,7 +81,7 @@ export const ModalUpdateProfile = () => {
               children={"CPF"}
               css="text-sm text-grey1 font-medium font-inter mb-[24px]"
               id="cpf"
-              inputCSS="w-full p-3 rounded bg-white border-gray7 border-2"
+              inputCSS="w-full pl-[5px] h-[48px] border-grey7 border-[1.5px] rounded-[4px] text-grey3 font-normal mt-[8px]"
               placeHolder="Digite seu cpf"
               type="text"
               register={register("cpf")}
@@ -93,7 +97,7 @@ export const ModalUpdateProfile = () => {
               children={"Telefone"}
               css="text-sm text-grey1 font-medium font-inter mb-[24px]"
               id="cellphone"
-              inputCSS="w-full p-3 rounded bg-white border-gray7 border-2"
+              inputCSS="w-full pl-[5px] h-[48px] border-grey7 border-[1.5px] rounded-[4px] text-grey3 font-normal mt-[8px]"
               placeHolder="Digite seu telefone"
               type="text"
               register={register("cellphone")}
@@ -109,7 +113,7 @@ export const ModalUpdateProfile = () => {
               children={"Data de nascimento"}
               css="text-sm text-grey1 font-medium font-inter mb-[24px]"
               id="birth_date"
-              inputCSS="w-full p-3 rounded bg-white border-gray7 border-2"
+              inputCSS="w-full pl-[5px] h-[48px] border-grey7 border-[1.5px] rounded-[4px] text-grey3 font-normal mt-[8px]"
               placeHolder="Digite seu nome"
               type="date"
               register={register("birth_date")}
@@ -121,16 +125,14 @@ export const ModalUpdateProfile = () => {
           </section>
 
           <section className="w-full relative flex flex-col">
-            <Input
-              children={"Descrição"}
-              css="text-sm text-grey1 font-medium font-inter mb-[24px]"
+            <label htmlFor="desc" className="text-sm text-grey1 font-medium font-inter">Descrição</label>
+            <textarea
+              className="w-full max-h-[60px] min-h-[60px] pl-[5px] pt-[5px] border-grey7 border-[1.5px] rounded-[4px] text-grey3 font-normal mb-[24px] mt-[8px]"
               id="description"
-              inputCSS="w-full p-3 rounded bg-white border-gray7 border-2"
-              placeHolder="Digitar descrição"
-              type="text"
-              register={register("description")}
+              placeholder="Digitar descrição"
+              {...register("description")}
               defaultValue={user ? user.description : ""}
-            />
+              ></textarea>
             <span className="opacity-70 w-full absolute -bottom-5 text-sm">
               {errors?.description ? errors.description.message : null}
             </span>
@@ -138,24 +140,24 @@ export const ModalUpdateProfile = () => {
 
           <div className="flex justify-between gap-2 mb-[24px]">
             <Button
-              type="submit"
-              css="bg-grey6 text-grey2 rounded-[4px] w-[47%] h-[48px] font-inter text-base font-medium max-w-[193px] hover:bg-grey5 hover:text-grey2"
+              type="button"
+              css="bg-grey6 text-grey2 rounded-[4px] w-[47%] h-[48px] font-inter text-base font-medium max-w-[193px] hover:bg-grey5"
               onClick={() => setOpenModalUpdateProfile(false)}
             >
               Cancelar
             </Button>
 
             <Button
-              type="submit"
-              css="bg-alert3 text-alert1 rounded-[4px] w-[47%] h-[48px] font-inter text-base font-medium max-w-[193px] hover:bg-alert2 hover:text-alert1"
-              onClick={() => deleteUser()}
+              type="button"
+              css="bg-alert3 text-alert1 rounded-[4px] w-[47%] h-[48px] font-inter text-base font-medium max-w-[193px] hover:bg-alert2"
+              onClick={() => setOpenModalConfirmDeleteUser(true)}
             >
               Excluir perfil
             </Button>
 
             <Button
               type="submit"
-              css=" bg-brand1 text-brand4 rounded-[4px] w-[47%] h-[48px] font-inter text-base font-medium max-w-[193px] hover:bg-brand2 hover:text-white"
+              css=" bg-brand1 text-brand4 rounded-[4px] w-[47%] h-[48px] font-inter text-base font-medium max-w-[193px] hover:bg-brand2"
             >
               Salvar alterações
             </Button>

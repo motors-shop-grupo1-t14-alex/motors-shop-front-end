@@ -13,6 +13,8 @@ import "../../index.css";
 import { SuccesModal } from "../../components/successModal";
 import { ModalUpdateProfile } from "../../components/modalUpdateProfile";
 import { ModalUpdateAddressProfile } from "../../components/modalUpdateAddressProfile";
+import { ModalUpdateAdvert } from "../../components/modalUpdateAdvert";
+import { ConfirmationDeleteModal } from "../../components/confirmationDeleteModal";
 
 export const UserPage = (): JSX.Element => {
   const userInfos: iUserInfos = JSON.parse(
@@ -26,7 +28,10 @@ export const UserPage = (): JSX.Element => {
     openModalUpdateProfile,
     setOpenModalUpdateProfile,
     openModalUpdateAddress, 
-    setOpenModalUpdateAddress, 
+    setOpenModalUpdateAddress,
+    deleteUser, 
+    openModalConfirmDeleteUser,
+    setOpenModalConfirmDeleteUser,
   } = useContext(UserContext);
 
   const {
@@ -34,6 +39,10 @@ export const UserPage = (): JSX.Element => {
     openOrCloseAdvertModal,
     createSuccessModal,
     createAdvertSuccessModal,
+    openModalUpdateAdvert,
+    openModalConfirmDeleteAdvert,
+    setOpenModalConfirmDeleteAdvert,
+    deleteAdvert,
   } = useContext(AdvertContext);
 
   const verificaEspaco = (string: string | undefined) =>
@@ -71,6 +80,9 @@ export const UserPage = (): JSX.Element => {
       {createSuccessModal && <SuccesModal openOrClose={createAdvertSuccessModal} textOne="Seu anúncio foi criado com sucesso!" textTwo="Agora você poderá ver seus negócios crescendo em grande escala"/>}
       {openModalUpdateProfile && <ModalUpdateProfile/>}
       {openModalUpdateAddress && <ModalUpdateAddressProfile/>}
+      {openModalUpdateAdvert && <ModalUpdateAdvert/>}
+      {openModalConfirmDeleteAdvert && <ConfirmationDeleteModal title="Excluir anúncio" openOrClose={() => setOpenModalConfirmDeleteAdvert(false)} textOne="Tem certeza que deseja remover este anúncio?" textTwo="Essa ação não pode ser desfeita. Isso excluirá permanentemente seu anúncio." onClickCancel={() => setOpenModalConfirmDeleteAdvert(false)} onClickDelete={() => deleteAdvert()} textButtonDelete="Sim, excluir anúncio"/>}
+      {openModalConfirmDeleteUser && <ConfirmationDeleteModal title="Excluir perfil" openOrClose={() => setOpenModalConfirmDeleteUser(false)} textOne="Tem certeza que deseja excluir o seu perfil?" textTwo="Essa ação não pode ser desfeita. Isso excluirá permanentemente sua conta e removerá seus dados de nossos servidores." onClickCancel={() => setOpenModalConfirmDeleteUser(false)} onClickDelete={() => deleteUser()} textButtonDelete="Sim, excluir minha conta"/>}
       <Header />
       
       <main className="flex flex-col items-center background-user-page">
@@ -92,13 +104,13 @@ export const UserPage = (): JSX.Element => {
               children={"Editar perfil"}
               type="button"
               onClick={() => setOpenModalUpdateProfile(true)}
-              css="bg-brand1 text-brand4 px-[8px] py-[4px] rounded-[4px] text-sm font-medium"
+              css="bg-brand1 text-brand4 px-[8px] py-[4px] rounded-[4px] text-sm font-medium hover:bg-brand2"
               />
               <Button 
               children={"Editar endereço"}
               type="button"
               onClick={() => setOpenModalUpdateAddress(true)}
-              css="bg-brand1 text-brand4 px-[8px] py-[4px] rounded-[4px] text-sm font-medium"
+              css="bg-brand1 text-brand4 px-[8px] py-[4px] rounded-[4px] text-sm font-medium hover:bg-brand2"
               />
             </div>
 

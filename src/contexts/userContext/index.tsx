@@ -12,8 +12,8 @@ import {
 import { NavigateFunction, useNavigate } from "react-router-dom";
 import {
   iRegisterData,
-  iRegisterUpdate,
-  iRegisterUpdateAddress,
+  iUpdateProfile,
+  iUpdateAddress,
 } from "../../pages/registerPage/validators";
 
 export const UserContext = createContext({} as iUserContext);
@@ -26,8 +26,9 @@ export const UserProvider = ({ children }: iUserContextProps) => {
   const [loading, setLoading] = useState(false);
   const [emailWaring, setEmailWaring] = useState(false);
   const [user, setUser] = useState<iUser | null>(null);
-  const [openModalUpdateProfile, setOpenModalUpdateProfile] = useState(false);
-  const [openModalUpdateAddress, setOpenModalUpdateAddress] = useState(false);
+  const [openModalUpdateProfile, setOpenModalUpdateProfile] = useState<boolean>(false);
+  const [openModalUpdateAddress, setOpenModalUpdateAddress] = useState<boolean>(false);
+  const [openModalConfirmDeleteUser, setOpenModalConfirmDeleteUser] = useState<boolean>(false);
 
   useEffect(() => {
     async function infoUser() {
@@ -143,7 +144,7 @@ export const UserProvider = ({ children }: iUserContextProps) => {
     }
   };
 
-  const onSubmitFormUpdateUserProfile = async (data: iRegisterUpdate) => {
+  const onSubmitFormUpdateUserProfile = async (data: iUpdateProfile) => {
     const id = localStorage.getItem("@ID");
     const token = JSON.parse(localStorage.getItem("@TOKEN")!);
 
@@ -161,7 +162,7 @@ export const UserProvider = ({ children }: iUserContextProps) => {
   };
 
   const onSubmitFormUpdateUserAddress = async (
-    data: iRegisterUpdateAddress
+    data: iUpdateAddress
   ) => {
     const id = localStorage.getItem("@ID");
     const token = JSON.parse(localStorage.getItem("@TOKEN")!);
@@ -227,6 +228,8 @@ export const UserProvider = ({ children }: iUserContextProps) => {
         onSubmitFormUpdateUserProfile,
         onSubmitFormUpdateUserAddress,
         deleteUser,
+        openModalConfirmDeleteUser,
+        setOpenModalConfirmDeleteUser,
       }}
     >
       {children}
