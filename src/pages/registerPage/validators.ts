@@ -25,7 +25,7 @@ export const registerSchema = z
 
 export type iRegisterData = z.infer<typeof registerSchema>;
 
-export const registerUpdateSchema = z.object({
+export const updateProfileSchema = z.object({
     email: z.string().email("Deve ser um e-mail válido"),
     name: z.string(),
     cpf: z.string(),
@@ -34,7 +34,7 @@ export const registerUpdateSchema = z.object({
     description: z.string(),
 }).partial()
 
-export const registerUpdateAddressSchema = z.object({
+export const updateAddressSchema = z.object({
     cep: z.string(),
     city: z.string(),
     complement: z.string(),
@@ -43,5 +43,5 @@ export const registerUpdateAddressSchema = z.object({
     uf: z.string(),
 }).partial()
 
-export type iRegisterUpdate = z.infer<typeof registerUpdateSchema>
-export type iRegisterUpdateAddress = z.infer<typeof registerUpdateAddressSchema>
+export type iUpdateProfile = z.infer<typeof updateProfileSchema>
+export type iUpdateAddress = z.infer<typeof updateAddressSchema>

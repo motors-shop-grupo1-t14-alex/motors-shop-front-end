@@ -9,4 +9,6 @@ export interface iSelect {
     register?: UseFormRegisterReturn<string>;
     ref?: React.MutableRefObject<undefined>;
     onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    defaultValue?: string;
+    value?: string;
 }

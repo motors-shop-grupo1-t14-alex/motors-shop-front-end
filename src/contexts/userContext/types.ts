@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import { iRegisterData, iRegisterUpdate, iRegisterUpdateAddress } from "../../pages/registerPage/validators";
+import { iRegisterData, iUpdateAddress, iUpdateProfile } from "../../pages/registerPage/validators";
 
 export interface iUserContext {
     user: iUser | null;
@@ -23,9 +23,11 @@ export interface iUserContext {
     setOpenModalUpdateAddress: React.Dispatch<React.SetStateAction<boolean>>;
     setOpenModalUpdateProfile: React.Dispatch<React.SetStateAction<boolean>>;
     openModalUpdateAddress: boolean;
-    onSubmitFormUpdateUserProfile: (data: iRegisterUpdate) => Promise<void>;
-    onSubmitFormUpdateUserAddress: (data: iRegisterUpdateAddress) => Promise<void>;
+    onSubmitFormUpdateUserProfile: (data: iUpdateProfile) => Promise<void>;
+    onSubmitFormUpdateUserAddress: (data: iUpdateAddress) => Promise<void>;
     deleteUser: () => Promise<void>;
+    openModalConfirmDeleteUser: boolean;
+    setOpenModalConfirmDeleteUser: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface RecoveryPass {
@@ -43,8 +45,8 @@ export interface iMail {
     setOpenModalUpdateProfile: React.Dispatch<React.SetStateAction<boolean>>
     openModalUpdateAddress: boolean;
     setOpenModalUpdateAddress: React.Dispatch<React.SetStateAction<boolean>>;
-    onSubmitFormUpdateUserProfile(data: iRegisterUpdate): Promise<void>;
-    onSubmitFormUpdateUserAddress(data: iRegisterUpdateAddress): Promise<void>;
+    onSubmitFormUpdateUserProfile: (data: iUpdateProfile) => Promise<void>;
+    onSubmitFormUpdateUserAddress: (data: iUpdateAddress) => Promise<void>;
     deleteUser(): Promise<void>;
 }
 
@@ -65,7 +67,7 @@ export type iUser = {
     is_admin: boolean;
     is_seller: boolean;
     updated_at: string;
-    address: iRegisterUpdateAddress;
+    address: iUpdateAddress;
 };
 
 export interface iLoginData {
