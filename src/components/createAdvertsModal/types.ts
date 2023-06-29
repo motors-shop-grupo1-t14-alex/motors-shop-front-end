@@ -1,4 +1,4 @@
-export interface iCarInfos {
+export interface iProductInfos {
     brand: string
     fuel: number
     id: string
