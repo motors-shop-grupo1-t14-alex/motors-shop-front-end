@@ -1,11 +1,20 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { CardProduct } from "../cardProduct/products"
 import { Filter, FilterMobile } from "../filters"
 import { ModalTemplate } from "../modalTemplate"
+import { api } from "../../services/axios"
+import { iHomeProducts, iPages } from "../../interfaces/home.interface"
+import { NavigateFunction, useNavigate } from "react-router-dom"
+import { ProtectHomeRoute } from "../ProtectHomeRoute"
 
-export const MainHome = (): JSX.Element => {
+export const HomeContent = (): JSX.Element => {
+
+    const navigate: NavigateFunction = useNavigate();
+
     const [openFilter, setOpenFilter] = useState(false)
-    
+    const [adverts, setAdverts] = useState<iHomeProducts[]>([])
+    const [pages, setPages] = useState<iPages>()
+
     const toggleModal = () => {
         setOpenFilter(!openFilter)
     }
@@ -21,9 +30,41 @@ export const MainHome = (): JSX.Element => {
             behavior: "smooth",
         });
     };
+    
+    const pageNumber = window.location.pathname.split("/")[1] || 1
 
+    const PreviousPage = () => {
+        navigate(`/${Number(pageNumber) - 1}`)
+        window.location.reload()
+    }
+
+    const nextPage = () => {
+        navigate(`/${Number(pageNumber) + 1}`)
+        window.location.reload()
+    }
+
+    useEffect(() => {
+
+        const takeAllAdverts = async () => {
+
+            try {
+                const { data } = await api.get("/adverts", { params: { page: pageNumber } })
+                setPages({previousPage: data.prevPage, nextPage: data.nextPage})
+                setAdverts(data.data)
+            }
+    
+            catch (error) {
+                console.error(error)
+            }
+        }
+
+        takeAllAdverts()
+    }, [navigate])
+
+    
     return (
         <>
+        <ProtectHomeRoute adverts={adverts}/>
         {openFilter && <ModalTemplate OpenOrClose={toggleModal} title="Filtro" style="bg-white w-full fixed top-0" headerStyle="w-9/10 my-5 mx-auto font-medium text-lg text-grey1" children={<FilterMobile OpenOrClose={toggleModal}/>}/> }
         <main className="mb-10">
         
@@ -42,18 +83,7 @@ export const MainHome = (): JSX.Element => {
             <div className="w-9/10 flex justify-between max-w-screen-2xl">
                 <Filter />
                 <ul className="flex gap-5 overflow-x-scroll md:flex-wrap md:overflow-hidden md:w-300">
-                    <CardProduct />
-                    <CardProduct />
-                    <CardProduct />
-                    <CardProduct />
-                    <CardProduct />
-                    <CardProduct />
-                    <CardProduct />
-                    <CardProduct />
-                    <CardProduct />
-                    <CardProduct />
-                    <CardProduct />
-                    <CardProduct />
+                    {adverts.map(item => <CardProduct key={item.id} infos={item}/>)}
                 </ul>
             </div>
         </div>
@@ -64,8 +94,11 @@ export const MainHome = (): JSX.Element => {
         </div>
         
         <div className="flex flex-col gap-3 md:flex-row md:justify-center md:gap-10 md:mt-16 md:mb-16">
-            <span className="text-grey3 m-auto md:m-0"><strong>1</strong> de 2</span>
-            <span className="m-auto md:m-0 text-brand1 cursor-pointer font-bold">Seguinte {">"}</span>
+            {pages && pages.previousPage !== null ? <button onClick={PreviousPage} className="m-auto md:m-0 text-brand1 cursor-pointer font-bold">{"<"} Anterior</button> : <button className="m-auto md:m-0 text-grey3 font-bold cursor-not-allowed">{"<"} Anterior</button>}
+
+            <strong className="text-grey3 m-auto md:m-0">{pageNumber}</strong>
+
+            {pages && pages.nextPage !== null ? <button onClick={nextPage} className="m-auto md:m-0 text-brand1 cursor-pointer font-bold ">Seguinte {">"}</button> : <button className="m-auto md:m-0 text-grey3 font-bold cursor-not-allowed">Seguinte {">"}</button>}
         </div>
 
       </main>
