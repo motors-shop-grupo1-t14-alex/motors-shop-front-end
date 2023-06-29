@@ -83,7 +83,7 @@ export const HomeContent = (): JSX.Element => {
             <div className="w-9/10 flex justify-between max-w-screen-2xl">
                 <Filter />
                 <ul className="flex gap-5 overflow-x-scroll md:flex-wrap md:overflow-hidden md:w-300">
-                    {adverts.map(item => <CardProduct key={item.id} infos={item}/>)}
+                    {adverts.map(item => item.is_published && <CardProduct key={item.id} infos={item}/>)}
                 </ul>
             </div>
         </div>
