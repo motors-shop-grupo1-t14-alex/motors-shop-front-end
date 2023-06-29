@@ -9,15 +9,15 @@ import { Select } from "../select";
 import { useContext, useRef, useState } from "react";
 import { AdvertContext } from "../../contexts/advertContext";
 import { api, fipe_api } from "../../services/axios";
-import { iCarInfos } from "./types";
+import { iProductInfos } from "./types";
 import { Form } from "../form";
 
 export const CreateAdvertsModal = (): JSX.Element => {
   const { brands, openOrCloseAdvertModal, createAdvertSuccessModal } =
     useContext(AdvertContext);
 
-  const [models, setModels] = useState<iCarInfos[]>([]);
-  const [carInfos, setCarInfos] = useState<iCarInfos>();
+  const [models, setModels] = useState<iProductInfos[]>([]);
+  const [carInfos, setCarInfos] = useState<iProductInfos>();
   const [imageInputs, setImageInputs] = useState<number>(1);
 
   const addImageInput = () => {
@@ -47,7 +47,7 @@ export const CreateAdvertsModal = (): JSX.Element => {
   const getCarInfos = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const model: string = event.target.value;
 
-    const carInfos: iCarInfos | undefined = models.find(
+    const carInfos: iProductInfos | undefined = models.find(
       (item) => item.name === model
     );
 
