@@ -64,8 +64,8 @@ export const UserPage = (): JSX.Element => {
 
       try {
         const { data } = await api.get(`adverts/user`, config);
-
-        setAdverts(data.adverts);
+        console.log(data)
+        setAdverts(data.data);
       } catch (error) {
         console.log(error);
       }
