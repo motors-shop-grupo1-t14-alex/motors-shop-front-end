@@ -8,14 +8,10 @@ Para inciar este projeto, é necessário instalar as dependências e configurar 
 
 `yarn` Para instalar todas as dependências
 
-Após isso, crie o arquivo `.env` e configure de acordo com o `.env.example`
-
 `yarn dev` Para rodar a aplicação localmente
 
 ## Caso use npm
 
 `npm install` Para instalar todas as dependências
-
-Após isso, crie o arquivo `.env` e configure de acordo com o `.env.example`
 
 `npm run dev` Para rodar a aplicação localmente
