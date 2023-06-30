@@ -8,7 +8,11 @@ import { api } from "../../services/axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { iHomeProducts } from "../../interfaces/home.interface";
-import { iComment } from "../../interfaces/advert.interface";
+import { iAdvertComment, iComment } from "../../interfaces/advert.interface";
+import { CommentBox } from "../commentBox";
+import { createCommentSchema } from "../../schemas/adverts.schema";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export const ProductInfos =  (): JSX.Element => {
 
@@ -18,6 +22,37 @@ export const ProductInfos =  (): JSX.Element => {
     const [comments, setComments] = useState<iComment[]>()
 
     const productId = window.location.pathname.split("/")[2]
+
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState: { errors },
+    } = useForm<iAdvertComment>({
+        mode: "onBlur",
+        resolver: zodResolver(createCommentSchema),
+    });
+
+    const createComment = async (data: iAdvertComment) => {
+
+        const token = localStorage.getItem("@TOKEN")
+
+        if (!token) {
+            return
+        }
+
+        const advertId = window.location.pathname.split("/")[2]
+
+        try {
+            const myToken = JSON.parse(token);
+            api.defaults.headers.common.authorization = `Bearer ${myToken}`;
+
+            await api.post(`/comment/${advertId}`, data);
+            reset()
+        } catch (error) {
+            console.error(error)
+        }
+    }
 
     useEffect(() => {
 
@@ -130,21 +165,8 @@ export const ProductInfos =  (): JSX.Element => {
                                     {comments?.length === 0 && <div className="w-full h-full flex justify-center items-center"> <p className="sm:text-xl">Nenhum comentário publicado</p> </div>}
                                 </div>
                             </div>
-                            <div className="w-full sm:w-[85%] 2xl:w-full max-w-[800px] h-[414px] bg-grey10 mb-6 flex justify-center rounded-[4px]">
-                                <div className="w-4/5 pt-9">
-                                    <UserProfile/>
-                                    <textarea className="w-full border-2 border-grey7 min-h-[128px] max-h-[128px] rounded-[4px] py-3 px-4 mt-6" placeholder="Carro muito confortável, foi uma ótima experiência de compra...">
-                                    </textarea>
-                                    <div className="flex sm:justify-end">
-                                        <Button children={"Comentar"} type="button" css="bg-brand1 w-[100px] h-[38px] rounded-[4px] font-inter font-normal text-base text-white hover:bg-brand2 transition mt-6 sm:-mt-14 mr-3 z-0"/>
-                                    </div>
-                                    <div className="flex flex-wrap gap-3 mt-6">
-                                        <CommentSuggestion content={"Gostei muito!"}/>
-                                        <CommentSuggestion content={"Incrível"}/>
-                                        <CommentSuggestion content={"Recomendarei para meus amigos!"}/>
-                                    </div>
-                                </div>
-                            </div>
+                            
+                            <CommentBox handleSubmit={handleSubmit} createComment={createComment} register={register}/>
                         </section>
                     </section>
             </div>
