@@ -4,8 +4,40 @@ import { ProductTag } from "../productTag";
 import { UserProfile } from "../userProfile";
 import "../../index.css";
 import { Button } from "../button";
+import { api } from "../../services/axios";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { iHomeProducts } from "../../interfaces/home.interface";
 
-export const ProductInfos = (): JSX.Element => {
+export const ProductInfos =  (): JSX.Element => {
+
+    const navigate = useNavigate()
+
+    const [productInfos, setProductInfos] = useState<iHomeProducts>()
+
+    const productId = window.location.pathname.split("/")[2]
+
+    useEffect(() => {
+
+        const getProductInfos = async () => {
+            try {
+                const { data } = await api.get(`/adverts/${productId}`)
+                
+                setProductInfos(data)
+            } catch (error) {
+                console.error(error)
+                navigate("/")
+            }
+        }
+
+        getProductInfos()
+    }, [])
+
+    console.log(productInfos)
+
+    const verificaEspaco = (string: string | undefined) =>
+    string && string.indexOf(" ") >= 0;
+    
     return (
         <main className="bg-grey7 flex flex-col items-center background-product-page-mobile sm:background-product-page-desktop">
             
@@ -13,17 +45,17 @@ export const ProductInfos = (): JSX.Element => {
                 <section className="sm:flex sm:justify-between w-full">
                     <section className="flex flex-col items-center">
                         <div className="w-full sm:w-[85%] 2xl:w-full max-w-[800px] h-[355px] flex justify-center items-center bg-grey10 rounded-[4px] mt-11 mb-4">
-                            <img src="../src/assets/img/car-product.svg" alt="car-product" />
+                            <img className="mobileGG:max-h-[400px] mobileGG:max-w-[450px]" src={productInfos && productInfos.cover_image} alt="car-product" />
                         </div>
                         <div className="w-full sm:w-[85%] 2xl:w-full max-w-[800px] h-[355px] bg-grey10 mb-6 flex justify-center rounded-[4px]">
                             <div className="w-4/5">
-                                <h1 className="font-Lexend font-bold text-xl mt-11">Mercedes Benz A 200 CGI ADVANCE SEDAN Mercedes Benz A 200 </h1>
+                                <h1 className="font-Lexend font-bold text-xl mt-11">{productInfos && productInfos.model}</h1>
                                 <div className="sm:flex sm:justify-between sm:items-center">
                                     <div className="mt-10 mb-8 flex gap-3">
-                                        <ProductTag content={"2013"}/>
-                                        <ProductTag content={"0 KM"}/>
+                                        <ProductTag content={productInfos && productInfos.year}/>
+                                        <ProductTag content={productInfos && productInfos.mileage}/>
                                     </div>
-                                    <p className="font-Lexend text-base font-semibold text-grey mb-6">R$ 00.000,00</p>
+                                    <p className="font-Lexend text-base font-semibold text-grey mb-6">R$ {productInfos && productInfos.price}</p>
                                 </div>
                                 <Button children={"Comprar"} type="button" css="bg-brand1 w-[100px] h-[38px] rounded-[4px] font-inter font-normal text-base text-white hover:bg-brand2 transition"/>
                             </div>
@@ -31,7 +63,7 @@ export const ProductInfos = (): JSX.Element => {
                         <div className="w-full sm:w-[85%] 2xl:w-full max-w-[800px] h-[355px] bg-grey10 mb-6 flex justify-center rounded-[4px]">
                             <div className="w-4/5">
                                 <h2 className="font-Lexend font-bold text-xl mt-11">Descrição</h2>
-                                <p className="font-Lexend text-base font-normal text-grey2 mt-8">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                                <p className="font-Lexend text-base font-normal text-grey2 mt-8 mobileGG:w-[60vw]">{productInfos && productInfos.description}</p>
                             </div>
                         </div>
                     </section>
@@ -40,32 +72,39 @@ export const ProductInfos = (): JSX.Element => {
                             <div className="w-9/10 desktopM:w-4/5">
                                 <h1 className="font-Lexend font-bold text-xl mt-11">Fotos</h1>
                                 <ul className="flex flex-wrap w-full mt-8 justify-between overflow-y-hidden sm:overflow-y-scroll desktopM:overflow-y-hidden h-[250px] desktopM:h-[260px] scrollbar-thin scrollbar-thumb-grey7 p-1">
-                                    <li className="w-[70px] h-[70px] mobileM:w-[80px] mobileM:h-[80px] mobileG:w-[90px] mobileG:h-[90px] rounded-[4px] bg-grey7 mb-10 flex justify-center items-center">
-                                        <img className="w-full" src="../../src/assets/img/car-gallery-image.svg" alt="gallery-img" />
-                                    </li>
-                                    <li className="w-[70px] h-[70px] mobileM:w-[80px] mobileM:h-[80px] mobileG:w-[90px] mobileG:h-[90px] rounded-[4px] bg-grey7 mb-10 flex justify-center items-center">
-                                        <img className="w-full" src="../../src/assets/img/car-gallery-image.svg" alt="gallery-img" />
-                                    </li>
-                                    <li className="w-[70px] h-[70px] mobileM:w-[80px] mobileM:h-[80px] mobileG:w-[90px] mobileG:h-[90px] rounded-[4px] bg-grey7 mb-10 flex justify-center items-center">
-                                        <img className="w-full" src="../../src/assets/img/car-gallery-image.svg" alt="gallery-img" />
-                                    </li>
-                                    <li className="w-[70px] h-[70px] mobileM:w-[80px] mobileM:h-[80px] mobileG:w-[90px] mobileG:h-[90px] rounded-[4px] bg-grey7 mb-10 flex justify-center items-center">
-                                        <img className="w-full" src="../../src/assets/img/car-gallery-image.svg" alt="gallery-img" />
-                                    </li>
-                                    <li className="w-[70px] h-[70px] mobileM:w-[80px] mobileM:h-[80px] mobileG:w-[90px] mobileG:h-[90px] rounded-[4px] bg-grey7 mb-10 flex justify-center items-center">
-                                        <img className="w-full" src="../../src/assets/img/car-gallery-image.svg" alt="gallery-img" />
-                                    </li>
-                                    <li className="w-[70px] h-[70px] mobileM:w-[80px] mobileM:h-[80px] mobileG:w-[90px] mobileG:h-[90px] rounded-[4px] bg-grey7 mb-10 flex justify-center items-center">
-                                        <img className="w-full" src="../../src/assets/img/car-gallery-image.svg" alt="gallery-img" />
-                                    </li>
+                                    {productInfos?.gallery_images.map(item => <li className="w-[70px] h-[70px] mobileM:w-[80px] mobileM:h-[80px] mobileG:w-[90px] mobileG:h-[90px] rounded-[4px] bg-grey7 mb-10 flex justify-center items-center"> <img className="w-full" src={item.url_image} alt="gallery-img" /> </li>)}
+
+                                    {productInfos?.gallery_images.map(item => <li className="w-[70px] h-[70px] mobileM:w-[80px] mobileM:h-[80px] mobileG:w-[90px] mobileG:h-[90px] rounded-[4px] bg-grey7 mb-10 flex justify-center items-center"> <img className="w-full" src={item.url_image} alt="gallery-img" /> </li>)}
+
+                                    {productInfos?.gallery_images.map(item => <li className="w-[70px] h-[70px] mobileM:w-[80px] mobileM:h-[80px] mobileG:w-[90px] mobileG:h-[90px] rounded-[4px] bg-grey7 mb-10 flex justify-center items-center"> <img className="w-full" src={item.url_image} alt="gallery-img" /> </li>)}
+
+                                    <li className="hidden w-[70px] h-[70px] mobileM:w-[80px] mobileM:h-[80px] mobileG:w-[90px] mobileG:h-[90px] rounded-[4px] bg-grey7 mb-10 sm:flex justify-center items-center"></li>
+
+                                    <li className="hidden w-[70px] h-[70px] mobileM:w-[80px] mobileM:h-[80px] mobileG:w-[90px] mobileG:h-[90px] rounded-[4px] bg-grey7 mb-10 sm:flex justify-center items-center"></li>
+
+                                    <li className="hidden w-[70px] h-[70px] mobileM:w-[80px] mobileM:h-[80px] mobileG:w-[90px] mobileG:h-[90px] rounded-[4px] bg-grey7 mb-10 sm:flex justify-center items-center"></li>
+
+                                    <li className="hidden w-[70px] h-[70px] mobileM:w-[80px] mobileM:h-[80px] mobileG:w-[90px] mobileG:h-[90px] rounded-[4px] bg-grey7 mb-10 sm:flex justify-center items-center"></li>
+
+                                    <li className="hidden w-[70px] h-[70px] mobileM:w-[80px] mobileM:h-[80px] mobileG:w-[90px] mobileG:h-[90px] rounded-[4px] bg-grey7 mb-10 sm:flex justify-center items-center"></li>
+
+                                    <li className="hidden w-[70px] h-[70px] mobileM:w-[80px] mobileM:h-[80px] mobileG:w-[90px] mobileG:h-[90px] rounded-[4px] bg-grey7 mb-10 sm:flex justify-center items-center"></li>
                                 </ul>
                             </div>
                         </div>
                         <div className="w-full  max-w-[420px] h-[359px] bg-grey10 mb-6 flex justify-center rounded-[4px]">
                             <div className="w-4/5 flex flex-col justify-center items-center gap-7">
-                                <img src="../../src/assets/img/user-example.svg" alt="user-profile" />
-                                <p className="text-xl font-bold font-Lexend text-grey1">Samuel Leão</p>
-                                <p className="text-base font-normal font-Lexend text-grey2 text-center">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's</p>
+                                <div className="w-[80px] h-[80px] bg-brand1 rounded-full flex justify-center items-center">
+                                    <p className="text-white text-3xl font-medium">
+                                        {verificaEspaco(productInfos?.user.name)
+                                        ? `${productInfos?.user.name.split(" ")[0].substring(0, 1)}${productInfos?.user.name
+                                            ?.split(" ")[1]
+                                            .substring(0, 1)}`
+                                        : productInfos?.user.name && `${productInfos?.user.name[0].toUpperCase()}`}
+                                    </p>
+                                </div>
+                                <p className="text-xl font-bold font-Lexend text-grey1">{productInfos && productInfos.user.name}</p>
+                                <p className="text-base font-normal font-Lexend text-grey2 text-center">{productInfos && productInfos.user.description}</p>
                                 <Button children={"Ver todos anuncios"} type="button" css="bg-grey0 w-[206px] h-[48px] rounded-[4px] font-medium text-lg text-white hover:bg-grey1 transition"/>
                             </div>
                         </div>

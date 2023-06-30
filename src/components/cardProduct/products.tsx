@@ -1,19 +1,26 @@
 import { iProductCardInfos } from "../../interfaces/home.interface";
 import { ProductTag } from "../productTag";
+import { useNavigate } from "react-router-dom";
 
 export const CardProduct = ({infos}: iProductCardInfos): JSX.Element => {
+
+  const navigate = useNavigate()
   
   const verificaEspaco = (string: string | undefined) => 
   string && string.indexOf(" ") >= 0;
 
+  const redirectToProductPage = () => {
+    navigate(`/product/${infos.id}`)
+  }
+
   return (
     <div className="flex flex-col gap-4 font-inter w-[275px]">
 
-      <div className="flex items-center justify-center bg-grey7 mt-5 h-[152px] w-[275px]">
+      <div onClick={redirectToProductPage} className="flex items-center justify-center bg-grey7 mt-5 h-[152px] w-[275px] hover:outline-2 hover:outline-brand1 hover:outline cursor-pointer">
         <img className="max-h-[152px] max-w-[275px]" src={infos.cover_image} alt="carro de luxo" />
       </div>
 
-      <p className="font-Lexend font-semibold max-w-[26ch] overflow-hidden text-ellipsis whitespace-nowrap">{infos.model}</p>
+      <p onClick={redirectToProductPage} className="font-Lexend font-semibold max-w-[26ch] overflow-hidden text-ellipsis whitespace-nowrap hover:underline cursor-pointer">{infos.model}</p>
 
       <p className="font-normal font-inter text-grey2 text-sm max-h-[40px] min-h-[40px] overflow-hidden text-ellipsis">{infos.description}</p>
 
