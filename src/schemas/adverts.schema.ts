@@ -19,7 +19,12 @@ const updateAdvertSchema = createAdvertSchema.extend({
     gallery_images1: z.string().url().max(255).optional(),
 })
 
+const createCommentSchema = z.object({
+    comment: z.string().min(1)
+})
+
 export {
     createAdvertSchema,
     updateAdvertSchema,
+    createCommentSchema
 }
