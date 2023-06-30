@@ -33,6 +33,7 @@ export interface iProductCardInfos {
 interface iSeller {
     id: number
     name: string
+    description?: string
 }
 
 interface iImages {

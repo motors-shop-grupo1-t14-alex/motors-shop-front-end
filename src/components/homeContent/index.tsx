@@ -82,8 +82,9 @@ export const HomeContent = (): JSX.Element => {
 
             <div className="w-9/10 flex justify-between max-w-screen-2xl">
                 <Filter />
-                <ul className="flex gap-5 overflow-x-scroll md:flex-wrap md:overflow-hidden md:w-300">
+                <ul className="flex gap-5 overflow-x-scroll md:flex-wrap md:overflow-hidden md:w-300 px-[2px]">
                     {adverts.map(item => item.is_published && <CardProduct key={item.id} infos={item}/>)}
+                    {adverts.length === 0 && <div className="w-full flex justify-center items-center"> <p className="text-lg sm:text-2xl">Ainda não há anúncios publicados</p> </div>}
                 </ul>
             </div>
         </div>
