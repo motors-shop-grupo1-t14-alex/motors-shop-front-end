@@ -6,6 +6,7 @@ import { RegisterPage } from "../pages/registerPage";
 import { UserPage } from "../pages/userPage";
 import { Providers } from "../contexts/providers";
 import { RecoveryPassword } from "../pages/passwordRecoveryPage";
+import { PublicSellerPage } from "../pages/publicSellerPage";
 
 export const MainRoutes = () => {
     return (
@@ -16,6 +17,7 @@ export const MainRoutes = () => {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
                 <Route path="/user" element={<UserPage />} />
+                <Route path="/seller/*" element={<PublicSellerPage />} />
                 <Route
                     path="/passwordRecovery/*"
                     element={<RecoveryPassword />}

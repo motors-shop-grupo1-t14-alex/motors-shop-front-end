@@ -13,7 +13,7 @@ export interface iHomeProducts {
     model: string
     price: string
     updated_at: string
-    user: iSeller
+    user?: iSeller
     year: string
 }
 

@@ -13,6 +13,10 @@ export const CardProduct = ({infos}: iProductCardInfos): JSX.Element => {
     navigate(`/product/${infos.id}`)
   }
 
+  const redirectToSellerPage = () => {
+    navigate(`/seller/${infos.user?.id}`)
+  }
+
   return (
     <div className="flex flex-col gap-4 font-inter w-[275px]">
 
@@ -27,14 +31,14 @@ export const CardProduct = ({infos}: iProductCardInfos): JSX.Element => {
       <div className="font-inter font-medium text-sm leading-6 flex items-center gap-2">
         <span className="w-[33px] h-[33px] bg-brand1 rounded-full flex justify-center items-center">
             <p className="text-white text-base font-medium">
-              {verificaEspaco(infos.user.name)
-                ? `${infos.user.name?.split(" ")[0].substring(0, 1)}${infos.user.name
+              {verificaEspaco(infos.user?.name)
+                ? `${infos.user?.name?.split(" ")[0].substring(0, 1)}${infos.user?.name
                 ?.split(" ")[1]
                 .substring(0, 1)}`
-                : infos.user.name && `${infos.user.name[0].toUpperCase()}`}
+                : infos.user?.name && `${infos.user?.name[0].toUpperCase()}`}
             </p>
           </span>
-        <span className="text-grey2">{infos.user.name}</span>
+        <p onClick={redirectToSellerPage} className="text-grey2 hover:underline cursor-pointer">{infos.user?.name}</p>
       </div>
 
       <div className="text-brand1 font-medium leading-6 text-[14px]">
