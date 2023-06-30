@@ -1,3 +1,3 @@
 export interface iProductTag  {
-    content: string
+    content: string | undefined
 }

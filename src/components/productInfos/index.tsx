@@ -33,10 +33,12 @@ export const ProductInfos =  (): JSX.Element => {
         getProductInfos()
     }, [])
 
-    console.log(productInfos)
-
     const verificaEspaco = (string: string | undefined) =>
     string && string.indexOf(" ") >= 0;
+
+    const redirectToSellerPage = () => {
+        navigate(`/seller/${productInfos?.user?.id}`)
+    }
     
     return (
         <main className="bg-grey7 flex flex-col items-center background-product-page-mobile sm:background-product-page-desktop">
@@ -96,16 +98,16 @@ export const ProductInfos =  (): JSX.Element => {
                             <div className="w-4/5 flex flex-col justify-center items-center gap-7">
                                 <div className="w-[80px] h-[80px] bg-brand1 rounded-full flex justify-center items-center">
                                     <p className="text-white text-3xl font-medium">
-                                        {verificaEspaco(productInfos?.user.name)
-                                        ? `${productInfos?.user.name.split(" ")[0].substring(0, 1)}${productInfos?.user.name
+                                        {verificaEspaco(productInfos?.user?.name)
+                                        ? `${productInfos?.user?.name.split(" ")[0].substring(0, 1)}${productInfos?.user?.name
                                             ?.split(" ")[1]
                                             .substring(0, 1)}`
-                                        : productInfos?.user.name && `${productInfos?.user.name[0].toUpperCase()}`}
+                                        : productInfos?.user?.name && `${productInfos?.user?.name[0].toUpperCase()}`}
                                     </p>
                                 </div>
-                                <p className="text-xl font-bold font-Lexend text-grey1">{productInfos && productInfos.user.name}</p>
-                                <p className="text-base font-normal font-Lexend text-grey2 text-center">{productInfos && productInfos.user.description}</p>
-                                <Button children={"Ver todos anuncios"} type="button" css="bg-grey0 w-[206px] h-[48px] rounded-[4px] font-medium text-lg text-white hover:bg-grey1 transition"/>
+                                <p className="text-xl font-bold font-Lexend text-grey1">{productInfos && productInfos.user?.name}</p>
+                                <p className="text-base font-normal font-Lexend text-grey2 text-center">{productInfos && productInfos.user?.description}</p>
+                                <Button onClick={redirectToSellerPage} children={"Ver todos anuncios"} type="button" css="bg-grey0 w-[206px] h-[48px] rounded-[4px] font-medium text-lg text-white hover:bg-grey1 transition"/>
                             </div>
                         </div>
                     </section>
