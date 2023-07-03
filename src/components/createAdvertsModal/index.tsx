@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Button } from "../../components/button";
 import { Select } from "../select";
-import { useContext, useRef, useState } from "react";
+import { useContext, useState } from "react";
 import { AdvertContext } from "../../contexts/advertContext";
 import { api, fipe_api } from "../../services/axios";
 import { iProductInfos } from "./types";
@@ -23,8 +23,6 @@ export const CreateAdvertsModal = (): JSX.Element => {
   const addImageInput = () => {
     setImageInputs(imageInputs + 1);
   };
-
-  const select = useRef();
 
   const getCarModels = async (event: React.ChangeEvent<HTMLInputElement>) => {
     if (!event.target) {
