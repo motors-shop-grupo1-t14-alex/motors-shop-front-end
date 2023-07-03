@@ -5,6 +5,8 @@ export const registerSchema = z
         email: z.string().email("Deve ser um e-mail válido"),
         name: z.string().nonempty("Nome obrigatório"),
         cpf: z.string().nonempty("Cpf obrigatório"),
+        // .min(8, "Minimo 8 numeros")
+        // .max(8, "Maximo 8 numeros"),
         cellphone: z.string().nonempty("Telefone obrigatório"),
         birth_date: z.string().nonempty("Aniversário obrigatório"),
         description: z.string(),
@@ -14,7 +16,7 @@ export const registerSchema = z
         street: z.string().nonempty("Rua obrigatória"),
         streetNumber: z.string().nonempty("Numero obrigatório"),
         complement: z.string(),
-        accountType: z.string().nonempty("Tipo obrigatório"),
+        //isSeller: z.string(),
         password: z.string().nonempty("Senha é obrigatória"),
         confirmPassword: z.string().nonempty("Senha é obrigatória"),
     })
@@ -25,23 +27,27 @@ export const registerSchema = z
 
 export type iRegisterData = z.infer<typeof registerSchema>;
 
-export const updateProfileSchema = z.object({
-    email: z.string().email("Deve ser um e-mail válido"),
-    name: z.string(),
-    cpf: z.string(),
-    cellphone: z.string(),
-    birth_date: z.string(),
-    description: z.string(),
-}).partial()
+export const updateProfileSchema = z
+    .object({
+        email: z.string().email("Deve ser um e-mail válido"),
+        name: z.string(),
+        cpf: z.string(),
+        cellphone: z.string(),
+        birth_date: z.string(),
+        description: z.string(),
+    })
+    .partial();
 
-export const updateAddressSchema = z.object({
-    cep: z.string(),
-    city: z.string(),
-    complement: z.string(),
-    number: z.string(),
-    street: z.string(),
-    uf: z.string(),
-}).partial()
+export const updateAddressSchema = z
+    .object({
+        cep: z.string(),
+        city: z.string(),
+        complement: z.string(),
+        number: z.string(),
+        street: z.string(),
+        uf: z.string(),
+    })
+    .partial();
 
-export type iUpdateProfile = z.infer<typeof updateProfileSchema>
-export type iUpdateAddress = z.infer<typeof updateAddressSchema>
+export type iUpdateProfile = z.infer<typeof updateProfileSchema>;
+export type iUpdateAddress = z.infer<typeof updateAddressSchema>;

@@ -1,5 +1,9 @@
 import { Dispatch, SetStateAction } from "react";
-import { iRegisterData, iUpdateAddress, iUpdateProfile } from "../../pages/registerPage/validators";
+import {
+    iRegisterData,
+    iUpdateAddress,
+    iUpdateProfile,
+} from "../../pages/registerPage/validators";
 
 export interface iUserContext {
     user: iUser | null;
@@ -27,7 +31,11 @@ export interface iUserContext {
     onSubmitFormUpdateUserAddress: (data: iUpdateAddress) => Promise<void>;
     deleteUser: () => Promise<void>;
     openModalConfirmDeleteUser: boolean;
-    setOpenModalConfirmDeleteUser: React.Dispatch<React.SetStateAction<boolean>>;
+    setOpenModalConfirmDeleteUser: React.Dispatch<
+        React.SetStateAction<boolean>
+    >;
+    isSeller: boolean;
+    setIsSeller: Dispatch<SetStateAction<boolean>>;
 }
 
 export interface RecoveryPass {
