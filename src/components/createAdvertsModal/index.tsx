@@ -130,7 +130,6 @@ export const CreateAdvertsModal = (): JSX.Element => {
             selectStyle="w-full h-[48px] border-grey7 border-[1.5px] rounded-[4px] text-grey3 font-normal mt-[8px]"
             selectTitle="Selecione uma marca..."
             title="Marca"
-            ref={select}
             onChange={getCarModels}
           >
             {brands.map((item) => (
@@ -145,7 +144,6 @@ export const CreateAdvertsModal = (): JSX.Element => {
             selectStyle="w-full h-[48px] border-grey7 border-[1.5px] rounded-[4px] text-grey3 font-normal mt-[8px]"
             selectTitle="Selecione um modelo..."
             title="Modelo"
-            ref={select}
             onChange={getCarInfos}
           >
             {models.map((item) => (

@@ -8,8 +8,8 @@ export interface iSelect {
     boxStyle: string;
     selectStyle: string;
     register?: UseFormRegisterReturn<string>;
-    ref?: RefObject<HTMLSelectElement>;
-    onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+    ref?: RefObject<HTMLSelectElement> | React.MutableRefObject<undefined>;
+    onChange: (event: React.ChangeEvent<any>) => Promise<void>;
     defaultValue?: string;
     value?: string;
 }
