@@ -1,7 +1,5 @@
 import { Comment } from "../comment";
-import { CommentSuggestion } from "../commentSuggestion";
 import { ProductTag } from "../productTag";
-import { UserProfile } from "../userProfile";
 import "../../index.css";
 import { Button } from "../button";
 import { api } from "../../services/axios";
@@ -62,6 +60,7 @@ export const ProductInfos =  (): JSX.Element => {
                 setProductInfos(data)
             } catch (error) {
                 console.error(error)
+                console.log(errors)
                 navigate("/")
             }
         }

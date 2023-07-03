@@ -8,7 +8,7 @@ import { SellerProductCard } from "../../components/sellerProductCard";
 import { api } from "../../services/axios";
 import { CreateAdvertsModal } from "../../components/createAdvertsModal";
 import { AdvertContext } from "../../contexts/advertContext";
-import { iAdvert, iUserInfos } from "./types";
+import { iAdvert } from "./types";
 import "../../index.css";
 import { SuccesModal } from "../../components/successModal";
 import { ModalUpdateProfile } from "../../components/modalUpdateProfile";
@@ -17,9 +17,6 @@ import { ModalUpdateAdvert } from "../../components/modalUpdateAdvert";
 import { ConfirmationDeleteModal } from "../../components/confirmationDeleteModal";
 
 export const UserPage = (): JSX.Element => {
-  const userInfos: iUserInfos = JSON.parse(
-    localStorage.getItem("@INFOS") || "{}"
-  );
 
   const [adverts, setAdverts] = useState<iAdvert[]>([]);
 

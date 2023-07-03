@@ -8,8 +8,6 @@ import { Form } from "../form";
 import { Input } from "../input";
 import { useContext } from "react";
 import { UserContext } from "../../contexts/userContext";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 export const RecoveryPasswordForm = (): JSX.Element => {
     const { submitPassword } = useContext(UserContext);
@@ -63,7 +61,6 @@ export const RecoveryPasswordForm = (): JSX.Element => {
             <button className="p-4 bg-brand1 text-white rounded w-full">
                 Confirmar
             </button>
-            <ToastContainer />
         </Form>
     );
 };
