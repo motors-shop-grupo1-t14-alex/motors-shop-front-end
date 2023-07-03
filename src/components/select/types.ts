@@ -1,3 +1,4 @@
+import { RefObject } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
 
 export interface iSelect {
@@ -7,8 +8,8 @@ export interface iSelect {
     boxStyle: string;
     selectStyle: string;
     register?: UseFormRegisterReturn<string>;
-    ref?: React.MutableRefObject<undefined>;
-    onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    ref?: RefObject<HTMLSelectElement>;
+    onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
     defaultValue?: string;
     value?: string;
 }

@@ -1,6 +1,5 @@
 import { Footer } from "../../components/footer";
 import { Header } from "../../components/header";
-
 import { useContext } from "react";
 import { RecoveryPasswordForm } from "../../components/recoveryPassword";
 import { FormEmail } from "../../components/validatedEmailForm";

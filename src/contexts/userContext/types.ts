@@ -41,13 +41,6 @@ export interface iCode {
 
 export interface iMail {
     email: string;
-    openModalUpdateProfile: boolean;
-    setOpenModalUpdateProfile: React.Dispatch<React.SetStateAction<boolean>>
-    openModalUpdateAddress: boolean;
-    setOpenModalUpdateAddress: React.Dispatch<React.SetStateAction<boolean>>;
-    onSubmitFormUpdateUserProfile: (data: iUpdateProfile) => Promise<void>;
-    onSubmitFormUpdateUserAddress: (data: iUpdateAddress) => Promise<void>;
-    deleteUser(): Promise<void>;
 }
 
 export type CodeNumber = [number];
