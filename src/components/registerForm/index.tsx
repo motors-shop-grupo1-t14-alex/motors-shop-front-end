@@ -10,7 +10,7 @@ import { useContext } from "react";
 import { UserContext } from "../../contexts/userContext";
 
 export const RegisterForm = (): JSX.Element => {
-    const { registerUser } = useContext(UserContext);
+    const { registerUser, setIsSeller } = useContext(UserContext);
 
     const {
         register,
@@ -213,29 +213,25 @@ export const RegisterForm = (): JSX.Element => {
 
                 <p>Tipo de conta</p>
 
-                <section className="w-full relative flex flex-col">
-                    {/* <select
-                        name=""
-                        id=""
-                        className="w-full p-3 rounded bg-white border-gray7 border-2"
+                <section className="w-full relative flex gap-2 ">
+                    <button
+                        className="p-4 border-2 border-brand1 rounded w-1/2 focus:bg-brand1 focus:text-white transition-all"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            setIsSeller(false);
+                        }}
                     >
-                        <option value="seller">Anunciante</option>
-                        <option value="user">Comprador</option>
-                    </select> */}
-                    <Input
-                        children={""}
-                        css="gap-1"
-                        id="accontType"
-                        inputCSS="w-full p-3 rounded bg-white border-gray7 border-2"
-                        placeHolder="Vendedor ou comprador"
-                        type="text"
-                        register={register("accountType")}
-                    />
-                    <span className="opacity-70 w-full absolute -bottom-5 text-sm">
-                        {errors?.accountType
-                            ? errors?.accountType.message
-                            : null}
-                    </span>
+                        Comprador
+                    </button>
+                    <button
+                        className="p-4 border-2 border-brand1 rounded w-1/2 focus:bg-brand1 focus:text-white transition-all"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            setIsSeller(true);
+                        }}
+                    >
+                        Anunciante
+                    </button>
                 </section>
 
                 <section className="w-full relative flex flex-col">

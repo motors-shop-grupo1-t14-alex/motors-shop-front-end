@@ -104,7 +104,7 @@ export const ProductInfos =  (): JSX.Element => {
                                     </div>
                                     <p className="font-Lexend text-base font-semibold text-grey mb-6">R$ {productInfos && productInfos.price}</p>
                                 </div>
-                                <Button children={"Comprar"} type="button" css="bg-brand1 w-[100px] h-[38px] rounded-[4px] font-inter font-normal text-base text-white hover:bg-brand2 transition"/>
+                                <Button children={"Comprar"} onClick={() => window.location.replace("https://web.whatsapp.com/")} type="button" css="bg-brand1 w-[100px] h-[38px] rounded-[4px] font-inter font-normal text-base text-white hover:bg-brand2 transition"/>
                             </div>
                         </div>
                         <div className="w-full sm:w-[85%] 2xl:w-full max-w-[800px] h-[355px] bg-grey10 mb-6 flex justify-center rounded-[4px]">
