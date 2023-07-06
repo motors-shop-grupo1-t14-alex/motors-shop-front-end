@@ -24,7 +24,7 @@
 }
 
 .background-user-page {
-    background-image: linear-gradient(to top, #F1F3F5 0, #F1F3F5 80%, #4529E6 20%);
+    background-image: linear-gradient(to top, #F1F3F5 0, #F1F3F5 60%, #4529E6 40%);
 }
 
 .background-product-page-mobile {
@@ -37,6 +37,6 @@
     }
 
     .background-user-page {
-        background-image: linear-gradient(to top, #F1F3F5 0, #F1F3F5 90%, #4529E6 10%);
+        background-image: linear-gradient(to top, #F1F3F5 0, #F1F3F5 70%, #4529E6 30%);
     }
 }
