@@ -66,8 +66,11 @@ export default {
                 mobileM: "375px",
                 mobileG: "425px",
                 mobileGG: "800px",
+                tablet: "700px",
+                laptop: "1000px",
                 desktopM: "1100px",
-                desktopG: "1400px"
+                desktopG: "1400px",
+                desktopGG: "2500px"
             },
             variants: {
                 extend: {
