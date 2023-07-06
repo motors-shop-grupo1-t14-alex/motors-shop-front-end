@@ -3,7 +3,7 @@ import { ProductTag } from "../productTag";
 import "../../index.css";
 import { Button } from "../button";
 import { api } from "../../services/axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { iHomeProducts } from "../../interfaces/home.interface";
 import { iAdvertComment, iComment } from "../../interfaces/advert.interface";
@@ -11,6 +11,7 @@ import { CommentBox } from "../commentBox";
 import { createCommentSchema } from "../../schemas/adverts.schema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { AdvertContext } from "../../contexts/advertContext";
 
 export const ProductInfos =  (): JSX.Element => {
 
@@ -18,6 +19,9 @@ export const ProductInfos =  (): JSX.Element => {
 
     const [productInfos, setProductInfos] = useState<iHomeProducts>()
     const [comments, setComments] = useState<iComment[]>()
+
+    const { deleteComment } = useContext(AdvertContext)
+
 
     const productId = window.location.pathname.split("/")[2]
 
@@ -76,7 +80,7 @@ export const ProductInfos =  (): JSX.Element => {
 
         getProductInfos()
         getComments()
-    }, [])
+    }, [deleteComment])
 
     const verificaEspaco = (string: string | undefined) =>
     string && string.indexOf(" ") >= 0;
@@ -158,7 +162,7 @@ export const ProductInfos =  (): JSX.Element => {
                             <div className="w-full sm:w-[85%] 2xl:w-full max-w-[800px] h-[845px] bg-grey10 mb-6 flex justify-center rounded-[4px]">
                                 <div className="w-4/5">
                                     <h2 className="font-Lexend font-bold text-xl mt-11 mb-6">Comentários</h2>
-                                    <ul className="overflow-y-scroll max-h-[700px] scrollbar-thin scrollbar-thumb-grey7 p-2 sm:w-[70vw]">
+                                    <ul className="overflow-y-scroll max-h-[700px] scrollbar-thin scrollbar-thumb-grey7 p-2 w-full sm:w-[537px] laptop:w-[716px] desktopM:w-[896px] desktopG:w-[1008px] desktopGG:w-[1792px]">
                                     {comments?.map(item => <Comment commentInfos={item}/>)}
                                     </ul>
                                     {comments?.length === 0 && <div className="w-full h-full flex justify-center items-center"> <p className="sm:text-xl">Nenhum comentário publicado</p> </div>}

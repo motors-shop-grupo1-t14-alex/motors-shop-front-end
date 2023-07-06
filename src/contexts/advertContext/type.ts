@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from "react";
 import { iAdvert } from "../../pages/userPage/types";
 
 export interface iAdvertProviderProps {
@@ -17,4 +18,9 @@ export interface iAdvertProviderValue {
     openModalConfirmDeleteAdvert: boolean,
     setOpenModalConfirmDeleteAdvert: React.Dispatch<React.SetStateAction<boolean>>,
     deleteAdvert: () => Promise<void>,
+    openOrCloseDeleteCommentModal: () => void,
+    deleteCommentModal: boolean,
+    commentID: number | undefined,
+    setCommentID: Dispatch<SetStateAction<number | undefined>>,
+    deleteComment: () => void
 }

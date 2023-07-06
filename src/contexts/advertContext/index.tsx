@@ -15,6 +15,8 @@ export const AdvertProvider = ({ children }: iAdvertProviderProps) => {
   const [openModalUpdateAdvert, setOpenModalUpdateAdvert] = useState<boolean>(false);
   const [advertToUpdate, setAdvertToUpdate] = useState<iAdvert>()
   const [openModalConfirmDeleteAdvert, setOpenModalConfirmDeleteAdvert] = useState<boolean>(false);
+  const [deleteCommentModal, setDeletCommentModal] = useState<boolean>(false)
+  const [commentID, setCommentID] = useState<number>()
 
   const getCarBrands = async () => {
     try {
@@ -64,6 +66,26 @@ export const AdvertProvider = ({ children }: iAdvertProviderProps) => {
     }
   };
 
+  const openOrCloseDeleteCommentModal = () => {
+
+    setDeletCommentModal(!deleteCommentModal)
+
+  }
+
+  const deleteComment = async () => {
+    const token = JSON.parse(localStorage.getItem("@TOKEN")!);
+
+    try {
+        await api.delete(`/comment/${commentID}`, {
+            headers: { Authorization: `Bearer ${token}` }
+        })
+
+        openOrCloseDeleteCommentModal()
+    } catch (error) {
+        console.error(error);
+    }
+}
+
   return (
     <AdvertContext.Provider
       value={{
@@ -79,6 +101,11 @@ export const AdvertProvider = ({ children }: iAdvertProviderProps) => {
         openModalConfirmDeleteAdvert,
         setOpenModalConfirmDeleteAdvert,
         deleteAdvert,
+        openOrCloseDeleteCommentModal,
+        deleteCommentModal,
+        commentID, 
+        setCommentID,
+        deleteComment
       }}
     >
       {children}
