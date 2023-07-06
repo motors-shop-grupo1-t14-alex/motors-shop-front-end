@@ -7,7 +7,7 @@ import { useContext } from "react";
 
 export const Comment = ({commentInfos}: iCommentProps): JSX.Element => {
 
-    const { openOrCloseDeleteCommentModal, setCommentID } = useContext(AdvertContext)
+    const { openOrCloseDeleteCommentModal, setCommentID, openOrCloseEditCommentModal, setCommentContent } = useContext(AdvertContext)
 
     const verificaEspaco = (string: string | undefined) =>
     string && string.indexOf(" ") >= 0;
@@ -80,7 +80,7 @@ export const Comment = ({commentInfos}: iCommentProps): JSX.Element => {
 
                    {ID === commentInfos.user.id &&
                     <div className="flex gap-2">
-                        <button><BiPencil style={{color: "#868E96"}}/></button>
+                        <button onClick={() => {openOrCloseEditCommentModal(), setCommentContent(commentInfos.comment), setCommentID(commentInfos.id)}} ><BiPencil style={{color: "#868E96"}}/></button>
                         <button onClick={()=> {openOrCloseDeleteCommentModal(), setCommentID(commentInfos.id)}}><FaRegTrashAlt style={{color: "#868E96"}}/></button>
                     </div>
                     }

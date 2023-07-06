@@ -5,6 +5,7 @@ import {
 } from "./type";
 import { api, fipe_api } from "../../services/axios";
 import { iAdvert } from "../../pages/userPage/types";
+import { iAdvertComment } from "../../interfaces/advert.interface";
 
 export const AdvertContext = createContext({} as iAdvertProviderValue);
 
@@ -15,7 +16,9 @@ export const AdvertProvider = ({ children }: iAdvertProviderProps) => {
   const [openModalUpdateAdvert, setOpenModalUpdateAdvert] = useState<boolean>(false);
   const [advertToUpdate, setAdvertToUpdate] = useState<iAdvert>()
   const [openModalConfirmDeleteAdvert, setOpenModalConfirmDeleteAdvert] = useState<boolean>(false);
-  const [deleteCommentModal, setDeletCommentModal] = useState<boolean>(false)
+  const [deleteCommentModal, setDeleteCommentModal] = useState<boolean>(false)
+  const [editCommentModal, setEditCommentModal] = useState<boolean>(false)
+  const [commentContent, setCommentContent] = useState<string>()
   const [commentID, setCommentID] = useState<number>()
 
   const getCarBrands = async () => {
@@ -68,7 +71,7 @@ export const AdvertProvider = ({ children }: iAdvertProviderProps) => {
 
   const openOrCloseDeleteCommentModal = () => {
 
-    setDeletCommentModal(!deleteCommentModal)
+    setDeleteCommentModal(!deleteCommentModal)
 
   }
 
@@ -77,14 +80,32 @@ export const AdvertProvider = ({ children }: iAdvertProviderProps) => {
 
     try {
         await api.delete(`/comment/${commentID}`, {
-            headers: { Authorization: `Bearer ${token}` }
+          headers: { Authorization: `Bearer ${token}` }
         })
 
         openOrCloseDeleteCommentModal()
     } catch (error) {
         console.error(error);
     }
-}
+  }
+
+  const openOrCloseEditCommentModal = () => {
+    setEditCommentModal(!editCommentModal)
+  }
+
+  const editComment = async (data: iAdvertComment) => {
+    const token = JSON.parse(localStorage.getItem("@TOKEN")!);
+
+    try {
+        await api.patch(`/comment/${commentID}`, data, {
+          headers: { Authorization: `Bearer ${token}` }
+        })
+
+        openOrCloseEditCommentModal()
+    } catch (error) {
+        console.error(error);
+    }
+  }
 
   return (
     <AdvertContext.Provider
@@ -105,7 +126,12 @@ export const AdvertProvider = ({ children }: iAdvertProviderProps) => {
         deleteCommentModal,
         commentID, 
         setCommentID,
-        deleteComment
+        deleteComment,
+        openOrCloseEditCommentModal,
+        editCommentModal,
+        commentContent, 
+        setCommentContent,
+        editComment
       }}
     >
       {children}

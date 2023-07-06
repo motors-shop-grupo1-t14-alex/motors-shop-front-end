@@ -20,8 +20,7 @@ export const ProductInfos =  (): JSX.Element => {
     const [productInfos, setProductInfos] = useState<iHomeProducts>()
     const [comments, setComments] = useState<iComment[]>()
 
-    const { deleteComment } = useContext(AdvertContext)
-
+    const { deleteComment, editComment } = useContext(AdvertContext)
 
     const productId = window.location.pathname.split("/")[2]
 
@@ -80,7 +79,7 @@ export const ProductInfos =  (): JSX.Element => {
 
         getProductInfos()
         getComments()
-    }, [deleteComment])
+    }, [deleteComment, editComment])
 
     const verificaEspaco = (string: string | undefined) =>
     string && string.indexOf(" ") >= 0;
