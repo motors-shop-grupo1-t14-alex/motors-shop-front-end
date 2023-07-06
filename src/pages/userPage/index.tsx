@@ -107,10 +107,10 @@ export const UserPage = (): JSX.Element => {
             )}
             <Header />
 
-            <main className="flex flex-col items-center background-user-page">
-                <section className="w-9/10 bg-grey10 rounded-[4px] mt-[65px] flex justify-center font-inter mb-[76px] max-w-screen-xl">
+            <main className={`flex flex-col items-center background-user-page ${!user?.is_seller && "h-[100vh]"} desktopGG:h-[100vh]`}>
+                <section className="w-9/10 bg-grey10 rounded-[4px] mt-[65px] flex justify-center font-inter max-w-screen-xl mb-[100px]">
                     <div className="flex flex-col w-9/10 mt-[40px]">
-                        <div className="w-[104px] h-[104px] bg-brand1 rounded-full flex justify-center items-center">
+                        <div className="w-[104px] h-[104px] bg-brand1 rounded-full flex justify-center items-center mb-2">
                             <p className="text-white text-4xl font-medium">
                                 {user !== null &&
                                     (verificaEspaco(user?.name)
@@ -144,11 +144,11 @@ export const UserPage = (): JSX.Element => {
                                 {user && user.name}
                             </p>
                             <p className="bg-brand4 text-brand1 px-[8px] py-[4px] rounded-[4px] text-sm font-medium">
-                                Anunciante
+                                {user?.is_seller ? <p>Anunciante</p> : <p>Cliente</p>}
                             </p>
                         </div>
 
-                        <p>{user && user.description}</p>
+                        <p className="py-5">{user && user.description}</p>
 
                         {user?.is_seller == true ? (
                             <div className="mt-[16px] mb-[40px] ">
@@ -167,6 +167,7 @@ export const UserPage = (): JSX.Element => {
                     <>
                         <section className="flex justify-center mb-[200px] w-9/10">
                             <ul className="flex gap-5 justify-start sm:justify-center overflow-x-scroll md:flex-wrap md:overflow-hidden w-full max-w-screen-xl">
+                                {adverts.length === 0 && user.is_seller ? <p className="mt-[50px] sm:text-lg font-inter font-medium">Este vendedor ainda não tem anúncios</p> : ""}
                                 {adverts.map((items) => (
                                     <SellerProductCard
                                         key={items.id}
