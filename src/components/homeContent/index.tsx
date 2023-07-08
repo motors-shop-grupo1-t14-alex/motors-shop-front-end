@@ -68,10 +68,10 @@ export const HomeContent = (): JSX.Element => {
         {openFilter && <ModalTemplate OpenOrClose={toggleModal} title="Filtro" style="bg-white w-full fixed top-0" headerStyle="w-9/10 my-5 mx-auto font-medium text-lg text-grey1" children={<FilterMobile OpenOrClose={toggleModal}/>}/> }
         <main className="mb-10">
         
-        <div className="h-[625px] md:h[300px] bannerMobile bg-fixed bg-center bg-cover md:flex md:justify-center md:items-center">
+        <div className="h-[625px] md:h[300px] banner bg-fixed bg-center bg-cover md:flex md:justify-center md:items-center">
 
           <h1 className="text-center absolute px-4 text-lg font-Lexend font-medium top-44 text-white md:flex md:flex-col md:justify-center md:items-center">
-             <strong className="text-2xl">Motors Shop</strong>
+             <strong className="text-2xl sm:text-3xl">Motors Shop</strong>
              <br></br>
              <br></br> A melhor plataforma de anúncios de carros do país
           </h1>
