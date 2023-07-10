@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-.bannerMobile {
-    background-image: url("./assets/img/banner-home-mobile.svg");
+.banner {
+    background-image: url("./assets/img/car-wallpaper.png");
 }
 
 .container {
@@ -24,11 +24,17 @@
 }
 
 .background-user-page {
-    background-image: linear-gradient(to top, #F1F3F5 0, #F1F3F5 80%, #4529E6 20%);
+    background-image: linear-gradient(to top, #F1F3F5 0, #F1F3F5 60%, #4529E6 40%);
 }
 
 .background-product-page-mobile {
     background-image: linear-gradient(to top, #E9ECEF 0, #E9ECEF 86.5%, #4529E6 13.5%);
+}
+
+@media (min-width: 2100px) {
+    .banner {
+        background-image: url("./assets/img/car-wallpaper-4k.png");
+    }
 }
 
 @media (min-width: 640px){
@@ -37,6 +43,6 @@
     }
 
     .background-user-page {
-        background-image: linear-gradient(to top, #F1F3F5 0, #F1F3F5 90%, #4529E6 10%);
+        background-image: linear-gradient(to top, #F1F3F5 0, #F1F3F5 70%, #4529E6 30%);
     }
 }
