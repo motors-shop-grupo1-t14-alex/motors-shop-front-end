@@ -3,9 +3,16 @@ import { Button } from "../button";
 import { ProductTag } from "../productTag";
 import { iSellerProductCard } from "./type";
 import { AdvertContext } from "../../contexts/advertContext";
+import { useNavigate } from "react-router";
 
 export const SellerProductCard = ({advertInfos}: iSellerProductCard): JSX.Element => {
   const { openModalUpdateAdvertAndSetAdvert } = useContext(AdvertContext);
+
+  const navigate = useNavigate()
+
+  const redirectToProductPage = () => {
+    navigate(`/product/${advertInfos.id}`)
+  }
 
   return (
     <div className="flex flex-col gap-4 font-inter w-[275px]">
@@ -57,6 +64,7 @@ export const SellerProductCard = ({advertInfos}: iSellerProductCard): JSX.Elemen
           type="button"
           children={"Ver detalhes"}
           css="w-[126px] h-[38px] border-[1.5px] border-grey1 rounded-[4px] hover:bg-grey1 hover:text-grey10 transition"
+          onClick={redirectToProductPage}
         />
       </div>
     </div>
